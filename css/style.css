@@ -70,7 +70,7 @@ body {
 }
 
 .main-form .input-text:hover {
-  border: 1px solid royalblue;
+    border: 1px solid royalblue;
 }
 
 .main-form .submit-button {
@@ -80,6 +80,7 @@ body {
     height: 2.75em;
     font-size: 1em;
     color: white;
+    font-weight: bold;
 }
 
 .main-form .submit-button:hover {
@@ -105,7 +106,6 @@ body {
 
 .olvide-password {
     display: block;
-    width: 66%;
     margin: auto;
     margin-top: 1em;
     overflow: hidden;
@@ -115,11 +115,10 @@ body {
     text-decoration: none;
     color: black;
     float: left;
-    font-size: 0.75em;
+    font-size: 1em;
 }
 
 .recordame-container {
-    width: 66%;
     margin: 1em auto;
     overflow: hidden;
 }
@@ -150,10 +149,10 @@ body {
         width: 100%;
     }
     .main-form {
-        padding: 15%;
+        padding: 10%;
         padding-top: 7.5%;
         padding-bottom: 7.5%;
-        width: 80%;
+        width: 90%;
     }
     .main-section {
         top: 33%;
@@ -182,6 +181,12 @@ body {
     .main-form {
         padding-top: 7.5%;
     }
+    .olvide-password {
+      width: 100%;
+    }
+    .recordame-container {
+        width: 100%;
+    }
 }
 
 @media (max-height: 490px) {
@@ -192,24 +197,23 @@ body {
     .titulo {
         display: none;
     }
+
 }
 
 @media (min-width: 770px) {
-
-  .main-section {
-      top: 20%;
-      max-width: 80%;
-      width: 100%;
-      left: 50%;
-      transform: translate(-50%);
-  }
-
-  .faqs-section {
-    padding: 3em;
-  }
-  .faqs-section article {
-    margin-bottom: 1.5em;
-  }
+    .main-section {
+        top: 20%;
+        max-width: 80%;
+        width: 100%;
+        left: 50%;
+        transform: translate(-50%);
+    }
+    .faqs-section {
+        padding: 3em;
+    }
+    .faqs-section article {
+        margin-bottom: 1.5em;
+    }
     .titulo-interno {
         border: 1px solid dodgerblue;
         display: block;
@@ -269,5 +273,12 @@ body {
     }
     .main-form {
         width: 50%;
+    }
+
+    .olvide-password {
+      width: 66%;
+    }
+    .recordame-container {
+        width: 66%;
     }
 }
