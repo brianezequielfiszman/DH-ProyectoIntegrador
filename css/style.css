@@ -145,17 +145,22 @@ body {
     }
 }
 
-@media (max-height: 390px) {
+@media (max-height: 490px) {
 
+  .main-form {
+    top: 0;
+    transform: translate(-50%, 0%);
+  }
 
   .titulo{
     display: none;
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 800px) {
 
     .titulo-interno {
+      border: 1px solid dodgerblue;
       display: block;
       width: 150%;
       margin-top: 0;
