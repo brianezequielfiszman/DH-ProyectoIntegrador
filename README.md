@@ -13,3 +13,5 @@ hacer un
  Acomodar paleta de colores de la pagina en general, a criterio.
  
  Ordenar codigo en general, enfasis en faqs-section.
+
+ Arreglar Scrolling
