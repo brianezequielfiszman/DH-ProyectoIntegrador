@@ -11,9 +11,13 @@ body {
 }
 
 .main-section {
-    position: relative;
-    width: 100%;
-    height: 100vh;
+    position: absolute;
+    border: 1px solid grey;
+    background: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 4px;
 }
 
 .main-form {
@@ -30,8 +34,10 @@ body {
     display: block;
 }
 
-
 .container {
+    overflow: scroll;
+    width: 100%;
+    height: 100vh;
     background: grey;
 }
 
@@ -57,6 +63,7 @@ body {
     border-radius: 4px;
     border: 1px solid dodgerblue;
 }
+
 .main-form .submit-button {
     background: dodgerblue;
     border-radius: 4px;
@@ -66,67 +73,66 @@ body {
     color: white;
 }
 
-.main-form .submit-button:hover{
-  background: royalblue;
+.main-form .submit-button:hover {
+    background: royalblue;
 }
 
 .main-nav a:hover {
-  background: #DDDDDD;
+    background: #DDDDDD;
 }
 
 .main-nav a {
-  background: #EEEEEE;
-  color: grey;
-  text-align: center;
-  text-decoration: none;
-  font-weight: bolder;
-  border: 1px solid black;
+    background: #EEEEEE;
+    color: grey;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bolder;
+    border: 1px solid black;
+}
+
+.main-nav {
+  position: fixed;
 }
 
 .olvide-password {
-  display: block;
-  width: 66%;
-  margin: auto;
-  margin-top: 1em;
-  overflow: hidden;
+    display: block;
+    width: 66%;
+    margin: auto;
+    margin-top: 1em;
+    overflow: hidden;
 }
 
 .olvide-password a {
-  font-size: 1.10em;
-  text-decoration: none;
-  color: black;
-  float: left;
+    font-size: 1.10em;
+    text-decoration: none;
+    color: black;
+    float: left;
 }
 
 .recordame-container {
-  width: 66%;
-  margin: 1em auto;
-  overflow: hidden;
-
+    width: 66%;
+    margin: 1em auto;
+    overflow: hidden;
 }
 
 .inner-form {
-  overflow: hidden;
+    overflow: hidden;
 }
 
 .recordame-container label {
-  float: left;
+    float: left;
 }
 
 .recordame-container span {
-  float: left;
-  width: 2em;
+    float: left;
+    width: 2em;
 }
 
-
 .olvide-password a:hover {
-  color: grey;
+    color: grey;
 }
 
 @media (max-width: 769px) {
-    .main-nav li {
-        display: block;
-    }
     .main-form input {
         margin: auto;
         width: 100%;
@@ -137,97 +143,83 @@ body {
         padding-bottom: 7.5%;
         width: 80%;
     }
-
-    .main-section{
-      position: relative;
+    .main-section {
+        position: relative;
     }
-
     .main-nav {
-      display: block;
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      overflow: hidden;
-      transform: translate(-50%, -100%);
-      width: 100%;
+        display: block;
+        top: 100%;
+        left: 50%;
+        overflow: hidden;
+        transform: translate(-50%, -100%);
+        width: 100%;
     }
-
     .main-nav a {
-      float: left;
-      width: 50%;
-      padding-top: 1.5em;
-      padding-bottom: 1.5em;
+        float: left;
+        width: 50%;
+        padding-top: 1.5em;
+        padding-bottom: 1.5em;
     }
-
     .titulo-interno {
-      display: none;
+        display: none;
     }
-
     .main-form {
-      padding-top: 7.5%;
+        padding-top: 7.5%;
     }
 }
 
 @media (max-height: 490px) {
-
-  .main-form {
-    top: 0;
-    transform: translate(-50%, 0%);
-  }
-
-  .titulo{
-    display: none;
-  }
+    .main-form {
+        top: 0;
+        transform: translate(-50%, 0%);
+    }
+    .titulo {
+        display: none;
+    }
 }
 
-@media (min-width: 800px) {
-
+@media (min-width: 770px) {
     .titulo-interno {
-      border: 1px solid dodgerblue;
-      display: block;
-      width: 150%;
-      margin-top: 0;
-      text-align: center;
-      background: dodgerblue;
-      color: white;
-      width: 100%;
-      padding: 1%;
-      font-family: sans-serif;
-      font-size: 3em;
+        border: 1px solid dodgerblue;
+        display: block;
+        width: 150%;
+        margin-top: 0;
+        text-align: center;
+        background: dodgerblue;
+        color: white;
+        width: 100%;
+        padding: 1%;
+        font-family: sans-serif;
+        font-size: 3em;
     }
-
     .titulo {
-      display: none;
+        display: none;
     }
-
     .links-holder {
-      margin: auto;
-      width: 50%;
-      overflow: hidden;
-      align-content: center;
-      box-shadow: 0px 0px 10px 0px;
-      border-radius: 0px 0px 6px 6px;
+        margin: auto;
+        width: 50%;
+        overflow: hidden;
+        align-content: center;
+        box-shadow: 0px 0px 10px 0px;
+        border-radius: 0px 0px 6px 6px;
     }
-
-
     .main-nav a {
-      display: inline-block;
-      width: 25%;
-      float: left;
-      padding: 1.5em;
-      text-align: center;
-      text-decoration: none;
-      font-weight: bolder;
-      border: 1px solid black;
-      display: inline-block;
+        display: inline-block;
+        width: 25%;
+        float: left;
+        padding: 1.5em;
+        text-align: center;
+        text-decoration: none;
+        font-weight: bolder;
+        border: 1px solid black;
+        display: inline-block;
     }
-
     .main-nav {
-      overflow: hidden;
-      width: 100%;
+        width: 100%;
+        left: 0;
     }
-
     .container {
+        position: relative;
         overflow: hidden;
         max-width: 1200px;
         margin-left: auto;
@@ -240,13 +232,11 @@ body {
         width: 66%;
         margin: auto;
     }
-
-.inner-form {
-  overflow: hidden;
-  padding: 0 5% 7.5% 5%;
-}
-
+    .inner-form {
+        overflow: hidden;
+        padding: 0 5% 7.5% 5%;
+    }
     .main-form {
-      width: 50%;
+        width: 50%;
     }
 }
