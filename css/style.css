@@ -88,14 +88,36 @@ body {
   width: 66%;
   margin: auto;
   margin-top: 1em;
-
+  overflow: hidden;
 }
 
 .olvide-password a {
   font-size: 1.10em;
   text-decoration: none;
   color: black;
+  float: left;
 }
+
+.recordame-container {
+  width: 66%;
+  margin: 1em auto;
+  overflow: hidden;
+
+}
+
+.inner-form {
+  overflow: hidden;
+}
+
+.recordame-container label {
+  float: left;
+}
+
+.recordame-container span {
+  float: left;
+  width: 2em;
+}
+
 
 .olvide-password a:hover {
   color: grey;
@@ -107,6 +129,7 @@ body {
     }
     .main-form input {
         margin: auto;
+        width: 100%;
     }
     .main-form {
         padding: 15%;
@@ -213,13 +236,13 @@ body {
     .main-nav ul {
         text-align: center;
     }
-    .main-header {}
     .main-form input {
         width: 66%;
         margin: auto;
     }
 
 .inner-form {
+  overflow: hidden;
   padding: 0 5% 7.5% 5%;
 }
 
