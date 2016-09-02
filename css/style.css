@@ -4,9 +4,9 @@
 }
 
 html, body {
-	height: 100%; 
-	margin: 0; 
-	width: 100%; 
+    min-height: 100%;
+    margin: 0;
+    width: 100%;
 }
 
 body {
@@ -14,6 +14,14 @@ body {
     font-family: sans-serif;
     font-size: 10px;
     margin: 0;
+}
+
+.form-container {
+    background: grey;
+    height: 100vh;
+    margin: auto;
+    position: relative;
+    width: 100%;
 }
 
 .inner-form, .olvide-password, .recordame-container {
@@ -30,6 +38,13 @@ body {
 
 .main-form .input-text:hover {
     border: 1px solid royalblue;
+}
+
+.main-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .submit-button, .titulo, .titulo-interno {
@@ -55,7 +70,6 @@ body {
 .main-section, .main-form {
     background: white;
     border: 1px solid grey;
-    position: absolute;
 }
 
 .faq {
@@ -79,21 +93,17 @@ body {
 }
 
 .container {
-    background: grey;
-    height: 100%;
-    overflow-y: scroll;
     position: relative;
+    background: grey;
     width: 100%;
 }
 
 .titulo {
     font-size: 2em;
+    margin: 0 auto;
     padding: 1%;
-    position: absolute;
     text-align: center;
-    top: 10%;
-    transform: translate(-50%, -10%);
-    width: 10em;
+    width: 100%;
 }
 
 .main-form .input-text {
@@ -153,9 +163,6 @@ body {
     body {
         font-size: 14px;
     }
-    .main-nav, .main-section {
-        left: 50%;
-    }
     .olvide-password, .recordame-container, .main-form input, .main-section {
         width: 100%;
     }
@@ -169,12 +176,15 @@ body {
         width: 90%;
     }
     .main-section {
+        background: grey;
+        margin: auto;
+        margin-top: 10%;
         max-width: 80%;
-        top: 33%;
-        transform: translate(-50%, 0%);
+        padding-bottom: 30vh;
     }
     .main-nav {
         display: block;
+        left: 50%;
         overflow: hidden;
         top: 100%;
         transform: translate(-50%, -100%);
@@ -194,6 +204,12 @@ body {
 }
 
 @media (max-height: 490px) {
+    .form-container {
+      padding-bottom: 70%;
+    }
+    .main-section {
+      margin-top: 0;
+    }
     .main-form {
         top: 0;
         transform: translate(-50%, 0%);
@@ -211,17 +227,18 @@ body {
         width: 66%;
     }
     .main-section {
-        left: 50%;
+        margin: auto;
+        margin-top: 10%;
         max-width: 80%;
-        top: 20%;
-        transform: translate(-50%);
-        width: 100%;
     }
-    .faqs-section {
+    .inner-section {
         padding: 3em;
     }
-    .faqs-section article {
+    .inner-section article {
         margin-bottom: 1.5em;
+    }
+    .form-container {
+        max-width: 90%;
     }
     .titulo-interno {
         display: block;
@@ -253,12 +270,13 @@ body {
     }
     .main-nav {
         left: 0;
+        top: 0;
     }
     .container {
         margin-left: auto;
         margin-right: auto;
         max-width: 1200px;
-        position: relative;
+        overflow: hidden;
     }
     .main-form input {
         margin: auto;
