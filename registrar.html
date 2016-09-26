@@ -5,9 +5,7 @@
     <link rel="stylesheet" href="./css/style.css" media="screen" title="no title" charset="utf-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="./js/validacion.js">
-
-    </script>
+    <script type="text/javascript" src="./js/validacion.js"></script>
     <title></title>
 </head>
 
@@ -19,21 +17,23 @@
         <form class="main-form" action="index.html" method="post">
             <h1 class="titulo-interno">Registrate</h1>
             <article class="inner-form">
-                <input id="name" class="input-text" type="text" name="nombre"  placeholder="Inserte Usuario">
-                <span id="name-error"></span>
-                <!--Agregar las condiciones a cumplir de los campos  -->
-                <input id="password" class="input-text" name="password" type="password"  placeholder="Inserte Password ">
-                <span id="password-error"></span>
-                <input id="passwordConfirm" class="input-text" name="passwordConfirm" type="password"  placeholder="Confirme Password">
-                <span id="passwordConfirm-error"></span>
-                <input type="submit" class="submit-button" name="name" class="submit" value="Registrarse">
+                <span class="error" id="name-error"></span>
+                <input id="name" class="input-text" type="text" name="nombre" placeholder="Inserte Usuario">
 
+                <!--Agregar las condiciones a cumplir de los campos  -->
+                <span class="error" id="email-error"></span>
+                <input id="email" class="input-text" name="email" type="email" placeholder="Inserte Correo">
+                <span class="error" id="password-error"></span>
+                <input id="password" class="input-text" name="password" type="password" placeholder="Inserte Password">
+                <span class="error" id="passwordConfirm-error"></span>
+                <input id="passwordConfirm" class="input-text" name="passwordConfirm" type="password" placeholder="Confirme Password">
+                <input type="submit" class="submit-button" name="name" class="submit" value="Registrarse">
             </article>
 
 
         </form>
         <span id="registered-users">
-          
+
         </span>
         <nav class="main-nav">
             <div class="links-holder">
