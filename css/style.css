@@ -24,6 +24,10 @@ body {
     width: 100%;
 }
 
+.inner-form div {
+  /*margin: auto;*/
+}
+
 .inner-form, .olvide-password, .recordame-container {
     overflow: hidden;
 }
@@ -79,6 +83,10 @@ body {
     padding: 1.5em;
 }
 
+.faq:hover {
+  cursor: pointer;
+}
+
 .important {
     background-color: rgba(56, 76, 255, 0.83);
 }
@@ -88,8 +96,15 @@ body {
     transform: translate(-50%, -50%);
 }
 
-.main-form input, .olvide-password {
+.main-form input, .error , .olvide-password {
     display: block;
+}
+
+.error {
+  color: red;
+  margin: auto;
+  margin-top: 0.5em;
+  text-align: center;
 }
 
 .container {
@@ -159,6 +174,10 @@ body {
     width: 2em;
 }
 
+.respuesta {
+  display: block;
+}
+
 @media (max-width: 769px) {
     body {
         font-size: 14px;
@@ -222,6 +241,9 @@ body {
 @media (min-width: 770px) {
     .main-form, .links-holder {
         width: 50%;
+    }
+    .error{
+      font-size: 1.33em;
     }
     .olvide-password, .recordame-container, .main-form input {
         width: 66%;
