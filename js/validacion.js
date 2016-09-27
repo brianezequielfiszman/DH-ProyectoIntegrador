@@ -60,7 +60,7 @@ window.onload = function() {
      * @param  {[string]}   passwordConfirm [description]
      * @return {[Object]}                   [description]
      */
-    function validate(nombre, apellido, email, password, passwordConfirm) {
+    function validate(param) {
         var persona = {
             nombre: null,
             apellido: null,
@@ -69,64 +69,22 @@ window.onload = function() {
             error: false,
         };
 
-        if (nombre) {
-            if (nombre.value.length > 0 && nombre.value.length < 50) {
-                persona.nombre = nombre.value;
-                nombre.style.borderColor = 'green';
-                nombre.style.borderStyle = 'solid';
-            } else {
-                persona.error = true;
-                nombre.style.borderColor = 'red';
-                nombre.style.borderStyle = 'solid';
-            }
-        }
+        var condiciones = [
+            (param && param.name === 'nombre') ? ((param.value.length > 0 && param.value.length < 50) ? persona.nombre = param.value : (persona.error = true) && false) : false,
+            (param && param.name === 'apellido') ? ((param.value.length > 0 && param.value.length < 50) ? persona.apellido = param.value : (persona.error = true) && false) : false,
+            (param && param.name === 'email') ? ((param.value.length > 0 && patt.test(email.value)) ? persona.email = param.value : (persona.error = true) && false) : false,
+            (param && param.name === 'password') ? ((password.value.length >= 8 && password.value.length < 50) ? persona.password = param.value : (persona.error = true) && false) : false,
+            (param && param.name === 'passwordConfirm') ? (((passwordConfirm.value.length >= 8 && passwordConfirm.value.length < 50) && passwordConfirm.value === document.querySelector('form').password.value) ? true : (persona.error = true) && false) : false,
+        ];
 
-        if (apellido) {
-            if (apellido.value.length > 0 && apellido.value.length < 50) {
-                persona.apellido = apellido.value;
-                apellido.style.borderColor = 'green';
-                apellido.style.borderStyle = 'solid';
+        for (var i = 0; i <= condiciones.length; i++) {
+            if (condiciones[i]) {
+                param.style.borderColor = 'green';
+                param.style.borderStyle = 'solid';
+                break;
             } else {
-                persona.error = true;
-                // persona.apellido = null;
-                apellido.style.borderColor = 'red';
-                apellido.style.borderStyle = 'solid';
-            }
-        }
-
-        if (email) {
-            if (email.value.length > 0 && patt.test(email.value)) {
-                persona.email = email.value;
-                email.style.borderColor = 'green';
-                email.style.borderStyle = 'solid';
-            } else {
-                persona.error = true;
-                // persona.email = null;
-                email.style.borderColor = 'red';
-                email.style.borderStyle = 'solid';
-            }
-        }
-
-        if (password) {
-            if (password.value.length > 8 && password.value.length < 50) {
-                persona.password = password.value;
-                password.style.borderColor = 'green';
-                password.style.borderStyle = 'solid';
-            } else {
-                persona.error = true;
-                password.style.borderColor = 'red';
-                password.style.borderStyle = 'solid';
-            }
-        }
-
-        if (passwordConfirm) {
-            if (passwordConfirm.value.length > 8 && passwordConfirm.value === document.querySelector('form').password.value) {
-                passwordConfirm.style.borderColor = 'green';
-                passwordConfirm.style.borderStyle = 'solid';
-            } else {
-                persona.error = true;
-                passwordConfirm.style.borderColor = 'red';
-                passwordConfirm.style.borderStyle = 'solid';
+                param.style.borderColor = 'red';
+                param.style.borderStyle = 'solid';
             }
         }
         return persona;
@@ -148,31 +106,37 @@ window.onload = function() {
 
     function generateError(elementId, elementValue) {
         var error;
-        console.log(elementId);
         if (elementId === 'name') {
-            console.log('elementValue');
             if (elementValue.length === 0 || elementValue.value === undefined) {
                 error = 'El campo de usuario esta vacio.';
             }
         } else if (elementId === 'email') {
-            error = 'Error';
+            if (elementValue.length === 0) {
+                error = 'El campo de correo esta vacio';
+            } else {
+                error = 'El formato de correo ingresado no es valido';
+            }
         } else if (elementId === 'password') {
-            if (elementValue.length < 8) {
-                error = 'El password debe ser de minimo 8 caracteres';
-            } else if (elementValue.length === 0) {
+            if (elementValue.length === 0) {
                 error = 'El campo de clave esta vacio';
-            } else if (document.querySelector('passwordConfirm')) {
-                if (document.querySelector('passwordConfirm').value != elementValue) {
+            }
+            if (elementValue.length < 8 && elementValue.length > 0) {
+                error = 'El password debe ser de minimo 8 caracteres';
+            }
+            if (document.querySelector('#passwordConfirm')) {
+                if (document.querySelector('#passwordConfirm').value !== document.querySelector('#password').value) {
                     error = 'Los campos de password no coinciden.';
                 }
             }
         } else if (elementId === 'passwordConfirm') {
-            if (elementValue.length < 8) {
-                error = 'El password debe ser de minimo 8 caracteres';
-            } else if (elementValue.length === 0) {
+            if (elementValue.length === 0) {
                 error = 'El campo de clave esta vacio';
-            } else if (document.querySelector('passwordConfirm')) {
-                if (document.querySelector('password').value != elementValue) {
+            }
+            if (elementValue.length < 8 && elementValue.length > 0) {
+                error = 'El password debe ser de minimo 8 caracteres';
+            }
+            if (document.querySelector('#passwordConfirm')) {
+                if (document.querySelector('#passwordConfirm').value !== document.querySelector('#password').value) {
                     error = 'Los campos de password no coinciden.';
                 }
             }
@@ -183,16 +147,8 @@ window.onload = function() {
     function elementsValidate(elementId) {
         if (document.querySelector(elementId))
             document.querySelector(elementId).onblur = function() {
-                var validateForm;
-                if (elementId === '#name') {
-                    validateForm = validate(this, null, null, null, null);
-                } else if (elementId === '#email') {
-                    validateForm = validate(null, null, this, null, null);
-                } else if (elementId === '#password') {
-                    validateForm = validate(null, null, null, this, null);
-                } else if (elementId === '#passwordConfirm') {
-                    validateForm = validate(null, null, null, null, this);
-                }
+                var validateForm = validate(this);
+                console.log(validateForm);
                 var bodyErrorMsg = document.querySelector(elementId + '-error');
                 if (!validateForm.error && bodyErrorMsg.firstChild) {
                     bodyErrorMsg.removeChild(bodyErrorMsg.firstChild);
