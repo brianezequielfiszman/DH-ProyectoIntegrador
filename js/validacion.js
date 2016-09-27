@@ -76,7 +76,6 @@ window.onload = function() {
                 nombre.style.borderStyle = 'solid';
             } else {
                 persona.error = true;
-                // persona.nombre = null;
                 nombre.style.borderColor = 'red';
                 nombre.style.borderStyle = 'solid';
             }
@@ -133,71 +132,78 @@ window.onload = function() {
         return persona;
     }
 
-    if(document.querySelector('form'))
-    document.querySelector('form').onsubmit = function(evt) {
-        var validateForm = validate(this.nombre, null, this.email, this.password, this.passwordConfirm);
-        var bodyRegisteredUsers = document.querySelector('#registered-users');
-        if (!validateForm.error) {
-            ajaxCall('GET', 'https://sprint.digitalhouse.com/nuevoUsuario', function(response) {
-                ajaxCall('GET', 'https://sprint.digitalhouse.com/getUsuarios', function(response) {
-                    bodyRegisteredUsers.appendChild(document.createTextNode(response.cantidad));
+    if (document.querySelector('form'))
+        document.querySelector('form').onsubmit = function(evt) {
+            var validateForm = validate(this.nombre, null, this.email, this.password, this.passwordConfirm);
+            var bodyRegisteredUsers = document.querySelector('#registered-users');
+            if (!validateForm.error) {
+                ajaxCall('GET', 'https://sprint.digitalhouse.com/nuevoUsuario', function(response) {
+                    ajaxCall('GET', 'https://sprint.digitalhouse.com/getUsuarios', function(response) {
+                        bodyRegisteredUsers.appendChild(document.createTextNode(response.cantidad));
+                    });
                 });
-            });
-        }
-        evt.preventDefault();
-    };
+            }
+            evt.preventDefault();
+        };
 
-    if(document.querySelector('#name'))
-    document.querySelector('#name').onblur = function() {
-        var validateForm = validate(this, null, null, null, null);
-        var bodyErrorMsg = document.querySelector('#name-error');
-        if (!validateForm.error && bodyErrorMsg.firstChild) {
-            bodyErrorMsg.removeChild(bodyErrorMsg.firstChild);
-        } else if (validateForm.error && !bodyErrorMsg.firstChild) {
-            bodyErrorMsg.appendChild(document.createTextNode("Error"));
+    function generateError(elementId, elementValue) {
+        var error;
+        console.log(elementId);
+        if (elementId === 'name') {
+            console.log('elementValue');
+            if (elementValue.length === 0 || elementValue.value === undefined) {
+                error = 'El campo de usuario esta vacio.';
+            }
+        } else if (elementId === 'email') {
+            error = 'Error';
+        } else if (elementId === 'password') {
+            if (elementValue.length < 8) {
+                error = 'El password debe ser de minimo 8 caracteres';
+            } else if (elementValue.length === 0) {
+                error = 'El campo de clave esta vacio';
+            } else if (document.querySelector('passwordConfirm')) {
+                if (document.querySelector('passwordConfirm').value != elementValue) {
+                    error = 'Los campos de password no coinciden.';
+                }
+            }
+        } else if (elementId === 'passwordConfirm') {
+            if (elementValue.length < 8) {
+                error = 'El password debe ser de minimo 8 caracteres';
+            } else if (elementValue.length === 0) {
+                error = 'El campo de clave esta vacio';
+            } else if (document.querySelector('passwordConfirm')) {
+                if (document.querySelector('password').value != elementValue) {
+                    error = 'Los campos de password no coinciden.';
+                }
+            }
         }
-    };
+        return error;
+    }
 
-    // document.querySelector('#apellido').onblur = function () {
-    //   var validateForm = validate(null, this, null, null, null);
-    //   var bodyErrorMsg = document.querySelector('#apellido-error');
-    //   if (!validateForm.error && bodyErrorMsg.firstChild) {
-    //     bodyErrorMsg.removeChild(bodyErrorMsg.firstChild);
-    //   } else if (validateForm.error && !bodyErrorMsg.firstChild) {
-    //     bodyErrorMsg.appendChild(document.createTextNode("error"));
-    //   }
-    // };
+    function elementsValidate(elementId) {
+        if (document.querySelector(elementId))
+            document.querySelector(elementId).onblur = function() {
+                var validateForm;
+                if (elementId === '#name') {
+                    validateForm = validate(this, null, null, null, null);
+                } else if (elementId === '#email') {
+                    validateForm = validate(null, null, this, null, null);
+                } else if (elementId === '#password') {
+                    validateForm = validate(null, null, null, this, null);
+                } else if (elementId === '#passwordConfirm') {
+                    validateForm = validate(null, null, null, null, this);
+                }
+                var bodyErrorMsg = document.querySelector(elementId + '-error');
+                if (!validateForm.error && bodyErrorMsg.firstChild) {
+                    bodyErrorMsg.removeChild(bodyErrorMsg.firstChild);
+                } else if (validateForm.error && !bodyErrorMsg.firstChild) {
+                    bodyErrorMsg.appendChild(document.createTextNode(generateError(this.id, this.value)));
+                }
+            };
+    }
 
-    if(document.querySelector('#email'))
-    document.querySelector('#email').onblur = function() {
-        var validateForm = validate(null, null, this, null, null);
-        var bodyErrorMsg = document.querySelector('#email-error');
-        if (!validateForm.error && bodyErrorMsg.firstChild) {
-            bodyErrorMsg.removeChild(bodyErrorMsg.firstChild);
-        } else if (validateForm.error && !bodyErrorMsg.firstChild) {
-            bodyErrorMsg.appendChild(document.createTextNode("error"));
-        }
-    };
-
-    if(document.querySelector('#password'))
-    document.querySelector('#password').onblur = function() {
-        var validateForm = validate(null, null, null, this, null);
-        var bodyErrorMsg = document.querySelector('#password-error');
-        if (!validateForm.error && bodyErrorMsg.firstChild) {
-            bodyErrorMsg.removeChild(bodyErrorMsg.firstChild);
-        } else if (validateForm.error && !bodyErrorMsg.firstChild) {
-            bodyErrorMsg.appendChild(document.createTextNode("error"));
-        }
-    };
-
-    if(document.querySelector('#passwordConfirm'))
-    document.querySelector('#passwordConfirm').onblur = function() {
-        var validateForm = validate(null, null, null, null, this);
-        var bodyErrorMsg = document.querySelector('#passwordConfirm-error');
-        if (!validateForm.error && bodyErrorMsg.firstChild) {
-            bodyErrorMsg.removeChild(bodyErrorMsg.firstChild);
-        } else if (validateForm.error && !bodyErrorMsg.firstChild) {
-            bodyErrorMsg.appendChild(document.createTextNode("error"));
-        }
-    };
+    elementsValidate('#name');
+    elementsValidate('#password');
+    elementsValidate('#passwordConfirm');
+    elementsValidate('#email');
 };
