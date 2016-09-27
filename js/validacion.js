@@ -80,13 +80,13 @@ window.onload = function() {
         for (var i = 0; i <= condiciones.length; i++) {
             if (condiciones[i]) {
                 param.style.borderColor = 'green';
-                param.style.borderStyle = 'solid';
                 break;
-            } else {
-                param.style.borderColor = 'red';
-                param.style.borderStyle = 'solid';
             }
         }
+
+        if (persona.error)
+            param.style.borderColor = 'red';
+        param.style.borderStyle = 'solid';
         return persona;
     }
 
