@@ -71,8 +71,8 @@ window.onload = function() {
             (elemHTML.name === 'email') ? ((elemHTML.value.length > 0 && patt.test(email.value)) ? persona.email = elemHTML.value : (persona.error = true) && false) : false,
             (elemHTML.name === 'password') ? ((password.value.length >= 8 && password.value.length < 50) ? persona.password = elemHTML.value : (persona.error = true) && false) : false,
             (elemHTML.name === 'passwordConfirm') ? (((passwordConfirm.value.length >= 8 && passwordConfirm.value.length < 50) && passwordConfirm.value === document.querySelector('form').password.value) ? true : (persona.error = true) && false) : false,
-            (elemHTML.className === 'main-form') ? (function() {
-                var errorFlag;
+            (elemHTML.className === 'main-form') ?
+            persona.error = (function() {
                 for (var j = 0; j < elemHTML.length; j++)
                     if (validate(elemHTML[j]).error)
                         errorFlag = true;
@@ -81,13 +81,13 @@ window.onload = function() {
         ];
 
         for (var i = 0; i <= condiciones.length; i++) {
-            if (condiciones[i]) {
+            if (condiciones[i] && elemHTML.className !== 'main-form') {
                 elemHTML.style.borderColor = 'green';
                 break;
             }
         }
 
-        if (persona.error)
+        if (persona.error && elemHTML.className !== 'main-form')
             elemHTML.style.borderColor = 'red';
         elemHTML.style.borderStyle = 'solid';
         return persona;
