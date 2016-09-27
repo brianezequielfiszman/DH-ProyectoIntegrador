@@ -148,7 +148,6 @@ window.onload = function() {
         if (document.querySelector(elementId))
             document.querySelector(elementId).onblur = function() {
                 var validateForm = validate(this);
-                console.log(validateForm);
                 var bodyErrorMsg = document.querySelector(elementId + '-error');
                 if (!validateForm.error && bodyErrorMsg.firstChild) {
                     bodyErrorMsg.removeChild(bodyErrorMsg.firstChild);
