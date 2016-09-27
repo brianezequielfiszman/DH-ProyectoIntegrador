@@ -53,14 +53,10 @@ window.onload = function() {
 
     /**
      * [validate: validacion de formulario]
-     * @param  {[string]}   nombre          [description]
-     * @param  {[string]}   apellido        [description]
-     * @param  {[string]}   email           [description]
-     * @param  {[string]}   password        [description]
-     * @param  {[string]}   passwordConfirm [description]
+     * @param  {[string]}   elemHTML         [description]
      * @return {[Object]}                   [description]
      */
-    function validate(param) {
+    function validate(elemHTML) {
         var persona = {
             nombre: null,
             apellido: null,
@@ -70,29 +66,37 @@ window.onload = function() {
         };
 
         var condiciones = [
-            (param.name === 'nombre') ? ((param.value.length > 0 && param.value.length < 50) ? persona.nombre = param.value : (persona.error = true) && false) : false,
-            (param.name === 'apellido') ? ((param.value.length > 0 && param.value.length < 50) ? persona.apellido = param.value : (persona.error = true) && false) : false,
-            (param.name === 'email') ? ((param.value.length > 0 && patt.test(email.value)) ? persona.email = param.value : (persona.error = true) && false) : false,
-            (param.name === 'password') ? ((password.value.length >= 8 && password.value.length < 50) ? persona.password = param.value : (persona.error = true) && false) : false,
-            (param.name === 'passwordConfirm') ? (((passwordConfirm.value.length >= 8 && passwordConfirm.value.length < 50) && passwordConfirm.value === document.querySelector('form').password.value) ? true : (persona.error = true) && false) : false,
+            (elemHTML.name === 'nombre') ? ((elemHTML.value.length > 0 && elemHTML.value.length < 50) ? persona.nombre = elemHTML.value : (persona.error = true) && false) : false,
+            (elemHTML.name === 'apellido') ? ((elemHTML.value.length > 0 && elemHTML.value.length < 50) ? persona.apellido = elemHTML.value : (persona.error = true) && false) : false,
+            (elemHTML.name === 'email') ? ((elemHTML.value.length > 0 && patt.test(email.value)) ? persona.email = elemHTML.value : (persona.error = true) && false) : false,
+            (elemHTML.name === 'password') ? ((password.value.length >= 8 && password.value.length < 50) ? persona.password = elemHTML.value : (persona.error = true) && false) : false,
+            (elemHTML.name === 'passwordConfirm') ? (((passwordConfirm.value.length >= 8 && passwordConfirm.value.length < 50) && passwordConfirm.value === document.querySelector('form').password.value) ? true : (persona.error = true) && false) : false,
+            (elemHTML.className === 'main-form') ? (function() {
+                var errorFlag;
+                for (var j = 0; j < elemHTML.length; j++)
+                    if (validate(elemHTML[j]).error)
+                        errorFlag = true;
+                return errorFlag;
+            })() : false
         ];
 
         for (var i = 0; i <= condiciones.length; i++) {
             if (condiciones[i]) {
-                param.style.borderColor = 'green';
+                elemHTML.style.borderColor = 'green';
                 break;
             }
         }
 
         if (persona.error)
-            param.style.borderColor = 'red';
-        param.style.borderStyle = 'solid';
+            elemHTML.style.borderColor = 'red';
+        elemHTML.style.borderStyle = 'solid';
         return persona;
     }
 
     if (document.querySelector('form'))
         document.querySelector('form').onsubmit = function(evt) {
-            var validateForm = validate(this.nombre, null, this.email, this.password, this.passwordConfirm);
+            var validateForm = validate(this);
+
             var bodyRegisteredUsers = document.querySelector('#registered-users');
             if (!validateForm.error) {
                 ajaxCall('GET', 'https://sprint.digitalhouse.com/nuevoUsuario', function(response) {
