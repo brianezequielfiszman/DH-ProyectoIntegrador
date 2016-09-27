@@ -70,11 +70,11 @@ window.onload = function() {
         };
 
         var condiciones = [
-            (param && param.name === 'nombre') ? ((param.value.length > 0 && param.value.length < 50) ? persona.nombre = param.value : (persona.error = true) && false) : false,
-            (param && param.name === 'apellido') ? ((param.value.length > 0 && param.value.length < 50) ? persona.apellido = param.value : (persona.error = true) && false) : false,
-            (param && param.name === 'email') ? ((param.value.length > 0 && patt.test(email.value)) ? persona.email = param.value : (persona.error = true) && false) : false,
-            (param && param.name === 'password') ? ((password.value.length >= 8 && password.value.length < 50) ? persona.password = param.value : (persona.error = true) && false) : false,
-            (param && param.name === 'passwordConfirm') ? (((passwordConfirm.value.length >= 8 && passwordConfirm.value.length < 50) && passwordConfirm.value === document.querySelector('form').password.value) ? true : (persona.error = true) && false) : false,
+            (param.name === 'nombre') ? ((param.value.length > 0 && param.value.length < 50) ? persona.nombre = param.value : (persona.error = true) && false) : false,
+            (param.name === 'apellido') ? ((param.value.length > 0 && param.value.length < 50) ? persona.apellido = param.value : (persona.error = true) && false) : false,
+            (param.name === 'email') ? ((param.value.length > 0 && patt.test(email.value)) ? persona.email = param.value : (persona.error = true) && false) : false,
+            (param.name === 'password') ? ((password.value.length >= 8 && password.value.length < 50) ? persona.password = param.value : (persona.error = true) && false) : false,
+            (param.name === 'passwordConfirm') ? (((passwordConfirm.value.length >= 8 && passwordConfirm.value.length < 50) && passwordConfirm.value === document.querySelector('form').password.value) ? true : (persona.error = true) && false) : false,
         ];
 
         for (var i = 0; i <= condiciones.length; i++) {
