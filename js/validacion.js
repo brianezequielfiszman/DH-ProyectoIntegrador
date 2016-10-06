@@ -105,8 +105,10 @@ window.onload = function() {
                         bodyRegisteredUsers.appendChild(document.createTextNode(response.cantidad));
                     });
                 });
+            } else {
+              evt.preventDefault();
             }
-            evt.preventDefault();
+            // EL PREVENT DEFAULT VA AFUERA
         };
 
     function generateError(elementId, elementValue) {
