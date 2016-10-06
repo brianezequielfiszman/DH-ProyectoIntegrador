@@ -13,7 +13,7 @@ $offset   = $config['db']['json']['offset'];
 
 $usuario  = new Usuario($nombre, null, $email, null, $password);
 
-$jsonDB   = new DB_JSON($config['db']['json']['file_path'], $config['db']['json']['offset']);
+$jsonDB   = new DB_JSON($jsonFile, $offset);
 
 $jsonDB->submitObject($usuario);
 
