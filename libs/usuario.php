@@ -29,8 +29,9 @@
     public function setMail($mail) { if(self::validate(self::MAIL_REGEXP, $mail)):  $this->mail = $mail; endif; }
     public function setEdad($edad) { if(is_numeric($edad)): $this->edad = $edad; endif; }
     public function setPassword($password) { $this->password = self::encriptarPassword($password); }
-    public function validate($regExp, $input) { return preg_match($regExp, $input); }
+
     public static function encriptarPassword($password) { return password_hash($password, PASSWORD_DEFAULT); }
+    public static function validate($regExp, $input) { return preg_match($regExp, $input); }
 
     public function JsonSerialize(){
       return [

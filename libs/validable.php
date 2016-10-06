@@ -9,5 +9,5 @@ interface Validable
     const EMAIL_ERROR    = 2;
     const PASSWORD_ERROR = 3;
 
-    public function validate($regExp, $input);
+    public static function validate($regExp, $input);
 }
