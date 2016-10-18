@@ -1,6 +1,20 @@
 window.onload = function() {
     var patt = new RegExp(/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i);
 
+    const USER_FIELD_EMPTY = 'El campo de usuario esta vacio.';
+    const MAIL_FIELD_EMPTY = 'El campo de correo esta vacio.';
+    const PASS_FIELD_EMPTY = 'El campo de clave esta vacio.';
+    const INVALID_MAIL = 'El formato de correo ingresado no es valido.';
+    const SHORT_PASSWORD = 'El password debe ser de minimo 8 caracteres.';
+    const UNEQUAL_PASSWORD = 'Los campos de password no coinciden.';
+    const USER_EXISTS = 'El usuario ingresado ya existe.';
+
+    const USER_FIELD_TOO_LONG = 'El valor de usuario es demasiado largo.';
+    const PASS_FIELD_TOO_LONG = 'La clave ingresada es demasiado larga.';
+
+    const OK = true;
+    const ERROR = false;
+
     'use strict';
 
     /**
@@ -57,113 +71,77 @@ window.onload = function() {
      * @return {[Object]}                   [description]
      */
     function validate(elemHTML) {
-        var persona = {
-            nombre: null,
-            apellido: null,
-            email: null,
-            password: null,
-            error: false,
-        };
-
+        var isValid;
         var condiciones = [
-            (elemHTML.name === 'nombre') ? ((elemHTML.value.length > 0 && elemHTML.value.length < 50) ? persona.nombre = elemHTML.value : (persona.error = true) && false) : false,
-            (elemHTML.name === 'apellido') ? ((elemHTML.value.length > 0 && elemHTML.value.length < 50) ? persona.apellido = elemHTML.value : (persona.error = true) && false) : false,
-            (elemHTML.name === 'email') ? ((elemHTML.value.length > 0 && patt.test(email.value)) ? persona.email = elemHTML.value : (persona.error = true) && false) : false,
-            (elemHTML.name === 'password') ? ((password.value.length >= 8 && password.value.length < 50) ? persona.password = elemHTML.value : (persona.error = true) && false) : false,
-            (elemHTML.name === 'passwordConfirm') ? (((passwordConfirm.value.length >= 8 && passwordConfirm.value.length < 50) && passwordConfirm.value === document.querySelector('form').password.value) ? true : (persona.error = true) && false) : false,
-            (elemHTML.className === 'main-form') ?
-            persona.error = (function() {
-                var errorFlag;
-                for (var j = 0; j < elemHTML.length; j++)
-                    if (validate(elemHTML[j]).error)
-                        errorFlag = true;
-                return errorFlag;
-            })() : false
+            ((elemHTML.name === 'nombre') ? ((elemHTML.value.length > 0) ? ((elemHTML.value.length < 50) ? isValid = aproveField(elemHTML) : isValid = generateError(elemHTML, USER_FIELD_TOO_LONG)) : isValid = (generateError(elemHTML, USER_FIELD_EMPTY))) : false),
+            ((elemHTML.name === 'email') ? ((elemHTML.value.length > 0) ? ((patt.test(elemHTML.value)) ? isValid = aproveField(elemHTML) : isValid = generateError(elemHTML, INVALID_MAIL)) : isValid = generateError(elemHTML, MAIL_FIELD_EMPTY)) : false),
+            ((elemHTML.name === 'password') ? ((elemHTML.value.length > 0) ? ((elemHTML.value.length >= 8) ? ((elemHTML.value.length < 50) ? isValid = aproveField(elemHTML) : isValid = generateError(elemHTML, PASS_FIELD_TOO_LONG)) : isValid = generateError(elemHTML, SHORT_PASSWORD)) : isValid = generateError(elemHTML, PASS_FIELD_EMPTY)) : false),
+            ((elemHTML.name === 'passwordConfirm') ? ((elemHTML.value === document.querySelector('form').password.value) ? ((elemHTML.value.length > 0) ? ((elemHTML.value.length >= 8) ? ((elemHTML.value.length < 50) ? isValid = aproveField(elemHTML) : isValid = generateError(elemHTML, PASS_FIELD_TOO_LONG)) : isValid = generateError(elemHTML, SHORT_PASSWORD)) : isValid = (generateError(elemHTML, PASS_FIELD_EMPTY))) : isValid = generateError(elemHTML, UNEQUAL_PASSWORD)) : false),
+            ((elemHTML.className === 'main-form') ?
+                isValid = (function() {
+                  var errorFlag;
+                    for (var j = 0; j < elemHTML.length; j++) {
+                        if (validate(elemHTML[j]) === ERROR)
+                            errorFlag = ERROR;
+                        if (elemHTML[j].className === 'submit-button')
+                          if(errorFlag !== ERROR){
+                            errorFlag = OK;
+                            break;
+                          }
+                    }
+                    return errorFlag;
+                })() : false)
         ];
-
-        for (var i = 0; i <= condiciones.length; i++) {
-            if (condiciones[i] && elemHTML.className != 'main-form') {
-                elemHTML.style.borderColor = 'green';
-                break;
-            }
-        }
-
-        if (persona.error && elemHTML.className != 'main-form')
-            elemHTML.style.borderColor = 'red';
         elemHTML.style.borderStyle = 'solid';
-        return persona;
+        return isValid;
     }
 
+// ESTO SOLO SE ACTIVA CUANDO SE HACE EL SUBMIT
     if (document.querySelector('form'))
         document.querySelector('form').onsubmit = function(evt) {
-            var validateForm = validate(this);
-
-            var bodyRegisteredUsers = document.querySelector('#registered-users');
-            if (!validateForm.error) {
+            var isValid = validate(this);
+            if (isValid) {
                 ajaxCall('GET', 'https://sprint.digitalhouse.com/nuevoUsuario', function(response) {
                     ajaxCall('GET', 'https://sprint.digitalhouse.com/getUsuarios', function(response) {
-                        bodyRegisteredUsers.appendChild(document.createTextNode(response.cantidad));
+                        window.alert('Te has registrado! La cantidad de usuarios es: ' + response.cantidad);
                     });
                 });
-            } else {
-              evt.preventDefault();
             }
-            // EL PREVENT DEFAULT VA AFUERA
+            evt.preventDefault();
         };
 
-    function generateError(elementId, elementValue) {
-        var error;
-        if (elementId === 'name') {
-            if (elementValue.length === 0 || elementValue.value === undefined) {
-                error = 'El campo de usuario esta vacio.';
-            }
-        } else if (elementId === 'email') {
-            if (elementValue.length === 0) {
-                error = 'El campo de correo esta vacio';
-            } else {
-                error = 'El formato de correo ingresado no es valido';
-            }
-        } else if (elementId === 'password') {
-            if (elementValue.length === 0) {
-                error = 'El campo de clave esta vacio';
-            }
-            if (elementValue.length < 8 && elementValue.length > 0) {
-                error = 'El password debe ser de minimo 8 caracteres';
-            }
-            if (document.querySelector('#passwordConfirm')) {
-                if (document.querySelector('#passwordConfirm').value !== document.querySelector('#password').value) {
-                    error = 'Los campos de password no coinciden.';
-                }
-            }
-        } else if (elementId === 'passwordConfirm') {
-            if (elementValue.length === 0) {
-                error = 'El campo de clave esta vacio';
-            }
-            if (elementValue.length < 8 && elementValue.length > 0) {
-                error = 'El password debe ser de minimo 8 caracteres';
-            }
-            if (document.querySelector('#passwordConfirm')) {
-                if (document.querySelector('#passwordConfirm').value !== document.querySelector('#password').value) {
-                    error = 'Los campos de password no coinciden.';
-                }
-            }
-        }
-        return error;
+// EN CASO DE QUE UN CAMPO SEA INVALIDO SE LE GENERA EL TEXTO DE ERROR
+    function generateError(elemHTML, elementError) {
+        var bodyErrorMsg = document.getElementById(elemHTML.id + '-error');
+        elemHTML.style.borderColor = 'red';
+
+        if (bodyErrorMsg.firstChild) {
+            bodyErrorMsg.removeChild(bodyErrorMsg.firstChild);
+            bodyErrorMsg.appendChild(document.createTextNode(elementError));
+        } else
+            bodyErrorMsg.appendChild(document.createTextNode(elementError));
+
+        return ERROR;
     }
 
+// ESTA FUNCION APRUEBA UN CAMPO VALIDO!
+    function aproveField(elemHTML) {
+        var bodyErrorMsg = document.getElementById(elemHTML.id + '-error');
+        if (bodyErrorMsg.firstChild)
+            bodyErrorMsg.removeChild(bodyErrorMsg.firstChild);
+        elemHTML.style.borderColor = 'green';
+        return OK;
+    }
+
+// ESTA FUNCION VALIDA UN ELEMENTO
     function elementsValidate(elementId) {
         if (document.querySelector(elementId))
             document.querySelector(elementId).onblur = function() {
-                var validateForm = validate(this);
-                var bodyErrorMsg = document.querySelector(elementId + '-error');
-                if (!validateForm.error && bodyErrorMsg.firstChild) {
-                    bodyErrorMsg.removeChild(bodyErrorMsg.firstChild);
-                } else if (validateForm.error && !bodyErrorMsg.firstChild) {
-                    bodyErrorMsg.appendChild(document.createTextNode(generateError(this.id, this.value)));
-                }
+                validate(this);
             };
     }
 
+// LAS SIGUIENTES LINEAS VALIDAN TODOS LOS ELEMENTOS DEL AREA DE REGISTRO
     elementsValidate('#name');
     elementsValidate('#password');
     elementsValidate('#passwordConfirm');
