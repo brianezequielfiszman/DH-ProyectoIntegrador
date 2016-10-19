@@ -12,9 +12,8 @@ $jsonFile = $config['db']['json']['file_path'];
 $offset   = $config['db']['json']['offset'];
 
 $usuario  = new Usuario($nombre, null, $email, null, $password);
-
 $jsonDB   = new DB_JSON($jsonFile, $offset);
 
 $jsonDB->submitObject($usuario);
 
-header('Location: index.html');
+header('Location: index.php');
