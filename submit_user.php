@@ -2,7 +2,8 @@
 
 include './libs/usuario.php';
 include './db/DB_JSON.php';
-include './config/config.php';
+
+$config   = include './config/config.php';
 
 $nombre   = $_POST['nombre'];
 $email    = $_POST['email'];
