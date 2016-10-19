@@ -5,6 +5,6 @@
       <?php if($_GET['id'] == LOGIN || $_GET['id'] == SIGNUP): ?>
         <script type="text/javascript" src=<?=$config['view']['URI']['validacion'];?>></script>
       <?php elseif ($_GET['id'] == FAQS): ?>
-          <script type="text/javascript" src=<?=$config['view']['URI']['faqs_script'];?>></script>
+        <script type="text/javascript" src=<?=$config['view']['URI']['faqs_script'];?>></script>
       <?php endif ?>
 </head>
