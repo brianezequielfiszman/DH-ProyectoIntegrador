@@ -1,10 +1,5 @@
 <?php
-const HOME   = 'home';
-const FAQS   = 'faqs';
-const LOGIN  = 'login';
-const SIGNUP = 'signup';
-
-$config = array(
+return array(
     "db" => array(
         "sql" => array(
             "dbname"   => "usuarios",

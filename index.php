@@ -6,12 +6,16 @@
   </head>
   <body>
     <?php
-    if (!isset($_GET['id'])):
-      $_GET['id'] = 0;
-    endif;
-    include $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
-    include $config['view']['URL']['head'];
+    if (!isset($_GET['id']))
+      $_GET['id'] = HOME;
+    $config = include $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
+    
+    const HOME   = 'home';
+    const FAQS   = 'faqs';
+    const LOGIN  = 'login';
+    const SIGNUP = 'signup';
 
+    include $config['view']['URL']['head'];
     switch ($_GET['id']):
       case HOME:
         include $config['view']['URL']['home'];
