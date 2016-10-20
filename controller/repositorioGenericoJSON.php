@@ -23,7 +23,6 @@ class RepositorioGenericoJSON implements JsonSerializable
      */
     private function parseFile($filePath)
     {
-      echo $filePath;
         if (file_exists($filePath))
             return json_decode(file_get_contents($filePath), true);
         else
