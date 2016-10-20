@@ -11,7 +11,7 @@ class RepositorioGenericoJSON extends RepositorioGenerico implements JsonSeriali
     {
         $this->filePath = $config['db']['json']['file_path'];
         $this->offset   = $config['db']['json']['offset'];
-        $this->arrObj   = $this->fetchObj($this->filePath) ?: [$this->offset => []];
+        $this->arrObj   = $this->fetchObj() ?: [$this->offset => []];
     }
 
     /**
@@ -22,13 +22,13 @@ class RepositorioGenericoJSON extends RepositorioGenerico implements JsonSeriali
      *
      * @return json_decode(file_get_contents($filePath), true);
      */
-    private function fetchObj($filePath)
+    protected function fetchObj()
     {
-        if (file_exists($filePath))
-            return json_decode(file_get_contents($filePath), true);
+        if (file_exists($this->filePath))
+            return json_decode(file_get_contents($this->filePath), true);
         else
-            fclose(fopen($filePath, 'w+'));
-        return json_decode(file_get_contents($filePath), true);
+            fclose(fopen($this->filePath, 'w+'));
+        return json_decode(file_get_contents($this->filePath), true);
     }
 
     /**
