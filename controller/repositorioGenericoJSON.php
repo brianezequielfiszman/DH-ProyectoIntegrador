@@ -22,7 +22,7 @@ class RepositorioGenericoJSON extends RepositorioGenerico implements JsonSeriali
      *
      * @return json_decode(file_get_contents($filePath), true);
      */
-    protected function fetchObj()
+    protected function fetchObject()
     {
         if (file_exists($this->filePath))
             return json_decode(file_get_contents($this->filePath), true);
