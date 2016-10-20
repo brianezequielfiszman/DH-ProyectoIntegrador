@@ -123,14 +123,14 @@ window.onload = function() {
         // ESTO SOLO SE ACTIVA CUANDO SE HACE EL SUBMIT
         if (document.querySelector('form'))
             document.querySelector('form').onsubmit = function(evt) {
-                if (validate(this)) {
+                if (validate(this))
                     ajaxCall('https://sprint.digitalhouse.com/nuevoUsuario', function(response) {
                         ajaxCall('https://sprint.digitalhouse.com/getUsuarios', function(response) {
                             window.alert('Te has registrado! La cantidad de usuarios es: ' + response.cantidad);
                         }, 'GET', null);
                     }, 'GET', null);
-                }
-               // evt.preventDefault();
+                else
+                    evt.preventDefault();
             };
     }
 
