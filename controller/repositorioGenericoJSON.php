@@ -1,16 +1,17 @@
 <?php
+$config = include $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
 
-class RepositorioGenericoJSON implements JsonSerializable
+class RepositorioGenericoJSON extends RepositorioGenerico implements JsonSerializable
 {
     protected $arrObj;
     protected $filePath;
     protected $offset;
 
-    public function __construct($filePath, string $offset)
+    public function __construct($config)
     {
-        $this->filePath = $filePath;
-        $this->offset   = $offset;
-        $this->arrObj   = $this->parseFile($filePath) ?: [$offset => []];
+        $this->filePath = $config['db']['json']['file_path'];
+        $this->offset   = $config['db']['json']['offset'];
+        $this->arrObj   = $this->fetchObj($this->filePath) ?: [$this->offset => []];
     }
 
     /**
@@ -21,7 +22,7 @@ class RepositorioGenericoJSON implements JsonSerializable
      *
      * @return json_decode(file_get_contents($filePath), true);
      */
-    private function parseFile($filePath)
+    private function fetchObj($filePath)
     {
         if (file_exists($filePath))
             return json_decode(file_get_contents($filePath), true);
