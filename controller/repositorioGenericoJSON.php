@@ -10,7 +10,7 @@ class RepositorioGenericoJSON implements JsonSerializable
     {
         $this->filePath = $filePath;
         $this->offset   = $offset;
-        $this->arrObj   = $this->parseFile($filePath) ?: [$this->offset => []];
+        $this->arrObj   = $this->parseFile($filePath) ?: [offset => []];
     }
 
     /**
