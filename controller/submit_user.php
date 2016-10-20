@@ -17,3 +17,5 @@ $password = $_POST['password'];
 $usuario = new Usuario($id, $nombre, null, $email, null, $password);
 
 $jsonDB->repositorioUsuarios->submitUser($usuario);
+
+header('location: ' . $config['view']['URI']['index']);
