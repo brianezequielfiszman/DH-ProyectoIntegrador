@@ -11,7 +11,7 @@ class RepositorioGenericoJSON extends RepositorioGenerico implements JsonSeriali
     {
         $this->filePath = $config['db']['json']['file_path'];
         $this->offset   = $config['db']['json']['offset'];
-        $this->arrObj   = $this->fetchObj() ?: [$this->offset => []];
+        $this->arrObj   = $this->fetchObject() ?: [$this->offset => []];
     }
 
     /**
