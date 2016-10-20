@@ -25,7 +25,7 @@ return array(
     ),
     'view' => array(
         'URL' => array(
-            'index' => $_SERVER['DOCUMENT_ROOT'].'/view/index.php',
+            'index' => $_SERVER['DOCUMENT_ROOT'].'/index.php',
             'home' => $_SERVER['DOCUMENT_ROOT'].'/view/home.php',
             'faqs' => $_SERVER['DOCUMENT_ROOT'].'/view/faqs.php',
             'login' => $_SERVER['DOCUMENT_ROOT'].'/view/login.php',
@@ -38,7 +38,7 @@ return array(
             'validacion' => $_SERVER['DOCUMENT_ROOT'].'/js/validacion.php',
         ),
         'URI' => array(
-            'index' => '/view/index.php',
+            'index' => '/index.php',
             'home' => '/view/home.php',
             'faqs' => '/view/faqs.php',
             'login' => '/view/login.php',
