@@ -55,6 +55,7 @@ return array(
         'URL' => array(
             'submit_user' => $_SERVER['DOCUMENT_ROOT'].'/controller/submit_user.php',
             'repositorio' => $_SERVER['DOCUMENT_ROOT'].'/controller/repositorio.php',
+            'repositorioJSON' => $_SERVER['DOCUMENT_ROOT'].'/controller/repositorioJSON.php',
             'repositorioUsuarios' => $_SERVER['DOCUMENT_ROOT'].'/controller/repositorioUsuarios.php',
             'repositorioGenericoJSON' => $_SERVER['DOCUMENT_ROOT'].'/controller/repositorioGenericoJSON.php',
             'repositorioUsuariosJSON' => $_SERVER['DOCUMENT_ROOT'].'/controller/repositorioUsuariosJSON.php',
@@ -62,6 +63,7 @@ return array(
         'URI' => array(
             'submit_user' => '/controller/submit_user.php',
             'repositorio' => '/controller/repositorio.php',
+            'repositorioJSON' => '/controller/repositorioJSON.php',
             'repositorioUsuarios' => '/controller/repositorioUsuarios.php',
             'repositorioGenericoJSON' => '/controller/repositorioGenericoJSON.php',
             'repositorioUsuariosJSON' => '/controller/repositorioUsuariosJSON.php',

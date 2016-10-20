@@ -1,5 +1,5 @@
 <?php
-$config = include $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
 include $config['model']['URL']['validable'];
 
   class Usuario implements Validable, JsonSerializable
