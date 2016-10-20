@@ -1,18 +1,20 @@
 {
     "usuarios": [
         {
-            "nombre": "Brian",
+            "id": 1,
+            "nombre": "",
             "fechaNacimiento": null,
             "mail": "brianezequielfiszman@gmail.com",
             "edad": null,
-            "password": "$2y$10$\/ifuMDF8c0EYF9TE3O21\/uNP83.Hwc7p\/ILg547uBrQvITLC2k5Ue"
+            "password": "$2y$10$OuIVl42EwO90jXCAHecpaOIJaHidKv66hJouN1dvb9hjZFNEM4crC"
         },
         {
-            "nombre": "Nairb",
+            "id": 2,
+            "nombre": "",
             "fechaNacimiento": null,
             "mail": "brianezequielfiszman@gmail.com",
             "edad": null,
-            "password": "$2y$10$5DEvfUZH3dE0Qd\/suCbIZuPv5LBNqxkf4FdbHVJHRAhzGP9TWZG4y"
+            "password": "$2y$10$xy8heKml0s.uRY7czdxszu6zboIAukPzcuUSfDinSC0EruNQxPwlW"
         }
     ]
 }

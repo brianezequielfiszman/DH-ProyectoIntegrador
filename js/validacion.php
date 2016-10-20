@@ -23,7 +23,8 @@ window.onload = function() {
     const SUBMIT = 'submit-button';
 
     'use strict';
-    <?php include './ajax.js'?>
+    <?php $config = include $_SERVER['DOCUMENT_ROOT'] . '/config/config.php'; ?>
+    <?php include $config['view']['URL']['ajax']; ?>
 
     /**
      * [validate: validacion de formulario]
@@ -129,7 +130,7 @@ window.onload = function() {
                         }, 'GET', null);
                     }, 'GET', null);
                 }
-                evt.preventDefault();
+               // evt.preventDefault();
             };
     }
 
