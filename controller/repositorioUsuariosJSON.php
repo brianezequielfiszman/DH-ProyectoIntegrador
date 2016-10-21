@@ -7,9 +7,9 @@ include $config['controller']['URL']['repositorioGenericoJSON'];
 
 class RepositorioUsuariosJSON extends RepositorioGenericoJSON implements repositorioUsuarios
 {
-    public function __construct($config)
+    public function __construct($filePath, $offset)
     {
-        parent::__construct($config);
+        parent::__construct($filePath, $offset);
     }
 
     public function submitUser(Usuario $usuario) { return parent::submitObject($usuario); }

@@ -4,7 +4,10 @@ $config = include $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
 include $config['model']['URL']['usuario'];
 include $config['controller']['URL']['repositorioJSON'];
 
-$jsonDB = new RepositorioJSON($config);
+$filePath = $config['db']['json']['file_path'];
+$offset = $config['db']['json']['offset'];
+
+$jsonDB = new RepositorioJSON($filePath, $offset);
 
 $id = $jsonDB->getRepositorioUsuarios()->getUsersCount() + 1;
 $nombre = $_POST['nombre'];
