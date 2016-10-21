@@ -53,6 +53,7 @@ return array(
     ),
     'controller' => array(
         'URL' => array(
+            'validationConfig' => $_SERVER['DOCUMENT_ROOT'].'/config/validation_config.php',
             'submit_user' => $_SERVER['DOCUMENT_ROOT'].'/controller/submit_user.php',
             'repositorio' => $_SERVER['DOCUMENT_ROOT'].'/controller/repositorio.php',
             'repositorioJSON' => $_SERVER['DOCUMENT_ROOT'].'/controller/repositorioJSON.php',
@@ -60,8 +61,10 @@ return array(
             'repositorioGenerico' => $_SERVER['DOCUMENT_ROOT'].'/controller/repositorioGenerico.php',
             'repositorioGenericoJSON' => $_SERVER['DOCUMENT_ROOT'].'/controller/repositorioGenericoJSON.php',
             'repositorioUsuariosJSON' => $_SERVER['DOCUMENT_ROOT'].'/controller/repositorioUsuariosJSON.php',
+            'validator' => $_SERVER['DOCUMENT_ROOT'].'/controller/validator.php',
         ),
         'URI' => array(
+            'validationConfig' => '/config/validation_config.php',
             'submit_user' => '/controller/submit_user.php',
             'repositorio' => '/controller/repositorio.php',
             'repositorioJSON' => '/controller/repositorioJSON.php',
@@ -69,6 +72,7 @@ return array(
             'repositorioGenerico' => '/controller/repositorioGenerico.php',
             'repositorioGenericoJSON' => '/controller/repositorioGenericoJSON.php',
             'repositorioUsuariosJSON' => '/controller/repositorioUsuariosJSON.php',
+            'validator' => '/controller/validator.php',
         ),
     ),
 );
