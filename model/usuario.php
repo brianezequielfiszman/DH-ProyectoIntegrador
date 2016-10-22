@@ -1,8 +1,7 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
-include $config['model']['URL']['validable'];
 
-  class Usuario implements Validable, JsonSerializable
+  class Usuario implements JsonSerializable
   {
     private $id;
     private $nombre;
@@ -10,40 +9,39 @@ include $config['model']['URL']['validable'];
     private $mail;
     private $edad;
     private $password;
+    private $passwordConfirm;
 
-    public function __construct($id, $nombre, $fechaNacimiento, $mail, $edad, $password)
+    public function __construct($id, $nombre, $fechaNacimiento, $mail, $edad, $password, $passwordConfirm)
     {
         $this->setId($id);
         $this->setNombre($nombre);
         $this->setFechaNacimiento($fechaNacimiento);
-        $this->setMail($mail);
+        $this->setEmail($mail);
         $this->setEdad($edad);
         $this->setPassword($password);
     }
 
-    public function saludar() { echo 'Hola'.' '.$this->getNombre(); }
     public function getId() { return $this->id;  }
     public function getNombre() { return $this->nombre; }
     public function getFechaNacimiento() { return $this->fechaNacimiento; }
-    public function getMail() { return $this->mail; }
+    public function getEmail() { return $this->mail; }
     public function getEdad() { return $this->edad; }
     public function getPassword() { return $this->password; }
+    public function getPasswordConfirm() { return $this->passwordConfirm; }
     public function setId($id)  { $this->id = $id; }
     public function setNombre($nombre) { $this->nombre = $nombre; }
     public function setFechaNacimiento($fechaNacimiento) { $this->fechaNacimiento = $fechaNacimiento; }
-    public function setMail($mail) { if(self::validate(self::MAIL_REGEXP, $mail)):  $this->mail = $mail; endif; }
-    public function setEdad($edad) { if(is_numeric($edad)): $this->edad = $edad; endif; }
-    public function setPassword($password) { $this->password = self::encriptarPassword($password); }
-
-    public static function encriptarPassword($password) { return password_hash($password, PASSWORD_DEFAULT); }
-    public static function validate($regExp, $input) { return preg_match($regExp, $input); }
+    public function setEmail($mail) { $this->mail = $mail; }
+    public function setEdad($edad) { $this->edad = $edad; }
+    public function setPassword($password) { $this->password = $password; }
+    public function setPasswordConfirm($passwordConfirm) { $this->passwordConfirm = $passwordConfirm; }
 
     public function JsonSerialize(){
       return [
           'id'              => $this->getId(),
-          'nombre'          => $this->getNombre(),
+          'name'            => $this->getNombre(),
           'fechaNacimiento' => $this->getFechaNacimiento(),
-          'mail'            => $this->getMail(),
+          'email'           => $this->getEmail(),
           'edad'            => $this->getEdad(),
           'password'        => $this->getPassword(),
       ];

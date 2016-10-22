@@ -5,7 +5,7 @@
     <title></title>
   </head>
   <body>
-    <?php 
+    <?php
     const HOME   = 'home';
     const FAQS   = 'faqs';
     const LOGIN  = 'login';
@@ -14,9 +14,9 @@
     if (!isset($_GET['id']))
       $_GET['id'] = HOME;
     $config = include $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
-    
+
     include $config['view']['URL']['head'];
-    
+
     switch ($_GET['id']):
       case HOME:
         include $config['view']['URL']['home'];

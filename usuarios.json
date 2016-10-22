@@ -2,179 +2,107 @@
     "usuarios": [
         {
             "id": 1,
-            "nombre": null,
+            "name": null,
             "fechaNacimiento": null,
-            "mail": null,
+            "email": null,
             "edad": null,
-            "password": "$2y$10$V4\/A0IGZtce01vU.5ravyOAtV4j467Hez97ay5XI8LQpK42kxSK3G"
+            "password": null
         },
         {
             "id": 2,
-            "nombre": null,
+            "name": null,
             "fechaNacimiento": null,
-            "mail": null,
+            "email": null,
             "edad": null,
-            "password": "$2y$10$34Mj.5KcNIFm2SgZmCdhcOm0zSmrGmXcxjos2eKjxQJ.7WSI0YGz."
+            "password": null
         },
         {
             "id": 3,
-            "nombre": "brianezequielfiszman@gmail.com",
+            "name": null,
             "fechaNacimiento": null,
-            "mail": null,
+            "email": null,
             "edad": null,
-            "password": "$2y$10$wKxQuX0PaCgTwWiZGrdKRemzU1Zwh7EcTDkcn\/s1n4rXs.2.YuQf6"
+            "password": null
         },
         {
             "id": 4,
-            "nombre": "b",
+            "name": null,
             "fechaNacimiento": null,
-            "mail": "brianezequielfiszman@gmail.com",
+            "email": null,
             "edad": null,
-            "password": "$2y$10$rTCgCHiPwxoDQaDVORpaBuqtj6S\/CxnlV91LhrprOi7hfGNjhieuC"
+            "password": null
         },
         {
             "id": 5,
-            "nombre": null,
+            "name": null,
             "fechaNacimiento": null,
-            "mail": null,
+            "email": null,
             "edad": null,
-            "password": "$2y$10$9sLBGu.wH24tyQRprMSMv.p.s.rVxp9vBuYfK0kzQ\/WFDKYusP8Ce"
+            "password": null
         },
         {
             "id": 6,
-            "nombre": null,
+            "name": null,
             "fechaNacimiento": null,
-            "mail": null,
+            "email": null,
             "edad": null,
-            "password": "$2y$10$e3.RAlKZCTaQ8D9l4wSDpOJMfSfqlsI9xZnBWnuyFcY7uppIfYzI2"
+            "password": null
         },
         {
             "id": 7,
-            "nombre": null,
+            "name": null,
             "fechaNacimiento": null,
-            "mail": null,
+            "email": null,
             "edad": null,
-            "password": "$2y$10$hCBXC1rGza5rD0HeE8\/uAelZN9SAY5vOOJPOMPfvRRM1HuHf9VjPy"
+            "password": null
         },
         {
             "id": 8,
-            "nombre": null,
+            "name": null,
             "fechaNacimiento": null,
-            "mail": null,
+            "email": null,
             "edad": null,
-            "password": "$2y$10$JDFjh28KOKiBbI\/IEa\/JzeY06DiZL9JPKJ3hEiOdzUeVsyiR3WDP2"
+            "password": null
         },
         {
             "id": 9,
-            "nombre": null,
+            "name": null,
             "fechaNacimiento": null,
-            "mail": null,
+            "email": null,
             "edad": null,
-            "password": "$2y$10$zhnV7ai07gKkIWB\/23DCwuQaUW1cFmOb0YkXM\/9747YtASkxuVgS6"
+            "password": null
         },
         {
             "id": 10,
-            "nombre": null,
+            "name": null,
             "fechaNacimiento": null,
-            "mail": null,
+            "email": null,
             "edad": null,
-            "password": "$2y$10$YZG7wLACQ\/UTzaDG4UA6MuS2UjlAnG1xXiSJzr25utlQWnC7HGw\/O"
+            "password": null
         },
         {
             "id": 11,
-            "nombre": null,
+            "name": null,
             "fechaNacimiento": null,
-            "mail": null,
+            "email": null,
             "edad": null,
-            "password": "$2y$10$zgn4dj0.qpxLssustHCD2uZsX.aA5Q1SSHI4\/..5bUHDYBLvQcQ.S"
+            "password": null
         },
         {
             "id": 12,
-            "nombre": "",
+            "name": null,
             "fechaNacimiento": null,
-            "mail": "brianezequielfiszman@gmail.com",
+            "email": null,
             "edad": null,
-            "password": "$2y$10$n4zmJlmIDESECyRR7XZ.pezo6U0NMz6WhnZ5UDaLFeejlhz6txoay"
+            "password": null
         },
         {
             "id": 13,
-            "nombre": "brianezequielfiszman@gmail.com",
+            "name": null,
             "fechaNacimiento": null,
-            "mail": null,
+            "email": null,
             "edad": null,
-            "password": "$2y$10$WvqsbwgUfxjoipOpbSmeYOhriyQDEq97NkgDEbVS.IWnnG2JMpOQS"
-        },
-        {
-            "id": 14,
-            "nombre": "asd",
-            "fechaNacimiento": null,
-            "mail": "brianezequielfiszman@gmail.com",
-            "edad": null,
-            "password": "$2y$10$bIUXiSejt26BMR.0dGIky.Jeq7EPaF2m48xW\/FqLUOl6ZNIlXLiXW"
-        },
-        {
-            "id": 15,
-            "nombre": "asdasdasd",
-            "fechaNacimiento": null,
-            "mail": "brianezequielfiszman@gmail.com",
-            "edad": null,
-            "password": "$2y$10$5el.7d.rua4280CF0M.or.CBosRqK7qghq7qYGxjXG4XCROuWgeAi"
-        },
-        {
-            "id": 16,
-            "nombre": null,
-            "fechaNacimiento": null,
-            "mail": null,
-            "edad": null,
-            "password": "$2y$10$vgAZq0qKvob1XSIOKolkdeeQGxxku4BInJOdRubvrStvyxSOA1PgS"
-        },
-        {
-            "id": 17,
-            "nombre": "b",
-            "fechaNacimiento": null,
-            "mail": "brianezequielfiszman@gmail.com",
-            "edad": null,
-            "password": "$2y$10$5\/Nki2e4\/OOxU2NBjA3h2urBPInUFHTXMWLFobMvQao7nY18TJ822"
-        },
-        {
-            "id": 18,
-            "nombre": "as",
-            "fechaNacimiento": null,
-            "mail": "brianezequielfiszman@gmail.com",
-            "edad": null,
-            "password": "$2y$10$wRbV.4bgff0dYmbHXBxmDem4arnE.tp4\/Ph6WeZIolbiv.f2XSAye"
-        },
-        {
-            "id": 19,
-            "nombre": null,
-            "fechaNacimiento": null,
-            "mail": null,
-            "edad": null,
-            "password": "$2y$10$X2mTffxkBkoaYE6d08\/oSeE0KBDQOz7aRnTzbx1Vw11BrKAzQXdB2"
-        },
-        {
-            "id": 20,
-            "nombre": "a",
-            "fechaNacimiento": null,
-            "mail": "brianezequielfiszman@gmail.com",
-            "edad": null,
-            "password": "$2y$10$ZOEL88VOBhZD8atmgcQyDOMJ86.lgFvCV9RVfoe0VJU5lQKb3DGBy"
-        },
-        {
-            "id": 21,
-            "nombre": "asdasd",
-            "fechaNacimiento": null,
-            "mail": "brianezequielfiszman@gmail.com",
-            "edad": null,
-            "password": "$2y$10$gCDV7EBzsUKzmQqVO85.t.uEUVmYgyKV7BfYuqx968vD3qTFfwYcW"
-        },
-        {
-            "id": 22,
-            "nombre": "asd",
-            "fechaNacimiento": null,
-            "mail": "brianezequielfiszman@gmail.com",
-            "edad": null,
-            "password": "$2y$10$d1ql7CRzI5.9uzLaCjecQepMc\/FIlMCAgkzDFWJInzl4HNjNXKC96"
+            "password": null
         }
     ]
 }

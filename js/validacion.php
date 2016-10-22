@@ -15,8 +15,8 @@ window.onload = function() {
     const USER_FIELD_TOO_LONG = '<?=$validationConfig['users']['errors']['userFieldTooLong']?>';
     const PASS_FIELD_TOO_LONG = '<?=$validationConfig['users']['errors']['passFieldTooLong']?>';
 
-    const OK = true;
-    const ERROR = false;
+    const OK = false;
+    const ERROR = true;
 
     const NAME = '<?=$validationConfig['users']['inputs']['name']?>';
     const EMAIL = '<?=$validationConfig['users']['inputs']['email']?>';
@@ -24,7 +24,6 @@ window.onload = function() {
     const PASSWORD_CONFIRM = '<?=$validationConfig['users']['inputs']['passwordConfirm']?>';
     const MAIN_FORM = '<?=$validationConfig['users']['inputs']['main-form']?>';
     const SUBMIT = '<?=$validationConfig['users']['inputs']['submit']?>';
-
     'use strict';
 
     <?php include $config['view']['URL']['ajax']; ?>

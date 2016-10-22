@@ -16,11 +16,9 @@ return array(
     'model' => array(
         'URL' => array(
             'usuario' => $_SERVER['DOCUMENT_ROOT'].'/model/usuario.php',
-            'validable' => $_SERVER['DOCUMENT_ROOT'].'/model/validable.php',
         ),
         'URI' => array(
           'usuario' => '/model/usuario.php',
-          'validable' => '/model/validable.php',
         ),
     ),
     'view' => array(
@@ -62,6 +60,7 @@ return array(
             'repositorioGenericoJSON' => $_SERVER['DOCUMENT_ROOT'].'/controller/repositorioGenericoJSON.php',
             'repositorioUsuariosJSON' => $_SERVER['DOCUMENT_ROOT'].'/controller/repositorioUsuariosJSON.php',
             'validator' => $_SERVER['DOCUMENT_ROOT'].'/controller/validator.php',
+            'userValidator' => $_SERVER['DOCUMENT_ROOT'].'/controller/userValidator.php',
         ),
         'URI' => array(
             'validationConfig' => '/config/validation_config.php',
@@ -73,6 +72,7 @@ return array(
             'repositorioGenericoJSON' => '/controller/repositorioGenericoJSON.php',
             'repositorioUsuariosJSON' => '/controller/repositorioUsuariosJSON.php',
             'validator' => '/controller/validator.php',
+            'userValidator' => '/controller/userValidator.php',
         ),
     ),
 );
