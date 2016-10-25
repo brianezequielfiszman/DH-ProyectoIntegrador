@@ -20,17 +20,17 @@ $usuario = new Usuario(null, $nombre, null, null, null, $password, null);
 $validator = new UserValidator($validationConfig);
 $validator->validate($usuario);
 
-    if($validator->isUserValid() === '' && $validator->isPasswordValid() === ''){
-      $userDetected = $jsonDB->getRepositorioUsuarios()->fetchUserByName($nombre);
-      if($userDetected){
-         $usuario->setPassword(password_hash($password, PASSWORD_DEFAULT));
-         if($userDetected['password'] === $usuario->getPassword()){
-           session_start();
-           setcookie('Logeado!', $logeado, time()+3600);
-         }
-      }
+if($jsonDB->getRepositorioUsuarios()->fetchUserByEmail($email))
+  $validator->setEmailValid('Este correo ya esta registrado');
+
+  if($jsonDB->getRepositorioUsuarios()->fetchUserByName($nombre))
+    $validator->setUserValid('Este usuario ya esta registrado');
+
+    if($validator->isUserValid() === '' && $validator->isEmailValid() === '' && $validator->isPasswordValid() === '' &&  $validator->isPasswordConfirmValid() === ''){
+      $usuario->setPassword(password_hash($password, PASSWORD_DEFAULT));
+      $jsonDB->getRepositorioUsuarios()->submitUser($usuario);
     }
 
 
 
-  // header('location: ' . $config['view']['URI']['index'] . "?id=login&nameError=" . $validator->isUserValid() . "&passError=".$validator->isPasswordValid());
+header('location: ' . $config['view']['URI']['index'] . "?id=signup&nameError=" . $validator->isUserValid() . "&emailError=".$validator->isEmailValid() . "&passError=".$validator->isPasswordValid() ."&passConfirmError=".$validator->isPasswordConfirmValid());
