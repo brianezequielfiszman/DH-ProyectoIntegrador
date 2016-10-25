@@ -131,8 +131,8 @@ window.onload = function() {
                             window.alert('Te has registrado! La cantidad de usuarios es: ' + response.cantidad);
                         }, 'GET', null);
                     }, 'GET', null);
-                else
-                    evt.preventDefault();
+                //else
+                    //evt.preventDefault();
             };
     }
 

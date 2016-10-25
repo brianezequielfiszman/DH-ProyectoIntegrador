@@ -15,6 +15,14 @@
             "email": "brianezequielfiszman@gmail.cs",
             "edad": null,
             "password": "$2y$10$cvrPW9dvo5P90P7.aKyeJ.ieWqeER9HSDbwADk3JpIkVHegQuRthi"
+        },
+        {
+            "id": 3,
+            "name": "brian",
+            "fechaNacimiento": null,
+            "email": "brianezequielfiszman@hotmail.com",
+            "edad": null,
+            "password": "$2y$10$yTGWPIRwLzyNhDYE4wbSEevQJyJLXC16mNuKgkPSaTgNQ7v\/99NRG"
         }
     ]
 }
