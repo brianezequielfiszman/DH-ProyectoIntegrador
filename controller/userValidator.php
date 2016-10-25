@@ -12,7 +12,7 @@ include $config['controller']['URL']['validator'];
 
       public function __construct($validationConfig) { $this->validationConfig = $validationConfig; }
 
-      protected function validate($usuario) {
+      public function validate($usuario) {
         $this->setUserValid($this->validationConfig['users']['rules']['isUserValid']($usuario->getNombre()));
         $this->setPasswordValid($this->validationConfig['users']['rules']['isPasswordValid']($usuario->getPassword()));
       }

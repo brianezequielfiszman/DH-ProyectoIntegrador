@@ -1,11 +1,11 @@
     <div class="form-container">
         <h1 class="titulo">Login</h1>
-        <form id='main-form' class="main-form" name="main-form" action="<?=$config['controller']['URI']['submit_user']?>" method="post">
+        <form id='main-form' class="main-form" name="main-form" action="<?=$config['controller']['URI']['login']?>" method="post">
             <h1 class="titulo-interno">Login</h1>
             <article class="inner-form">
-                <span class="error" id="name-error"></span>
+                <span class="error" id="name-error"><?=$nameError = (isset($_GET['nameError'])) ? $_GET['nameError'] : ''?></span>
                 <input id="name" class="input-text" type="text" name="nombre" placeholder="Ingrese Usuario">
-                <span class="error" id="password-error"></span>
+                <span class="error" id="password-error"><?=$passError = (isset($_GET['passError'])) ? $_GET['passError'] : ''?></span>
                 <input id="password" class="input-text" name="password" type="password" placeholder="Ingrese Password">
                 <div class="recordame-container">
                     <span><input type="checkbox" name="checkbox" value="value" id="recordame"></span>

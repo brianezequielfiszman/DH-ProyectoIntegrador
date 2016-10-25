@@ -4,7 +4,7 @@
         <form id="main-form" class="main-form" action="<?=$config['controller']['URI']['submit_user']?>" method="post">
             <h1 class="titulo-interno">Registrate</h1>
             <article class="inner-form">
-                <span class="error" id="name-error"><?=$error = (isset($_GET['nameError'])) ? $_GET['nameError'] : ''?></span>
+                <span class="error" id="name-error"><?=$nameError = (isset($_GET['nameError'])) ? $_GET['nameError'] : ''?></span>
                 <input id="name" class="input-text" type="text" name="nombre" placeholder="Ingrese Usuario">
                 <span class="error" id="email-error"><?=$emailError = (isset($_GET['emailError'])) ? $_GET['emailError'] : ''?></span>
                 <input id="email" class="input-text" name="email" type="email" placeholder="Ingrese Correo">
