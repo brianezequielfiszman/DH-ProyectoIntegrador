@@ -1,6 +1,6 @@
 window.onload = function() {
     <?php $config = include $_SERVER['DOCUMENT_ROOT'] . '/config/config.php'; ?>
-    <?php $validationConfig = include $config['controller']['URL']['validationConfig']; ?>
+    <?php include $config['controller']['URL']['validationConfig']; ?>
 
     const MAIL_REGEXP = new RegExp(/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i);
 
@@ -131,8 +131,8 @@ window.onload = function() {
                             window.alert('Te has registrado! La cantidad de usuarios es: ' + response.cantidad);
                         }, 'GET', null);
                     }, 'GET', null);
-                else
-                    evt.preventDefault();
+                <!-- else
+                    evt.preventDefault(); -->
             };
     }
 

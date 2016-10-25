@@ -15,23 +15,17 @@ class RepositorioUsuariosJSON extends RepositorioGenericoJSON implements Reposit
     public function fetchUsers(){ return parent::fetchObject()[$this->offset]; }
     public function getUsersCount(){ return count($this->fetchUsers()); }
 
-    public function fetchUserByEmail($email){
-        foreach ($this->fetchUsers() as $user):
-            if($user['email'] === $email):
-              return $user;
-            else:
-              return false;
-            endif;
-        endforeach;
+    public function fetchUserByEmail($email) {
+        foreach ($this->fetchUsers() as $user)
+            if ($user['email'] === $email)
+                return $user;
+        return false;
     }
 
     public function fetchUserByName($name){
-      foreach ($this->fetchUsers() as $user):
-          if($user['name'] === $name):
+      foreach ($this->fetchUsers() as $user)
+          if($user['name'] === $name)
             return $user;
-          else:
-            return false;
-          endif;
-      endforeach;
+      return false;
     }
 }

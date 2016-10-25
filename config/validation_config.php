@@ -1,6 +1,6 @@
 <?php
 
-return array(
+$validationConfig = array(
     'users' => array(
         'errors' => array(
             'userFieldEmpty'   => 'El campo de usuario esta vacio.',
@@ -22,7 +22,47 @@ return array(
             'submit'           => 'submit-button',
         ),
         'regExp' => array(
-            'mailRegExp'       => '/^(?!(?:(?:\\x22?\\x5C[\\x00-\\x7E]\\x22?)|(?:\\x22?[^\\x5C\\x22]\\x22?)){255,})(?!(?:(?:\\x22?\\x5C[\\x00-\\x7E]\\x22?)|(?:\\x22?[^\\x5C\\x22]\\x22?)){65,}@)(?:(?:[\\x21\\x23-\\x27\\x2A\\x2B\\x2D\\x2F-\\x39\\x3D\\x3F\\x5E-\\x7E]+)|(?:\\x22(?:[\\x01-\\x08\\x0B\\x0C\\x0E-\\x1F\\x21\\x23-\\x5B\\x5D-\\x7F]|(?:\\x5C[\\x00-\\x7F]))*\\x22))(?:\\.(?:(?:[\\x21\\x23-\\x27\\x2A\\x2B\\x2D\\x2F-\\x39\\x3D\\x3F\\x5E-\\x7E]+)|(?:\\x22(?:[\\x01-\\x08\\x0B\\x0C\\x0E-\\x1F\\x21\\x23-\\x5B\\x5D-\\x7F]|(?:\\x5C[\\x00-\\x7F]))*\\x22)))*@(?:(?:(?!.*[^.]{64,})(?:(?:(?:xn--)?[a-z0-9]+(?:-+[a-z0-9]+)*\\.){1,126}){1,}(?:(?:[a-z][a-z0-9]*)|(?:(?:xn--)[a-z0-9]+))(?:-+[a-z0-9]+)*)|(?:\\[(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){7})|(?:(?!(?:.*[a-f0-9][:\\]]){7,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?)))|(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){5}:)|(?:(?!(?:.*[a-f0-9]:){5,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3}:)?)))?(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))(?:\\.(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))){3}))\\]))$/iD',
+            'mailRegExp'       => '/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i',
+        ),
+        'rules' => array(
+          'isUserValid' => function($user){
+            global $validationConfig;
+            return (strlen($user) > 0) ?
+            ((strlen($user) < 50) ?
+                '' :
+                $validationConfig['users']['errors']['userFieldTooLong']) :
+            ($validationConfig['users']['errors']['userFieldEmpty']);
+            },
+            'isEmailValid' => function($email){
+              global $validationConfig;
+              return (strlen($email) > 0) ?
+              ((preg_match($validationConfig['users']['regExp']['mailRegExp'], $email)) ?
+                  '' :
+                  $validationConfig['users']['errors']['invalidMail']) :
+              $validationConfig['users']['errors']['mailFieldEmpty'];
+            },
+            'isPasswordValid' => function($pass){
+              global $validationConfig;
+              return (strlen($pass) > 0) ?
+              ((strlen($pass) >= 8) ?
+                  ((strlen($pass) < 50) ?
+                      '' :
+                      $validationConfig['users']['errors']['passFieldTooLong']) :
+                  ($validationConfig['users']['errors']['shortPassword'])) :
+              ($validationConfig['users']['errors']['passFieldEmpty']);
+            },
+            'isPasswordConfirmValid' => function($pass, $passConfirm){
+              global $validationConfig;
+              return ($pass === $passConfirm) ?
+            ((strlen($pass) > 0) ?
+                ((strlen($pass) >= 8) ?
+                    ((strlen($pass) < 50) ?
+                        '' :
+                        $validationConfig['users']['errors']['passFieldTooLong']) :
+                    ($validationConfig['users']['errors']['shortPassword'])) :
+                ($validationConfig['users']['errors']['passFieldEmpty'])) :
+            ($validationConfig['users']['errors']['unequalPassword']);
+            }
         ),
     ),
 );

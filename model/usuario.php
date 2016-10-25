@@ -19,6 +19,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
         $this->setEmail($mail);
         $this->setEdad($edad);
         $this->setPassword($password);
+        $this->setPasswordConfirm($passwordConfirm);
     }
 
     public function getId() { return $this->id;  }
