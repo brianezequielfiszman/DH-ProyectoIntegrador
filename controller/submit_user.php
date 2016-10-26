@@ -5,11 +5,7 @@ include $config['model']['URL']['usuario'];
 include $config['controller']['URL']['repositorioJSON'];
 include $config['controller']['URL']['signUpValidator'];
 
-
-$filePath = $config['db']['json']['file_path'];
-$offset = $config['db']['json']['offset'];
-
-$jsonDB = new RepositorioJSON($filePath, $offset);
+$jsonDB = new RepositorioJSON($config);
 
 $id = $jsonDB->getRepositorioUsuarios()->getUsersCount() + 1;
 $nombre = $_POST['nombre'];
@@ -27,5 +23,4 @@ $validator->validate($usuario, $jsonDB->getRepositorioUsuarios());
               $usuario->setPassword(password_hash($password, PASSWORD_DEFAULT));
               $jsonDB->getRepositorioUsuarios()->submitUser($usuario);
           }
-
-  header('location: ' . $config['view']['URI']['index'] . "?id=signup&nameError=" . $validator->isUserValid() . "&emailError=".$validator->isEmailValid() . "&passError=".$validator->isPasswordValid() ."&passConfirmError=".$validator->isPasswordConfirmValid());
+header('location: ' . $config['view']['URI']['index'] . "?id=signup&nameError=" . $validator->isUserValid() . "&emailError=".$validator->isEmailValid() . "&passError=".$validator->isPasswordValid() ."&passConfirmError=".$validator->isPasswordConfirmValid());
