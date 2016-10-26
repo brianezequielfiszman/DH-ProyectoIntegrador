@@ -10,9 +10,11 @@ include $config['controller']['URL']['validator'];
       protected $isUserValid;
       protected $isPasswordValid;
 
-      public function __construct($validationConfig) { $this->validationConfig = $validationConfig; }
+      public function __construct($validationConfig) {
+        $this->validationConfig = $validationConfig;
+      }
 
-      public function validate($usuario) {
+      public function validate($usuario, $userDatabase) {
         $this->setUserValid($this->validationConfig['users']['rules']['isUserValid']($usuario->getNombre()));
         $this->setPasswordValid($this->validationConfig['users']['rules']['isPasswordValid']($usuario->getPassword()));
       }

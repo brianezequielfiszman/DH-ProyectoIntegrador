@@ -11,9 +11,13 @@ class SignUpValidator extends UserValidator
     parent::__construct($validationConfig);
   }
 
-  public function validate($usuario){
-    parent::validate($usuario);
+  public function validate($usuario, $userDatabase){
+    parent::validate($usuario, $userDatabase);
+    if(!parent::isUserValid())
+    $this->setUserValid($this->validationConfig['users']['rules']['isUserAlreadyRegistered']($userDatabase, $usuario->getNombre()));
     $this->setEmailValid($this->validationConfig['users']['rules']['isEmailValid']($usuario->getEmail()));
+    if(!$this->isEmailValid())
+    $this->setEmailValid($this->validationConfig['users']['rules']['isEmailAlreadyRegistered']($userDatabase, $usuario->getEmail()));
     $this->setPasswordConfirmValid($this->validationConfig['users']['rules']['isPasswordConfirmValid']($usuario->getPassword(), $usuario->getPasswordConfirm()));
   }
 

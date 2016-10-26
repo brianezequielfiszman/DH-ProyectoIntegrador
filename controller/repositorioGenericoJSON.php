@@ -1,5 +1,5 @@
 <?php
-$config = include $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
+// $config = include $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
 
 class RepositorioGenericoJSON extends RepositorioGenerico implements JsonSerializable
 {

@@ -19,21 +19,13 @@ $passwordConfirm = $_POST['passwordConfirm'];
 
 $usuario = new Usuario($id, $nombre, null, $email, null, $password, $passwordConfirm);
 $validator = new SignUpValidator($validationConfig);
-$validator->validate($usuario);
-
-
-
-if($jsonDB->getRepositorioUsuarios()->fetchUserByEmail($email))
-  $validator->setEmailValid('Este correo ya esta registrado');
-
-  if($jsonDB->getRepositorioUsuarios()->fetchUserByName($nombre))
-    $validator->setUserValid('Este usuario ya esta registrado');
-
-    if($validator->isUserValid() === '' && $validator->isEmailValid() === '' && $validator->isPasswordValid() === '' &&  $validator->isPasswordConfirmValid() === ''){
-      $usuario->setPassword(password_hash($password, PASSWORD_DEFAULT));
-      $jsonDB->getRepositorioUsuarios()->submitUser($usuario);
-    }
-
-
+$validator->validate($usuario, $jsonDB->getRepositorioUsuarios());
+    if($validator->isUserValid() === '' || !$validator->isUserValid())
+      if($validator->isEmailValid() === '' || !$validator->isUserValid())
+        if($validator->isPasswordValid() === '' || !$validator->isPasswordValid())
+          if($validator->isPasswordConfirmValid() === '' || !$validator->isPasswordConfirmValid()){
+              $usuario->setPassword(password_hash($password, PASSWORD_DEFAULT));
+              $jsonDB->getRepositorioUsuarios()->submitUser($usuario);
+          }
 
   header('location: ' . $config['view']['URI']['index'] . "?id=signup&nameError=" . $validator->isUserValid() . "&emailError=".$validator->isEmailValid() . "&passError=".$validator->isPasswordValid() ."&passConfirmError=".$validator->isPasswordConfirmValid());

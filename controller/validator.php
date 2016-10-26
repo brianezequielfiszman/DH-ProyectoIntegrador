@@ -5,7 +5,7 @@
 
     public function __construct($errorOutput) { $this->errorOutput = $errorOutput; }
 
-    abstract protected function validate($object);
+    abstract protected function validate($object, $database);
   }
 
 ?>

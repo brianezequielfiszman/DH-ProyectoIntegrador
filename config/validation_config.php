@@ -3,47 +3,50 @@
 $validationConfig = array(
     'users' => array(
         'errors' => array(
-            'userFieldEmpty'   => 'El campo de usuario esta vacio.',
-            'mailFieldEmpty'   => 'El campo de correo esta vacio.',
-            'passFieldEmpty'   => 'El campo de clave esta vacio.',
-            'invalidMail'      => 'El formato de correo ingresado no es valido.',
-            'shortPassword'    => 'El password debe ser de minimo 8 caracteres.',
-            'unequalPassword'  => 'Los campos de password no coinciden.',
-            'userExists'       => 'El usuario ingresado ya existe.',
+            'userFieldEmpty' => 'El campo de usuario esta vacio.',
+            'mailFieldEmpty' => 'El campo de correo esta vacio.',
+            'passFieldEmpty' => 'El campo de clave esta vacio.',
+            'invalidMail' => 'El formato de correo ingresado no es valido.',
+            'shortPassword' => 'El password debe ser de minimo 8 caracteres.',
+            'unequalPassword' => 'Los campos de password no coinciden.',
+            'userExists' => 'El usuario ingresado ya existe.',
+            'emailExists' => 'El correo ingresado ya existe.',
             'userFieldTooLong' => 'El valor de usuario es demasiado largo.',
             'passFieldTooLong' => 'La clave ingresada es demasiado larga.',
+            'wrongPassword' => 'La clave ingresada es incorrecta.',
+            'userNotRegistered' => 'El usuario ingresado no existe.',
         ),
         'inputs' => array(
-            'name'             => 'name',
-            'email'            => 'email',
-            'password'         => 'password',
-            'passwordConfirm'  => 'passwordConfirm',
-            'main-form'        => 'main-form',
-            'submit'           => 'submit-button',
+            'name' => 'name',
+            'email' => 'email',
+            'password' => 'password',
+            'passwordConfirm' => 'passwordConfirm',
+            'main-form' => 'main-form',
+            'submit' => 'submit-button',
         ),
         'regExp' => array(
-            'mailRegExp'       => '/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i',
+            'mailRegExp' => '/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i',
         ),
         'rules' => array(
-          'isUserValid' => function($user){
-            global $validationConfig;
-            return (strlen($user) > 0) ?
+          'isUserValid' => function ($user) {
+              global $validationConfig;
+              return (strlen($user) > 0) ?
             ((strlen($user) < 50) ?
                 '' :
                 $validationConfig['users']['errors']['userFieldTooLong']) :
             ($validationConfig['users']['errors']['userFieldEmpty']);
-            },
-            'isEmailValid' => function($email){
-              global $validationConfig;
-              return (strlen($email) > 0) ?
+          },
+            'isEmailValid' => function ($email) {
+                global $validationConfig;
+                return (strlen($email) > 0) ?
               ((preg_match($validationConfig['users']['regExp']['mailRegExp'], $email)) ?
                   '' :
                   $validationConfig['users']['errors']['invalidMail']) :
               $validationConfig['users']['errors']['mailFieldEmpty'];
             },
-            'isPasswordValid' => function($pass){
-              global $validationConfig;
-              return (strlen($pass) > 0) ?
+            'isPasswordValid' => function ($pass) {
+                global $validationConfig;
+                return (strlen($pass) > 0) ?
               ((strlen($pass) >= 8) ?
                   ((strlen($pass) < 50) ?
                       '' :
@@ -51,9 +54,9 @@ $validationConfig = array(
                   ($validationConfig['users']['errors']['shortPassword'])) :
               ($validationConfig['users']['errors']['passFieldEmpty']);
             },
-            'isPasswordConfirmValid' => function($pass, $passConfirm){
-              global $validationConfig;
-              return ($pass === $passConfirm) ?
+            'isPasswordConfirmValid' => function ($pass, $passConfirm) {
+                global $validationConfig;
+                return ($pass === $passConfirm) ?
             ((strlen($pass) > 0) ?
                 ((strlen($pass) >= 8) ?
                     ((strlen($pass) < 50) ?
@@ -62,7 +65,28 @@ $validationConfig = array(
                     ($validationConfig['users']['errors']['shortPassword'])) :
                 ($validationConfig['users']['errors']['passFieldEmpty'])) :
             ($validationConfig['users']['errors']['unequalPassword']);
-            }
+            },
+            'isUserAlreadyRegistered' => function(RepositorioUsuarios $repo, $user) {
+              global $validationConfig;
+              if($repo->fetchUserByName($user))
+                return $validationConfig['users']['errors']['userExists'];
+            },
+            'userNotRegistered' => function(RepositorioUsuarios $repo, $user) {
+              global $validationConfig;
+              if(!$repo->fetchUserByName($user))
+                return $validationConfig['users']['errors']['userNotRegistered'];
+            },
+            'isEmailAlreadyRegistered' => function(RepositorioUsuarios $repo, $email) {
+              global $validationConfig;
+              if($repo->fetchUserByEmail($email))
+                return $validationConfig['users']['errors']['emailExists'];
+            },
+            'wrongPassword' => function(RepositorioUsuarios $repo, Usuario $usuario, $password){
+              global $validationConfig;
+              if($user = $repo->fetchUserByName($usuario->getNombre()))
+                if(!password_verify($password, $user['password']))
+                  return $validationConfig['users']['errors']['wrongPassword'];
+            },
         ),
     ),
 );
