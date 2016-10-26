@@ -65,6 +65,7 @@ return array(
             'userValidator' => $_SERVER['DOCUMENT_ROOT'].'/controller/userValidator.php',
             'signUpValidator' => $_SERVER['DOCUMENT_ROOT'].'/controller/signup-validator.php',
             'loginValidator' => $_SERVER['DOCUMENT_ROOT'].'/controller/loginValidator.php',
+            'support' => $_SERVER['DOCUMENT_ROOT'].'/controller/support.php',
         ),
         'URI' => array(
             'validationConfig' => '/config/validation_config.php',
@@ -81,6 +82,7 @@ return array(
             'userValidator' => '/controller/userValidator.php',
             'signUpValidator' => '/controller/signup-validator.php',
             'loginValidator' => '/controller/loginValidator.php',
+            'support' => '/controller/support.php',
         ),
     ),
 );

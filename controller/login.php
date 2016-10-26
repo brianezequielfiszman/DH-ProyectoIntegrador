@@ -18,4 +18,11 @@ $usuario = new Usuario(null, $nombre, null, null, null, $password, null);
 $validator = new LoginValidator($validationConfig);
 $validator->validate($usuario, $jsonDB->getRepositorioUsuarios());
 
+if($validator->isUserValid() === '' || !$validator->isUserValid())
+  if($validator->isPasswordValid() === '' || !$validator->isPasswordValid()){
+    session_start();
+    $user = $jsonDB->getRepositorioUsuarios()->fetchUserByName($nombre);
+    $_SESSION['usuarioLogueado'] = $user['email'];
+  }
+
 header('location: ' . $config['view']['URI']['index'] . "?id=login&nameError=" . $validator->isUserValid() .  "&passError=".$validator->isPasswordValid());

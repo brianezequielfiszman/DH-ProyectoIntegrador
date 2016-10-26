@@ -6,14 +6,19 @@
   </head>
   <body>
     <?php
-    const HOME   = 'home';
-    const FAQS   = 'faqs';
-    const LOGIN  = 'login';
+    $config = include $_SERVER['DOCUMENT_ROOT'].'/config/config.php';
+    include $config['controller']['URL']['support'];
+
+    $repoUsuarios = $repo->getRepositorioUsuarios();
+
+    $usuarioLogueado = $auth->getLoggedUser($repoUsuarios);
+
+    const HOME = 'home';
+    const FAQS = 'faqs';
+    const LOGIN = 'login';
     const SIGNUP = 'signup';
 
-    if (!isset($_GET['id']))
-      $_GET['id'] = HOME;
-    $config = include $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
+    if (!isset($_GET['id'])) { $_GET['id'] = HOME; }
 
     include $config['view']['URL']['head'];
 

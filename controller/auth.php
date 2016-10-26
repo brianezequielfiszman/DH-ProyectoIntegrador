@@ -1,8 +1,8 @@
 <?php
-  $config = require_once $_SERVER['DOCUMENT_ROOT'].'/config/config.php';
+  $config = include $_SERVER['DOCUMENT_ROOT'].'/config/config.php';
 
-  require_once $config['model']['URL']['usuario'];
-  require_once $config['controller']['URL']['repositorioGenerico'];
+  include $config['model']['URL']['usuario'];
+
 
   class Auth
   {
