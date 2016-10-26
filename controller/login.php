@@ -1,28 +1,51 @@
 <?php
 $config = include $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
 
-include $config['model']['URL']['usuario'];
 include $config['controller']['URL']['repositorioJSON'];
 include $config['controller']['URL']['loginValidator'];
+include $config['controller']['URL']['auth'];
 
-$filePath = $config['db']['json']['file_path'];
-$offset = $config['db']['json']['offset'];
+class Login
+{
+  private $usuario;
+  private $repositorio;
+  private $validator;
+  private $config;
 
-$jsonDB = new RepositorioJSON($filePath, $offset);
-
-$id = $jsonDB->getRepositorioUsuarios()->getUsersCount() + 1;
-$nombre = $_POST['nombre'];
-$password = $_POST['password'];
-
-$usuario = new Usuario(null, $nombre, null, null, null, $password, null);
-$validator = new LoginValidator($validationConfig);
-$validator->validate($usuario, $jsonDB->getRepositorioUsuarios());
-
-if($validator->isUserValid() === '' || !$validator->isUserValid())
-  if($validator->isPasswordValid() === '' || !$validator->isPasswordValid()){
-    session_start();
-    $user = $jsonDB->getRepositorioUsuarios()->fetchUserByName($nombre);
-    $_SESSION['usuarioLogueado'] = $user['email'];
+  public function __construct($nombre, $password, RepositorioUsuarios $repositorio, LoginValidator $validator, $config)
+  {
+    $this->usuario = Usuario::loginConstruct($nombre, $password);
+    $this->repositorio = $repositorio;
+    $this->validator = $validator;
+    $this->config = $config;
   }
 
-header('location: ' . $config['view']['URI']['index'] . "?id=login&nameError=" . $validator->isUserValid() .  "&passError=".$validator->isPasswordValid());
+  public function getUsuario(){ return $this->usuario; }
+  public function setUsuario(Usuario $usuario) { $this->usuario = $usuario; }
+
+  private function validateLogin(){
+    $this->validator->validate($this->usuario, $this->repositorio);
+    return (($this->validator->isUserValid() === '' || !$this->validator->isUserValid()) && ($this->validator->isPasswordValid() === '' ||
+    !$this->validator->isPasswordValid()));
+  }
+
+  public function loginUser($recordame = ''){
+    if ($this->validateLogin()) {
+      $usuario = $this->repositorio->fetchUserByName($this->usuario->getNombre());
+      $this->usuario->setEmail($usuario['email']);
+      $auth = Auth::getInstance($this->repositorio);
+      $auth->login($this->usuario);
+      if (isset($recordame))
+        $auth->storeCookie($this->usuario);
+      header('location: ' . $this->config['view']['URI']['index'] . "?id=home");
+    } else {
+      header('location: ' . $this->config['view']['URI']['index'] . "?id=login&nameError=" . $this->validator->isUserValid() .  "&passError=".$this->validator->isPasswordValid());
+    }
+  }
+}
+
+$login = new Login($_POST['nombre'], $_POST['password'], (new RepositorioJSON($config))->getRepositorioUsuarios(), new LoginValidator($validationConfig), $config);
+if(isset($_POST['recordame']))
+  $login->loginUser($_POST['recordame']);
+else
+  $login->loginUser();

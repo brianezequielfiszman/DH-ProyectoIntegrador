@@ -8,7 +8,7 @@
                 <span class="error" id="password-error"><?=$passError = (isset($_GET['passError'])) ? $_GET['passError'] : ''?></span>
                 <input id="password" class="input-text" name="password" type="password" placeholder="Ingrese Password">
                 <div class="recordame-container">
-                    <span><input type="checkbox" name="checkbox" value="value" id="recordame"></span>
+                    <span><input type="checkbox" value="true" id="recordame" name="recordame"></span>
                     <label for="recordame">Recordame</label>
                 </div>
                 <input type="submit" class="submit-button" name="name" class="submit" value="Iniciar sesión">

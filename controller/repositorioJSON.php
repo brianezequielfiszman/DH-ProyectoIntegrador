@@ -8,9 +8,9 @@ include $config['controller']['URL']['repositorioUsuariosJSON'];
 class RepositorioJSON extends Repositorio
 {
 
-    public function __construct($filePath, $offset)
+    public function __construct($config)
     {
-      $this->setRepositorioUsuarios(new RepositorioUsuariosJSON($filePath, $offset));
+      $this->setRepositorioUsuarios(new RepositorioUsuariosJSON($config['db']['json']['file_path'], $config['db']['json']['offset']));
     }
 
     public function getRepositorioUsuarios(){ return $this->repositorioUsuarios; }

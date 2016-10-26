@@ -19,6 +19,7 @@
       {
         if (self::$instance == null):
           self::$instance = new self();
+          self::$instance->autoLogin($repositorio);
         endif;
 
         return self::$instance;
@@ -36,16 +37,16 @@
         return null;
 
       $loggedEmail = $_SESSION['usuarioLogueado'];
-      return $repo->fetchUserByEmail($loggedEmail);
+      return $repositorio->fetchUserByEmail($loggedEmail);
     }
 
-    public function autoLogin(RepositorioUsuarios $repo)
+    public function autoLogin(RepositorioUsuarios $repositorio)
     {
       session_start();
       $this->unsetCookie('usuarioLogueado');
       if (!$this->isLogged())
         if (isset($_COOKIE['usuarioLogueado'])):
-          $usuario = $repo->fetchUserByEmail($_COOKIE['usuarioLogueado']);
+          $usuario = $repositorio->fetchUserByEmail($_COOKIE['usuarioLogueado']);
           $this->login($usuario);
         endif;
     }

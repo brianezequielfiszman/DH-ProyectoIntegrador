@@ -5,13 +5,10 @@ include($config['controller']['URL']['repositorioJSON']);
 
 $tipoRepositorio = "json";
 
-$filePath = $config['db']['json']['file_path'];
-$offset = $config['db']['json']['offset'];
-
 switch($tipoRepositorio) {
 	case "json":
-		$repo = new RepositorioJSON($filePath, $offset);
+		$repositorio = new RepositorioJSON($config);
 		break;
 }
 
-$auth = Auth::getInstance($repo->getRepositorioUsuarios());
+$auth = Auth::getInstance($repositorio->getRepositorioUsuarios());
