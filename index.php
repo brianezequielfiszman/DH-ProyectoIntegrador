@@ -17,6 +17,7 @@
     const LOGIN = 'login';
     const SIGNUP = 'signup';
     const LOGOUT = 'logout';
+    const MENU = 'menu';
 
     if (!isset($_GET['id'])) {
         $_GET['id'] = HOME;
@@ -24,6 +25,7 @@
 
     include $config['view']['URL']['head'];
 
+if (!$auth->isLogged()):
     switch ($_GET['id']):
       case HOME:
         include $config['view']['URL']['home'];
@@ -37,13 +39,29 @@
       case SIGNUP:
         include $config['view']['URL']['registrar'];
         break;
+        default:
+          include $config['view']['URL']['home'];
+          break;
+    endswitch;
+  else:
+    switch ($_GET['id']):
+      case HOME:
+        include $config['view']['URL']['home'];
+        break;
+      case FAQS:
+        include $config['view']['URL']['faqs'];
+        break;
       case LOGOUT:
         $auth->logout();
         header('location: index.php');
+      case MENU:
+        include $config['view']['URL']['menu'];
+        break;
       default:
         include $config['view']['URL']['home'];
         break;
     endswitch;
+  endif;
     include $config['view']['URL']['footer'];
 
     ?>

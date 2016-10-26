@@ -23,7 +23,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
     }
 
     public static function loginConstruct($nombre, $password){ return new self(null, $nombre, null, null, null, $password, null); }
-    
+
     public function getId() { return $this->id;  }
     public function getNombre() { return $this->nombre; }
     public function getFechaNacimiento() { return $this->fechaNacimiento; }

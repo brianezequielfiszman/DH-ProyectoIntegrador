@@ -16,6 +16,15 @@ body {
     margin: 0;
 }
 
+#userTable {
+  border: 1px solid black;
+  margin: auto;
+}
+
+#tableData {
+  border: 1px solid black;
+}
+
 .form-container {
     background: #999999;
     height: 100vh;
