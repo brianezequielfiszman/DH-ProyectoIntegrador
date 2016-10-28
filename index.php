@@ -1,9 +1,5 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
   <body>
     <?php
     $config = include $_SERVER['DOCUMENT_ROOT'].'/config/config.php';
