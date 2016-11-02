@@ -39,6 +39,14 @@
             "email": "adrian@aadri.com",
             "edad": null,
             "password": "$2y$10$iyH7hgI5s0EhOnWknl75PeRmFq5PKIDlo74Svbt3TdpIPheRlMbpi"
+        },
+        {
+            "id": 6,
+            "name": "gegege",
+            "fechaNacimiento": null,
+            "email": "gegege@gegege.com",
+            "edad": null,
+            "password": "$2y$10$BCo6esNtrjtHT7xK1Dcwge8R5.AjYtuKJa9yfXR4JpunLi1KLoLsy"
         }
     ]
 }

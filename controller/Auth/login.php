@@ -25,7 +25,7 @@ class Login
 
   private function validateLogin(){
     $this->validator->validate($this->usuario, $this->repositorio);
-    return (($this->validator->isUserValid() === NO_ERROR) && ($this->validator->isPasswordValid() === NO_ERROR));
+    return (($this->validator->isUserValid() === ValidationConfig::NO_ERROR) && ($this->validator->isPasswordValid() === ValidationConfig::NO_ERROR));
   }
 
   public function loginUser($recordame = ''){
