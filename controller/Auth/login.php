@@ -1,8 +1,8 @@
 <?php
 use Configuration\Config;
-
+use Configuration\ValidationConfig;
 require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Config.php';
-
+require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/ValidationConfig.php';
 require_once Config::$controller['URL']['repositorioJSON'];
 require_once Config::$controller['URL']['loginValidator'];
 require_once Config::$controller['URL']['auth'];
@@ -25,8 +25,7 @@ class Login
 
   private function validateLogin(){
     $this->validator->validate($this->usuario, $this->repositorio);
-    return (($this->validator->isUserValid() === '' || !$this->validator->isUserValid()) && ($this->validator->isPasswordValid() === '' ||
-    !$this->validator->isPasswordValid()));
+    return (($this->validator->isUserValid() === NO_ERROR) && ($this->validator->isPasswordValid() === NO_ERROR));
   }
 
   public function loginUser($recordame = ''){

@@ -23,6 +23,22 @@
             "email": "patata@patata.com",
             "edad": null,
             "password": "$2y$10$NRgG1KJ8yekpvePjNOpo0OpTLR2E.kComKJOBp3x5DeVddcZj9OZi"
+        },
+        {
+            "id": 4,
+            "name": "patri",
+            "fechaNacimiento": null,
+            "email": "petri@petri.com",
+            "edad": null,
+            "password": "$2y$10$WZF32IYrBO2k7c81JFRYlOzHQss61VSIhnr5yhYfE\/hMZqnvutiGy"
+        },
+        {
+            "id": 5,
+            "name": "adrian",
+            "fechaNacimiento": null,
+            "email": "adrian@aadri.com",
+            "edad": null,
+            "password": "$2y$10$iyH7hgI5s0EhOnWknl75PeRmFq5PKIDlo74Svbt3TdpIPheRlMbpi"
         }
     ]
 }

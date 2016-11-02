@@ -1,5 +1,7 @@
 <?php
 
+const NO_ERROR = '';
+
 return array(
     'users' => array(
         'errors' => array(
@@ -29,63 +31,69 @@ return array(
         ),
         'rules' => array(
           'isUserValid' => function ($user) {
-            $validationConfig = include 'validation_config.php';
+              $validationConfig = include 'validation_config.php';
+
               return (strlen($user) > 0) ?
             ((strlen($user) < 50) ?
-                '' :
+                NO_ERROR :
                 $validationConfig['users']['errors']['userFieldTooLong']) :
             ($validationConfig['users']['errors']['userFieldEmpty']);
           },
             'isEmailValid' => function ($email) {
-              $validationConfig = include 'validation_config.php';
+                $validationConfig = include 'validation_config.php';
+
                 return (strlen($email) > 0) ?
               ((preg_match($validationConfig['users']['regExp']['mailRegExp'], $email)) ?
-                  '' :
+                  NO_ERROR :
                   $validationConfig['users']['errors']['invalidMail']) :
               $validationConfig['users']['errors']['mailFieldEmpty'];
             },
             'isPasswordValid' => function ($pass) {
-              $validationConfig = include 'validation_config.php';
+                $validationConfig = include 'validation_config.php';
+
                 return (strlen($pass) > 0) ?
               ((strlen($pass) >= 8) ?
                   ((strlen($pass) < 50) ?
-                      '' :
+                      NO_ERROR :
                       $validationConfig['users']['errors']['passFieldTooLong']) :
                   ($validationConfig['users']['errors']['shortPassword'])) :
               ($validationConfig['users']['errors']['passFieldEmpty']);
             },
             'isPasswordConfirmValid' => function ($pass, $passConfirm) {
                 $validationConfig = include 'validation_config.php';
+
                 return ($pass === $passConfirm) ?
             ((strlen($pass) > 0) ?
                 ((strlen($pass) >= 8) ?
                     ((strlen($pass) < 50) ?
-                        '' :
+                        NO_ERROR :
                         $validationConfig['users']['errors']['passFieldTooLong']) :
                     ($validationConfig['users']['errors']['shortPassword'])) :
                 ($validationConfig['users']['errors']['passFieldEmpty'])) :
             ($validationConfig['users']['errors']['unequalPassword']);
             },
-            'isUserAlreadyRegistered' => function(RepositorioUsuarios $repo, $user) {
-              $validationConfig = include 'validation_config.php';
-              if($repo->fetchUserByName($user))
-                return $validationConfig['users']['errors']['userExists'];
+            'isUserAlreadyRegistered' => function (RepositorioUsuarios $repo, $user) {
+                $validationConfig = include 'validation_config.php';
+
+                return ($repo->fetchUserByName($user)) ?
+                $validationConfig['users']['errors']['userExists'] : NO_ERROR;
             },
-            'userNotRegistered' => function(RepositorioUsuarios $repo, $user) {
-              $validationConfig = include 'validation_config.php';
-              if(!$repo->fetchUserByName($user))
-                return $validationConfig['users']['errors']['userNotRegistered'];
+            'userNotRegistered' => function (RepositorioUsuarios $repo, $user) {
+                $validationConfig = include 'validation_config.php';
+
+                return (!$repo->fetchUserByName($user)) ? $validationConfig['users']['errors']['userNotRegistered'] :
+                NO_ERROR;
             },
-            'isEmailAlreadyRegistered' => function(RepositorioUsuarios $repo, $email) {
-              $validationConfig = include 'validation_config.php';
-              if($repo->fetchUserByEmail($email))
-                return $validationConfig['users']['errors']['emailExists'];
+            'isEmailAlreadyRegistered' => function (RepositorioUsuarios $repo, $email) {
+                $validationConfig = include 'validation_config.php';
+
+                return ($repo->fetchUserByEmail($email)) ? $validationConfig['users']['errors']['emailExists'] : NO_ERROR;
             },
-            'wrongPassword' => function(RepositorioUsuarios $repo, Usuario $usuario, $password){
-              $validationConfig = include 'validation_config.php';
-              if($user = $repo->fetchUserByName($usuario->getNombre()))
-                if(!password_verify($password, $user['password']))
-                  return $validationConfig['users']['errors']['wrongPassword'];
+            'wrongPassword' => function (RepositorioUsuarios $repo, Usuario $usuario, $password) {
+                $validationConfig = include 'validation_config.php';
+                if ($user = $repo->fetchUserByName($usuario->getNombre())) {
+                    return (!password_verify($password, $user['password'])) ? $validationConfig['users']['errors']['wrongPassword'] : NO_ERROR;
+                }
             },
         ),
     ),

@@ -11,6 +11,8 @@ namespace Configuration;
       public static $regExp;
       public static $rules;
 
+      const NO_ERROR = '';
+
       private function __construct()
       {
           self::$file   = include $_SERVER['DOCUMENT_ROOT'].'/config/validation_config.php';
