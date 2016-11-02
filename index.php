@@ -2,22 +2,20 @@
 <html>
   <body>
     <?php
-    $config = include $_SERVER['DOCUMENT_ROOT'].'/config/config.php';
+    $config = require_once $_SERVER['DOCUMENT_ROOT'].'/config/config.php';
     require_once $config['controller']['URL']['support'];
 
-    $repoUsuarios = $repositorio->getRepositorioUsuarios();
+    $repoUsuarios    = $repositorio->getRepositorioUsuarios();
     $usuarioLogueado = $auth->getLoggedUser($repoUsuarios);
 
-    const HOME = 'home';
-    const FAQS = 'faqs';
-    const LOGIN = 'login';
+    const HOME   = 'home';
+    const FAQS   = 'faqs';
+    const LOGIN  = 'login';
     const SIGNUP = 'signup';
     const LOGOUT = 'logout';
-    const MENU = 'menu';
+    const MENU   = 'menu';
 
-    if (!isset($_GET['id'])) {
-        $_GET['id'] = HOME;
-    }
+    if (!isset($_GET['id'])) { $_GET['id'] = HOME; }
 
     include $config['view']['URL']['head'];
 
@@ -35,9 +33,9 @@ if (!$auth->isLogged()):
       case SIGNUP:
         include $config['view']['URL']['registrar'];
         break;
-        default:
-          include $config['view']['URL']['home'];
-          break;
+      default:
+        include $config['view']['URL']['home'];
+        break;
     endswitch;
   else:
     switch ($_GET['id']):

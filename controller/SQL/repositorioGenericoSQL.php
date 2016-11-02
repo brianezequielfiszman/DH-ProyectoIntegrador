@@ -1,19 +1,19 @@
 <?php
-// $config = include $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
+$config = include $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
 
-class RepositorioGenericoJSON extends RepositorioGenerico implements JsonSerializable
+class RepositorioGenericoSQL extends RepositorioGenerico
 {
-    protected $arrObj;
-    protected $filePath;
-    protected $offset;
+    protected $db;
 
-    public function __construct($filePath, $offset)
+    public function __construct(SQLConnection $db, $table)
     {
-        $this->filePath = $filePath;
-        $this->offset   = $offset;
-        $this->arrObj   = $this->fetchObject() ?: [$this->offset => []];
+        $this->db = $db;
     }
 
+    private function createDatabase(){}
+    private function createTable(){}
+
+    protected function select(){}
     /**
      * This method parse a JSON file and returns its decoded contents.
      * If the file doesnt exists it creates a new one.

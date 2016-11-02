@@ -1,23 +1,23 @@
 <?php
-$config = include $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
+use Configuration\Config;
 
-include $config['controller']['URL']['repositorioJSON'];
-include $config['controller']['URL']['loginValidator'];
-include $config['controller']['URL']['auth'];
+require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Config.php';
+
+require_once Config::$controller['URL']['repositorioJSON'];
+require_once Config::$controller['URL']['loginValidator'];
+require_once Config::$controller['URL']['auth'];
 
 class Login
 {
   private $usuario;
   private $repositorio;
   private $validator;
-  private $config;
 
-  public function __construct($nombre, $password, RepositorioUsuarios $repositorio, LoginValidator $validator, $config)
+  public function __construct($nombre, $password, RepositorioUsuarios $repositorio, LoginValidator $validator)
   {
     $this->usuario = Usuario::loginConstruct($nombre, $password);
     $this->repositorio = $repositorio;
     $this->validator = $validator;
-    $this->config = $config;
   }
 
   public function getUsuario(){ return $this->usuario; }
@@ -37,14 +37,14 @@ class Login
       $auth->login($this->usuario);
       if (isset($recordame))
         $auth->storeCookie($this->usuario);
-      header('location: ' . $this->config['view']['URI']['index'] . "?id=home");
+      header('location: ' . Config::$view['URI']['index'] . "?id=home");
     } else {
-      header('location: ' . $this->config['view']['URI']['index'] . "?id=login&nameError=" . $this->validator->isUserValid() .  "&passError=".$this->validator->isPasswordValid());
+      header('location: ' . Config::$view['URI']['index'] . "?id=login&nameError=" . $this->validator->isUserValid() .  "&passError=".$this->validator->isPasswordValid());
     }
   }
 }
 
-$login = new Login($_POST['nombre'], $_POST['password'], (new RepositorioJSON($config))->getRepositorioUsuarios(), new LoginValidator($validationConfig), $config);
+$login = new Login($_POST['nombre'], $_POST['password'], (new RepositorioJSON())->getRepositorioUsuarios(), new LoginValidator());
 if(isset($_POST['recordame']))
   $login->loginUser($_POST['recordame']);
 else

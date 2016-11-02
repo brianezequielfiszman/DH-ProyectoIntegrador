@@ -1,9 +1,8 @@
 <?php
+use Configuration\Config;
 
-$config = include $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
-
-include $config['controller']['URL']['repositorioUsuarios'];
-include $config['controller']['URL']['repositorioGenericoJSON'];
+require_once Config::$controller['URL']['repositorioUsuarios'];
+require_once Config::$controller['URL']['repositorioGenericoJSON'];
 
 class RepositorioUsuariosJSON extends RepositorioGenericoJSON implements RepositorioUsuarios {
 

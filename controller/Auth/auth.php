@@ -1,7 +1,8 @@
 <?php
-  $config = include $_SERVER['DOCUMENT_ROOT'].'/config/config.php';
+  use Configuration\Config;
 
-  include $config['model']['URL']['usuario'];
+  require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Config.php';
+  include Config::$model['URL']['usuario'];
 
 
   class Auth

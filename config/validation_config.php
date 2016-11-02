@@ -1,6 +1,6 @@
 <?php
 
-$validationConfig = array(
+return array(
     'users' => array(
         'errors' => array(
             'userFieldEmpty' => 'El campo de usuario esta vacio.',
@@ -25,11 +25,11 @@ $validationConfig = array(
             'submit' => 'submit-button',
         ),
         'regExp' => array(
-            'mailRegExp' => '/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i',
+            'mailRegExp' => '/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:  [0-9]{1,5})?$/i',
         ),
         'rules' => array(
           'isUserValid' => function ($user) {
-              global $validationConfig;
+            $validationConfig = include 'validation_config.php';
               return (strlen($user) > 0) ?
             ((strlen($user) < 50) ?
                 '' :
@@ -37,7 +37,7 @@ $validationConfig = array(
             ($validationConfig['users']['errors']['userFieldEmpty']);
           },
             'isEmailValid' => function ($email) {
-                global $validationConfig;
+              $validationConfig = include 'validation_config.php';
                 return (strlen($email) > 0) ?
               ((preg_match($validationConfig['users']['regExp']['mailRegExp'], $email)) ?
                   '' :
@@ -45,7 +45,7 @@ $validationConfig = array(
               $validationConfig['users']['errors']['mailFieldEmpty'];
             },
             'isPasswordValid' => function ($pass) {
-                global $validationConfig;
+              $validationConfig = include 'validation_config.php';
                 return (strlen($pass) > 0) ?
               ((strlen($pass) >= 8) ?
                   ((strlen($pass) < 50) ?
@@ -55,7 +55,7 @@ $validationConfig = array(
               ($validationConfig['users']['errors']['passFieldEmpty']);
             },
             'isPasswordConfirmValid' => function ($pass, $passConfirm) {
-                global $validationConfig;
+                $validationConfig = include 'validation_config.php';
                 return ($pass === $passConfirm) ?
             ((strlen($pass) > 0) ?
                 ((strlen($pass) >= 8) ?
@@ -67,22 +67,22 @@ $validationConfig = array(
             ($validationConfig['users']['errors']['unequalPassword']);
             },
             'isUserAlreadyRegistered' => function(RepositorioUsuarios $repo, $user) {
-              global $validationConfig;
+              $validationConfig = include 'validation_config.php';
               if($repo->fetchUserByName($user))
                 return $validationConfig['users']['errors']['userExists'];
             },
             'userNotRegistered' => function(RepositorioUsuarios $repo, $user) {
-              global $validationConfig;
+              $validationConfig = include 'validation_config.php';
               if(!$repo->fetchUserByName($user))
                 return $validationConfig['users']['errors']['userNotRegistered'];
             },
             'isEmailAlreadyRegistered' => function(RepositorioUsuarios $repo, $email) {
-              global $validationConfig;
+              $validationConfig = include 'validation_config.php';
               if($repo->fetchUserByEmail($email))
                 return $validationConfig['users']['errors']['emailExists'];
             },
             'wrongPassword' => function(RepositorioUsuarios $repo, Usuario $usuario, $password){
-              global $validationConfig;
+              $validationConfig = include 'validation_config.php';
               if($user = $repo->fetchUserByName($usuario->getNombre()))
                 if(!password_verify($password, $user['password']))
                   return $validationConfig['users']['errors']['wrongPassword'];

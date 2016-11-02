@@ -5,7 +5,7 @@ include $config['model']['URL']['usuario'];
 include $config['controller']['URL']['repositorioJSON'];
 include $config['controller']['URL']['signUpValidator'];
 
-$jsonDB = new RepositorioJSON($config);
+$jsonDB = new RepositorioJSON();
 
 $id = $jsonDB->getRepositorioUsuarios()->getUsersCount() + 1;
 $nombre = $_POST['nombre'];
@@ -14,7 +14,7 @@ $password = $_POST['password'];
 $passwordConfirm = $_POST['passwordConfirm'];
 
 $usuario = new Usuario($id, $nombre, null, $email, null, $password, $passwordConfirm);
-$validator = new SignUpValidator($validationConfig);
+$validator = new SignUpValidator();
 $validator->validate($usuario, $jsonDB->getRepositorioUsuarios());
     if($validator->isUserValid() === '' || !$validator->isUserValid())
       if($validator->isEmailValid() === '' || !$validator->isUserValid())

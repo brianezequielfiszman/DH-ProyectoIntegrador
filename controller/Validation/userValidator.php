@@ -1,7 +1,12 @@
 <?php
-$config = include $_SERVER['DOCUMENT_ROOT'].'/config/config.php';
-include $config['controller']['URL']['validationConfig'];
-include $config['controller']['URL']['validator'];
+use Configuration\Config;
+use Configuration\ValidationConfig;
+
+require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Config.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/ValidationConfig.php';
+
+require_once Config::$controller['URL']['validationConfig'];
+require_once Config::$controller['URL']['validator'];
 
 
   class UserValidator extends Validator
@@ -10,13 +15,10 @@ include $config['controller']['URL']['validator'];
       protected $isUserValid;
       protected $isPasswordValid;
 
-      public function __construct($validationConfig) {
-        $this->validationConfig = $validationConfig;
-      }
 
       public function validate($usuario, $userDatabase) {
-        $this->setUserValid($this->validationConfig['users']['rules']['isUserValid']($usuario->getNombre()));
-        $this->setPasswordValid($this->validationConfig['users']['rules']['isPasswordValid']($usuario->getPassword()));
+        $this->setUserValid(ValidationConfig::$rules['isUserValid']($usuario->getNombre()));
+        $this->setPasswordValid(ValidationConfig::$rules['isPasswordValid']($usuario->getPassword()));
       }
 
       public function isUserValid(){ return $this->isUserValid; }

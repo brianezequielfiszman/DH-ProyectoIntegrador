@@ -1,32 +1,35 @@
 window.onload = function() {
-    <?php $config = include $_SERVER['DOCUMENT_ROOT'] . '/config/config.php'; ?>
-    <?php include $config['controller']['URL']['validationConfig']; ?>
+  <?php use Configuration\Config; ?>
+  <?php use Configuration\ValidationConfig; ?>
 
-    const MAIL_REGEXP = new RegExp(/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i);
+  <?php require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Config.php'; ?>
+  <?php require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/ValidationConfig.php'; ?>
 
-    const USER_FIELD_EMPTY = '<?=$validationConfig['users']['errors']['userFieldEmpty']?>';
-    const MAIL_FIELD_EMPTY = '<?=$validationConfig['users']['errors']['mailFieldEmpty']?>';
-    const PASS_FIELD_EMPTY = '<?=$validationConfig['users']['errors']['passFieldEmpty']?>';
-    const INVALID_MAIL = '<?=$validationConfig['users']['errors']['invalidMail']?>';
-    const SHORT_PASSWORD = '<?=$validationConfig['users']['errors']['shortPassword']?>';
-    const UNEQUAL_PASSWORD = '<?=$validationConfig['users']['errors']['unequalPassword']?>';
-    const USER_EXISTS = '<?=$validationConfig['users']['errors']['userExists']?>';
+    const MAIL_REGEXP      = new RegExp(<?=ValidationConfig::$regExp['mailRegExp']?>);
 
-    const USER_FIELD_TOO_LONG = '<?=$validationConfig['users']['errors']['userFieldTooLong']?>';
-    const PASS_FIELD_TOO_LONG = '<?=$validationConfig['users']['errors']['passFieldTooLong']?>';
+    const USER_FIELD_EMPTY = '<?=ValidationConfig::$errors['userFieldEmpty']?>';
+    const MAIL_FIELD_EMPTY = '<?=ValidationConfig::$errors['mailFieldEmpty']?>';
+    const PASS_FIELD_EMPTY = '<?=ValidationConfig::$errors['passFieldEmpty']?>';
+    const INVALID_MAIL     = '<?=ValidationConfig::$errors['invalidMail']?>';
+    const SHORT_PASSWORD   = '<?=ValidationConfig::$errors['shortPassword']?>';
+    const UNEQUAL_PASSWORD = '<?=ValidationConfig::$errors['unequalPassword']?>';
+    const USER_EXISTS      = '<?=ValidationConfig::$errors['userExists']?>';
 
-    const OK = false;
+    const USER_FIELD_TOO_LONG = '<?=ValidationConfig::$errors['userFieldTooLong']?>';
+    const PASS_FIELD_TOO_LONG = '<?=ValidationConfig::$errors['passFieldTooLong']?>';
+
+    const OK    = false;
     const ERROR = true;
 
-    const NAME = '<?=$validationConfig['users']['inputs']['name']?>';
-    const EMAIL = '<?=$validationConfig['users']['inputs']['email']?>';
-    const PASSWORD = '<?=$validationConfig['users']['inputs']['password']?>';
-    const PASSWORD_CONFIRM = '<?=$validationConfig['users']['inputs']['passwordConfirm']?>';
-    const MAIN_FORM = '<?=$validationConfig['users']['inputs']['main-form']?>';
-    const SUBMIT = '<?=$validationConfig['users']['inputs']['submit']?>';
+    const NAME             = '<?=ValidationConfig::$inputs['name']?>';
+    const EMAIL            = '<?=ValidationConfig::$inputs['email']?>';
+    const PASSWORD         = '<?=ValidationConfig::$inputs['password']?>';
+    const PASSWORD_CONFIRM = '<?=ValidationConfig::$inputs['passwordConfirm']?>';
+    const MAIN_FORM        = '<?=ValidationConfig::$inputs['main-form']?>';
+    const SUBMIT           = '<?=ValidationConfig::$inputs['submit']?>';
     'use strict';
 
-    <?php include $config['view']['URL']['ajax']; ?>
+    <?php include Config::$view['URL']['ajax']; ?>
 
     /**
      * [validate: validacion de formulario]

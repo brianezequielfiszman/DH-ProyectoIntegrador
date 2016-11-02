@@ -19,9 +19,9 @@
                     <?php endif; ?>
                 <?php endforeach; ?>
               </td>
-            
+
               <td id='tableData'>
-                <img src="/resourse/img/generic-avatar.jpg" alt="" />
+                <img src="/resourses/img/generic-avatar.jpg" alt="" />
               </td>
 
               </tbody>

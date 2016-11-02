@@ -2,27 +2,27 @@
     "usuarios": [
         {
             "id": 1,
-            "name": "asd",
+            "name": "brian",
             "fechaNacimiento": null,
             "email": "brianezequielfiszman@gmail.com",
             "edad": null,
-            "password": "$2y$10$cvrPW9dvo5P90P7.aKyeJ.ieWqeER9HSDbwADk3JpIkVHegQuRthi"
+            "password": "$2y$10$9dZzTsK.FMgvKMh7.ns8puusHtP3kWoIuyKi\/ozdtYZxtFZ6c\/1xe"
         },
         {
             "id": 2,
-            "name": "brian",
+            "name": "adelaidas",
             "fechaNacimiento": null,
-            "email": "brianezequielfiszman@hotmail.com",
+            "email": "adelaidas@tetascaidas.com",
             "edad": null,
-            "password": "$2y$10$yTGWPIRwLzyNhDYE4wbSEevQJyJLXC16mNuKgkPSaTgNQ7v\/99NRG"
+            "password": "$2y$10$VqAq.6QwRiAcJZXVYq3Ps.wtK8otcUa\/G2J\/J.58K5yIV5.X8oW\/G"
         },
         {
             "id": 3,
-            "name": "brianfiszman",
+            "name": "patata",
             "fechaNacimiento": null,
-            "email": "brianezequielfiszman@gmail.gov",
+            "email": "patata@patata.com",
             "edad": null,
-            "password": "$2y$10$mAI\/wPDtvFNP4Ikw.kDnf.i.5FhHbCKuE8CEenIaudWbxZSLdgwCW"
+            "password": "$2y$10$NRgG1KJ8yekpvePjNOpo0OpTLR2E.kComKJOBp3x5DeVddcZj9OZi"
         }
     ]
 }
