@@ -5,8 +5,7 @@ use Configuration\ValidationConfig;
 require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Config.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/ValidationConfig.php';
 
-require_once Config::$controller['URL']['validationConfig'];
-require_once Config::$controller['URL']['validator'];
+require_once Config::getValidator();
 
 
   class UserValidator extends Validator
@@ -17,8 +16,8 @@ require_once Config::$controller['URL']['validator'];
 
 
       public function validate($usuario, $userDatabase) {
-        $this->setUserValid(ValidationConfig::$rules['isUserValid']($usuario->getNombre()));
-        $this->setPasswordValid(ValidationConfig::$rules['isPasswordValid']($usuario->getPassword()));
+        $this->setUserValid(ValidationConfig::IsUserValidRule()($usuario->getNombre()));
+        $this->setPasswordValid(ValidationConfig::IsPasswordValidRule()($usuario->getPassword()));
       }
 
       public function isUserValid(){ return $this->isUserValid; }

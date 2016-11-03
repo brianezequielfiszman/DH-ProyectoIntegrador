@@ -2,17 +2,17 @@
 
 return array(
     'db' => array(
-        'sql' => array(
+        'SQL' => array(
             'driver' => 'mysql',
             'dbname' => 'test',
             'username' => 'root',
-            'password' => 'as time goes by',
+            'password' => '',
             'host' => 'localhost',
             'table' => array(
               'usuarios' => 'usuarios',
             ),
         ),
-        'json' => array(
+        'JSON' => array(
             'offset' => 'usuarios',
             'file_path' => $_SERVER['DOCUMENT_ROOT'].'/usuarios.json',
         ),

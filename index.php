@@ -56,8 +56,8 @@ if (!$auth->isLogged()):
         break;
     endswitch;
   endif;
-    include $config['view']['URL']['footer'];
 
+    include $config['view']['URL']['footer'];
     ?>
   </body>
 </html>

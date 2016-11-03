@@ -3,8 +3,8 @@
 use Configuration\Config;
 
 require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Config.php';
-include Config::$controller['URL']['auth'];
-include Config::$controller['URL']['repositorioJSON'];
+include Config::getAuth();
+include Config::getRepositorioJSON();
 
 $tipoRepositorio = 'json';
 

@@ -1,35 +1,35 @@
 window.onload = function() {
-  <?php use Configuration\Config; ?>
+  <?php use Configuration\Config;           ?>
   <?php use Configuration\ValidationConfig; ?>
 
-  <?php require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Config.php'; ?>
+  <?php require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Config.php';           ?>
   <?php require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/ValidationConfig.php'; ?>
 
     const MAIL_REGEXP      = new RegExp(<?=ValidationConfig::$regExp['mailRegExp']?>);
 
-    const USER_FIELD_EMPTY = '<?=ValidationConfig::$errors['userFieldEmpty']?>';
-    const MAIL_FIELD_EMPTY = '<?=ValidationConfig::$errors['mailFieldEmpty']?>';
-    const PASS_FIELD_EMPTY = '<?=ValidationConfig::$errors['passFieldEmpty']?>';
-    const INVALID_MAIL     = '<?=ValidationConfig::$errors['invalidMail']?>';
-    const SHORT_PASSWORD   = '<?=ValidationConfig::$errors['shortPassword']?>';
-    const UNEQUAL_PASSWORD = '<?=ValidationConfig::$errors['unequalPassword']?>';
-    const USER_EXISTS      = '<?=ValidationConfig::$errors['userExists']?>';
+    const USER_FIELD_EMPTY = '<?=ValidationConfig::getUserFieldEmptyError()  ?>';
+    const MAIL_FIELD_EMPTY = '<?=ValidationConfig::getMailFieldEmptyError()  ?>';
+    const PASS_FIELD_EMPTY = '<?=ValidationConfig::getPassFieldEmptyError()  ?>';
+    const INVALID_MAIL     = '<?=ValidationConfig::getInvalidMailError()     ?>';
+    const SHORT_PASSWORD   = '<?=ValidationConfig::getShortPasswordError()   ?>';
+    const UNEQUAL_PASSWORD = '<?=ValidationConfig::getUnequalPasswordError() ?>';
+    const USER_EXISTS      = '<?=ValidationConfig::getUserExistsError()      ?>';
 
-    const USER_FIELD_TOO_LONG = '<?=ValidationConfig::$errors['userFieldTooLong']?>';
-    const PASS_FIELD_TOO_LONG = '<?=ValidationConfig::$errors['passFieldTooLong']?>';
+    const USER_FIELD_TOO_LONG = '<?=ValidationConfig::getUserFieldTooLongError()?>';
+    const PASS_FIELD_TOO_LONG = '<?=ValidationConfig::getPassFieldTooLongError()?>';
 
     const OK    = false;
     const ERROR = true;
 
-    const NAME             = '<?=ValidationConfig::$inputs['name']?>';
-    const EMAIL            = '<?=ValidationConfig::$inputs['email']?>';
-    const PASSWORD         = '<?=ValidationConfig::$inputs['password']?>';
-    const PASSWORD_CONFIRM = '<?=ValidationConfig::$inputs['passwordConfirm']?>';
-    const MAIN_FORM        = '<?=ValidationConfig::$inputs['main-form']?>';
-    const SUBMIT           = '<?=ValidationConfig::$inputs['submit']?>';
+    const NAME             = '<?=ValidationConfig::getNameInput()           ?>';
+    const EMAIL            = '<?=ValidationConfig::getEmailInput()          ?>';
+    const PASSWORD         = '<?=ValidationConfig::getPasswordInput()       ?>';
+    const PASSWORD_CONFIRM = '<?=ValidationConfig::getPasswordConfirmInput()?>';
+    const MAIN_FORM        = '<?=ValidationConfig::getMainFormInput()       ?>';
+    const SUBMIT           = '<?=ValidationConfig::getSubmitInput()         ?>';
     'use strict';
 
-    <?php include Config::$view['URL']['ajax']; ?>
+    <?php include Config::getViewAJAX(); ?>
 
     /**
      * [validate: validacion de formulario]

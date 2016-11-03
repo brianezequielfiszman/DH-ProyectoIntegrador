@@ -1,7 +1,7 @@
 <?php
 use Configuration\Config;
 
-include Config::$controller['URL']['repositorioGenerico'];
+include Config::getRepositorioGenerico();
 
 abstract class Repositorio
 {

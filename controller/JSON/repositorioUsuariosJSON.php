@@ -1,8 +1,8 @@
 <?php
 use Configuration\Config;
 
-require_once Config::$controller['URL']['repositorioUsuarios'];
-require_once Config::$controller['URL']['repositorioGenericoJSON'];
+require_once Config::getRepositorioUsuarios();
+require_once Config::getRepositorioGenericoJSON();
 
 class RepositorioUsuariosJSON extends RepositorioGenericoJSON implements RepositorioUsuarios {
 
@@ -10,9 +10,9 @@ class RepositorioUsuariosJSON extends RepositorioGenericoJSON implements Reposit
         parent::__construct($filePath, $offset);
     }
 
-    public function submitUser(Usuario $usuario) { return parent::submitObject($usuario); }
-    public function fetchUsers(){ return parent::fetchObject()[$this->offset]; }
-    public function getUsersCount(){ return count($this->fetchUsers()); }
+    public function submitUser(Usuario $usuario) { return parent::submitObject($usuario);       }
+    public function fetchUsers()                 { return parent::fetchObject()[$this->offset]; }
+    public function getUsersCount()              { return count($this->fetchUsers());           }
 
     public function fetchUserByEmail($email) {
         foreach ($this->fetchUsers() as $user)

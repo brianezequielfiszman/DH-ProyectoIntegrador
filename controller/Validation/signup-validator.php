@@ -4,7 +4,8 @@ use Configuration\ValidationConfig;
 
 require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Config.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/ValidationConfig.php';
-require_once Config::$controller['URL']['userValidator'];
+require_once Config::getUserValidator();
+
 class SignUpValidator extends UserValidator
 {
   private $isEmailValid;
@@ -13,11 +14,11 @@ class SignUpValidator extends UserValidator
   public function validate($usuario, $userDatabase){
     parent::validate($usuario, $userDatabase);
     if(parent::isUserValid() === ValidationConfig::NO_ERROR)
-    $this->setUserValid(ValidationConfig::$rules['isUserAlreadyRegistered']($userDatabase, $usuario->getNombre()));
-    $this->setEmailValid(ValidationConfig::$rules['isEmailValid']($usuario->getEmail()));
+    $this->setUserValid(ValidationConfig::IsUserAlreadyRegisteredRule()($userDatabase, $usuario->getNombre()));
+    $this->setEmailValid(ValidationConfig::IsEmailValidRule()($usuario->getEmail()));
     if($this->isEmailValid() === ValidationConfig::NO_ERROR)
-    $this->setEmailValid(ValidationConfig::$rules['isEmailAlreadyRegistered']($userDatabase, $usuario->getEmail()));
-    $this->setPasswordConfirmValid(ValidationConfig::$rules['isPasswordConfirmValid']($usuario->getPassword(), $usuario->getPasswordConfirm()));
+    $this->setEmailValid(ValidationConfig::IsEmailAlreadyRegisteredRule()($userDatabase, $usuario->getEmail()));
+    $this->setPasswordConfirmValid(ValidationConfig::IsPasswordConfirmValidRule()($usuario->getPassword(), $usuario->getPasswordConfirm()));
   }
 
   public function isEmailValid(){ return $this->isEmailValid; }
