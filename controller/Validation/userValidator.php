@@ -16,8 +16,8 @@ require_once Config::getValidator();
 
 
       public function validate($usuario, $userDatabase) {
-        $this->setUserValid(ValidationConfig::IsUserValidRule()($usuario->getNombre()));
-        $this->setPasswordValid(ValidationConfig::IsPasswordValidRule()($usuario->getPassword()));
+        $this->setUserValid(ValidationConfig::IsUserValidRule($usuario->getNombre()));
+        $this->setPasswordValid(ValidationConfig::IsPasswordValidRule($usuario->getPassword()));
       }
 
       public function isUserValid(){ return $this->isUserValid; }

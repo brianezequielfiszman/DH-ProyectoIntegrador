@@ -36,8 +36,10 @@ namespace Configuration;
           return self::$instance;
       }
 
-      public static function   getMailRegExp() { return self::$regExp['mailRegExp'];   }
+      // GETTERS FOR REGEXP
+      public static function getMailRegExp() { return self::$regExp['mailRegExp'];   }
 
+      // GETTERS FOR ERRORS
       public static function   getUserFieldEmptyError() { return self::$errors['userFieldEmpty'];   }
       public static function   getMailFieldEmptyError() { return self::$errors['mailFieldEmpty'];   }
       public static function   getPassFieldEmptyError() { return self::$errors['passFieldEmpty'];   }
@@ -48,6 +50,7 @@ namespace Configuration;
       public static function getUserFieldTooLongError() { return self::$errors['userFieldTooLong']; }
       public static function getPassFieldTooLongError() { return self::$errors['passFieldTooLong']; }
 
+      // GETTERS FOR INPUTS
       public static function            getNameInput() { return self::$inputs['name'];            }
       public static function           getEmailInput() { return self::$inputs['email'];           }
       public static function        getPasswordInput() { return self::$inputs['password'];        }
@@ -55,13 +58,30 @@ namespace Configuration;
       public static function        getMainFormInput() { return self::$inputs['main-form'];       }
       public static function          getSubmitInput() { return self::$inputs['submit'];          }
 
-      public static function     getUserNotRegisteredRule() { return self::$rules['userNotRegistered'];        }
-      public static function         getWrongPasswordRule() { return self::$rules['wrongPassword'];            }
-      public static function  IsUserAlreadyRegisteredRule() { return self::$rules['isUserAlreadyRegistered'];  }
-      public static function             IsEmailValidRule() { return self::$rules['isEmailValid'];             }
-      public static function IsEmailAlreadyRegisteredRule() { return self::$rules['isEmailAlreadyRegistered']; }
-      public static function   IsPasswordConfirmValidRule() { return self::$rules['isPasswordConfirmValid'];   }
-      public static function              IsUserValidRule() { return self::$rules['isUserValid'];              }
-      public static function          IsPasswordValidRule() { return self::$rules['isPasswordValid'];          }
+      // GETTERS FOR RULES
+      public static function IsPasswordConfirmValidRule($password, $passwordConfirm) {
+        return self::$rules['isPasswordConfirmValid']($password, $passwordConfirm);
+      }
+      public static function getWrongPasswordRule($database, $user, $password) {
+        return self::$rules['wrongPassword']($database, $user, $password);
+       }
+      public static function IsEmailAlreadyRegisteredRule($database, $email) {
+        return self::$rules['isEmailAlreadyRegistered']($database, $email);
+      }
+      public static function IsUserAlreadyRegisteredRule($database, $user) {
+        return self::$rules['isUserAlreadyRegistered']($database, $user);
+      }
+      public static function getUserNotRegisteredRule($database, $user) {
+        return self::$rules['userNotRegistered']($database, $user);
+      }
+      public static function IsPasswordValidRule($password) {
+        return self::$rules['isPasswordValid']($password);
+      }
+      public static function IsEmailValidRule($email) {
+        return self::$rules['isEmailValid']($email);
+      }
+      public static function IsUserValidRule($user) {
+        return self::$rules['isUserValid']($user);
+      }
   }
 ValidationConfig::getInstance();

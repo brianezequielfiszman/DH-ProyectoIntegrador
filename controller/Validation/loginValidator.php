@@ -9,7 +9,7 @@ require_once Config::getUserValidator();
   class LoginValidator extends UserValidator
   {
       public function validate($usuario, $userDatabase) {
-          $this->setUserValid(ValidationConfig::getUserNotRegisteredRule()($userDatabase, $usuario->getNombre()));
-          $this->setPasswordValid(ValidationConfig::getWrongPasswordRule()($userDatabase, $usuario, $usuario->getPassword()));
+          $this->setUserValid(ValidationConfig::getUserNotRegisteredRule($userDatabase, $usuario->getNombre()));
+          $this->setPasswordValid(ValidationConfig::getWrongPasswordRule($userDatabase, $usuario, $usuario->getPassword()));
       }
   }

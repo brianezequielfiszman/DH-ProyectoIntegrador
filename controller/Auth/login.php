@@ -34,14 +34,12 @@ class Login
         if ($this->validateLogin()) {
             $usuario = $this->repositorio->fetchUserByName($this->usuario->getNombre());
             $this->usuario->setEmail($usuario['email']);
-
             $auth = Auth::getInstance($this->repositorio);
             $auth->login($this->usuario);
-
             if (isset($recordame)) $auth->storeCookie($this->usuario);
-
             header('location: '.Config::getViewIndex(URI).'?id=home');
-        } else
+        }
+         else
             header('location: '.Config::getViewIndex(URI).'?id=login&nameError='.$this->validator->isUserValid().'&passError='.$this->validator->isPasswordValid());
     }
 }
