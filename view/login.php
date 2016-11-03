@@ -1,6 +1,7 @@
+<?php use Configuration\Config; ?>
     <div class="form-container">
         <h1 class="titulo">Login</h1>
-        <form id='main-form' class="main-form" name="main-form" action="<?=$config['controller']['URI']['login']?>" method="post">
+        <form id='main-form' class="main-form" name="main-form" action="<?=Config::getLogin(Config::URI)?>" method="post">
             <h1 class="titulo-interno">Login</h1>
             <article class="inner-form">
                 <span class="error" id="name-error"><?=$nameError = (isset($_GET['nameError'])) ? $_GET['nameError'] : ''?></span>

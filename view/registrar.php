@@ -1,7 +1,8 @@
+<?php use Configuration\Config; ?>
     <div class="form-container">
 
         <h1 class="titulo">Registrate</h1>
-        <form id="main-form" class="main-form" action="<?=$config['controller']['URI']['submit_user']?>" method="post">
+        <form id="main-form" class="main-form" action="<?=Config::getRegistrar(Config::URI)?>" method="post">
             <h1 class="titulo-interno">Registrate</h1>
             <article class="inner-form">
                 <span class="error" id="name-error"><?=$nameError = (isset($_GET['nameError'])) ? $_GET['nameError'] : ''?></span>

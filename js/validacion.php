@@ -5,7 +5,7 @@ window.onload = function() {
   <?php require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Config.php';           ?>
   <?php require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/ValidationConfig.php'; ?>
 
-    const MAIL_REGEXP      = new RegExp(<?=ValidationConfig::$regExp['mailRegExp']?>);
+    const MAIL_REGEXP      = new RegExp(<?=ValidationConfig::getMailRegExp()?>);
 
     const USER_FIELD_EMPTY = '<?=ValidationConfig::getUserFieldEmptyError()  ?>';
     const MAIL_FIELD_EMPTY = '<?=ValidationConfig::getMailFieldEmptyError()  ?>';

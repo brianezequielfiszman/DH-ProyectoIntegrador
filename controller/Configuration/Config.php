@@ -71,8 +71,22 @@ namespace Configuration;
 
       public static function getModelUsuario($ENV = self::URL)            { return self::getPath($ENV, self::$model)['usuario'];                      }
       public static function getViewIndex($ENV = self::URL)               { return self::getPath($ENV, self::$view)['index'];                         }
+      public static function getViewHome($ENV = self::URL)                { return self::getPath($ENV, self::$view)['home'];                          }
+      public static function getViewHead($ENV = self::URL)                { return self::getPath($ENV, self::$view)['head'];                          }
+      public static function getViewFaqs($ENV = self::URL)                { return self::getPath($ENV, self::$view)['faqs'];                          }
+      public static function getViewLogin($ENV = self::URL)               { return self::getPath($ENV, self::$view)['login'];                         }
+      public static function getViewRegistrar($ENV = self::URL)           { return self::getPath($ENV, self::$view)['registrar'];                     }
+      public static function getViewMenu($ENV = self::URL)                { return self::getPath($ENV, self::$view)['menu'];                          }
+      public static function getViewLogout($ENV = self::URL)              { return self::getPath($ENV, self::$view)['logout'];                        }
       public static function getViewAJAX($ENV = self::URL)                { return self::getPath($ENV, self::$view)['ajax'];                          }
+      public static function getViewFooter($ENV = self::URL)              { return self::getPath($ENV, self::$view)['footer'];                        }
+      public static function getViewStyle($ENV = self::URL)               { return self::getPath($ENV, self::$view)['style'];                         }
+      public static function getViewValidation($ENV = self::URL)          { return self::getPath($ENV, self::$view)['validacion'];                    }
+      public static function getViewFaqsScript($ENV = self::URL)          { return self::getPath($ENV, self::$view)['faqs_script'];                   }
       public static function getAuth($ENV = self::URL)                    { return self::getPath($ENV, self::$controller)['auth'];                    }
+      public static function getLogin($ENV = self::URL)                   { return self::getPath($ENV, self::$controller)['login'];                   }
+      public static function getRegistrar($ENV = self::URL)               { return self::getPath($ENV, self::$controller)['submit_user'];             }
+      public static function getSupport($ENV = self::URL)                 { return self::getPath($ENV, self::$controller)['support'];                 }
       public static function getRepositorio($ENV = self::URL)             { return self::getPath($ENV, self::$controller)['repositorio'];             }
       public static function getRepositorioUsuarios($ENV = self::URL)     { return self::getPath($ENV, self::$controller)['repositorioUsuarios'];     }
       public static function getRepositorioGenerico($ENV = self::URL)     { return self::getPath($ENV, self::$controller)['repositorioGenerico'];     }

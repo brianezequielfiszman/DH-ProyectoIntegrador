@@ -47,6 +47,30 @@
             "email": "gegege@gegege.com",
             "edad": null,
             "password": "$2y$10$BCo6esNtrjtHT7xK1Dcwge8R5.AjYtuKJa9yfXR4JpunLi1KLoLsy"
+        },
+        {
+            "id": 7,
+            "name": "lalalala",
+            "fechaNacimiento": null,
+            "email": "lalalala@lalalala.com",
+            "edad": null,
+            "password": "$2y$10$IUi5FKeqY3.6vCYTziNvaubV2R1gHppzDXRxTXHthB4ftky8tZq1."
+        },
+        {
+            "id": 8,
+            "name": "asdasd",
+            "fechaNacimiento": null,
+            "email": "asdasd@asdasd.com",
+            "edad": null,
+            "password": "$2y$10$6SlDdCuoAzJQVfkbsHfUy.MHpC9UkWrI9mq8y.4.Hv2lzUT1yY992"
+        },
+        {
+            "id": 9,
+            "name": "asdasdasd",
+            "fechaNacimiento": null,
+            "email": "asdasdasd@asdasdasd.com",
+            "edad": null,
+            "password": "$2y$10$s039q7MUz7SOXYgqcjcxqu145VPXFeEJTSMXW2sbrCkHWlkozXuDC"
         }
     ]
 }

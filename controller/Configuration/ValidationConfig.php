@@ -36,6 +36,8 @@ namespace Configuration;
           return self::$instance;
       }
 
+      public static function   getMailRegExp() { return self::$regExp['mailRegExp'];   }
+
       public static function   getUserFieldEmptyError() { return self::$errors['userFieldEmpty'];   }
       public static function   getMailFieldEmptyError() { return self::$errors['mailFieldEmpty'];   }
       public static function   getPassFieldEmptyError() { return self::$errors['passFieldEmpty'];   }
