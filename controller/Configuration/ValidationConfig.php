@@ -22,6 +22,7 @@ namespace Configuration;
           self::$inputs = self::$users['inputs'];
           self::$regExp = self::$users['regExp'];
           self::$rules  = self::$users['rules'];
+          self::destruct();
       }
 
       private function destruct(){ self::$file = null; }
