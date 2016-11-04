@@ -6,6 +6,8 @@ namespace Configuration;
       private static $instance = null;
       private static $file;
       private static $db;
+      private static $tables;
+      private static $usuarios;
       private static $model;
       private static $view;
       private static $controller;
@@ -20,6 +22,8 @@ namespace Configuration;
       {
           self::$file       = include $_SERVER['DOCUMENT_ROOT'].'/config/config.php';
           self::$db         = self::$file['db'];
+          self::$tables     = self::$db[self::SQL]['tables'];
+          self::$usuarios   = self::$tables['usuarios'];
           self::$model      = self::$file['model'];
           self::$view       = self::$file['view'];
           self::$controller = self::$file['controller'];
@@ -64,11 +68,22 @@ namespace Configuration;
         $DBType = ($DBType === self::SQL) ? self::SQL : self::JSON;
         return $metaDataArr[$DBType];
       }
-
+      // JSON
       public static function getJSONFilePath() { return self::getDBMetaData(self::JSON, self::$db)['file_path']; }
       public static function getJSONOffset()   { return self::getDBMetaData(self::JSON, self::$db)['offset'];    }
+      // SQL
+      public static function getSQLDriver()    { return self::getDBMetaData(self::SQL, self::$db)['driver'];           }
+      public static function getSQLDataBase()  { return self::getDBMetaData(self::SQL, self::$db)['dbname'];           }
+      public static function getSQLHost()      { return self::getDBMetaData(self::SQL, self::$db)['host'];             }
+      public static function getSQLPort()      { return self::getDBMetaData(self::SQL, self::$db)['port'];             }
+      public static function getSQLUserName()  { return self::getDBMetaData(self::SQL, self::$db)['username'];         }
+      public static function getSQLPassword()  { return self::getDBMetaData(self::SQL, self::$db)['password'];         }
+
+      public static function getSQLUsersTableName()      { return self::$usuarios['nombre'];     }
+      public static function getSQLUsersTableProperties(){ return self::$usuarios['properties']; }
 
 
+      //PATH
       public static function getModelUsuario($ENV = self::URL)            { return self::getPath($ENV, self::$model)['usuario'];                      }
       public static function getViewIndex($ENV = self::URL)               { return self::getPath($ENV, self::$view)['index'];                         }
       public static function getViewHome($ENV = self::URL)                { return self::getPath($ENV, self::$view)['home'];                          }
@@ -90,6 +105,10 @@ namespace Configuration;
       public static function getRepositorio($ENV = self::URL)             { return self::getPath($ENV, self::$controller)['repositorio'];             }
       public static function getRepositorioUsuarios($ENV = self::URL)     { return self::getPath($ENV, self::$controller)['repositorioUsuarios'];     }
       public static function getRepositorioGenerico($ENV = self::URL)     { return self::getPath($ENV, self::$controller)['repositorioGenerico'];     }
+      public static function getSQLServer($ENV = self::URL)               { return self::getPath($ENV, self::$controller)['SQLServer'];               }
+      public static function getRepositorioGenericoSQL($ENV = self::URL)  { return self::getPath($ENV, self::$controller)['repositorioGenericoSQL'];  }
+      public static function getRepositorioSQL($ENV = self::URL)          { return self::getPath($ENV, self::$controller)['repositorioSQL'];          }
+      public static function getRepositorioUsuariosSQL($ENV = self::URL)  { return self::getPath($ENV, self::$controller)['repositorioUsuariosSQL'];  }
       public static function getRepositorioGenericoJSON($ENV = self::URL) { return self::getPath($ENV, self::$controller)['repositorioGenericoJSON']; }
       public static function getRepositorioJSON($ENV = self::URL)         { return self::getPath($ENV, self::$controller)['repositorioJSON'];         }
       public static function getRepositorioUsuariosJSON($ENV = self::URL) { return self::getPath($ENV, self::$controller)['repositorioUsuariosJSON']; }

@@ -14,7 +14,7 @@
     </div>
     <div class="welcome">
     <?php if ($auth->isLogged()): ?>
-      Bienvenido <?=$usuarioLogueado['name']?>
+      Bienvenido <?=$usuarioLogueado['nombre']?>
     <?php else: ?>
       Bienvenido invitado
     <?php endif; ?>

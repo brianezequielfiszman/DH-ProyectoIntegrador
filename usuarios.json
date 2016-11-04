@@ -71,6 +71,14 @@
             "email": "asdasdasd@asdasdasd.com",
             "edad": null,
             "password": "$2y$10$s039q7MUz7SOXYgqcjcxqu145VPXFeEJTSMXW2sbrCkHWlkozXuDC"
+        },
+        {
+            "id": 10,
+            "name": "ogete",
+            "fechaNacimiento": null,
+            "email": "ogete@agaga.com",
+            "edad": null,
+            "password": "$2y$10$0tI7rTUSEpEPq\/BWFtm1luU.1j.LAALLOwSwiaD6uXcezpV5xopoq"
         }
     ]
 }

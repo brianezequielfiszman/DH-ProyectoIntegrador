@@ -1,9 +1,9 @@
 <?php
   use Configuration\Config;
-
+  use SQL\RepositorioUsuariosSQL;
+  use SQL\RepositorioSQL;
   require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Config.php';
   require_once Config::getModelUsuario();
-
 
   class Auth
   {
@@ -11,10 +11,10 @@
 
       private function __construct() {}
 
-      public function login(Usuario $usuario)       { $_SESSION['usuarioLogueado'] = $usuario->getEmail();                   }
-      public function isLogged()                    { return isset($_SESSION['usuarioLogueado']);                            }
-      public function storeCookie(Usuario $usuario) { setcookie('usuarioLogeado', $usuario->getEmail(), time() + 3600 * 24); }
-      public function unsetCookie($cookieName)      { setcookie($cookieName, '', -1);                                        }
+      public function login(Usuario $usuario)       { $_SESSION['usuarioLogueado'] = $usuario->getEmail() ?? $usuario['email']; }
+      public function isLogged()                    { return isset($_SESSION['usuarioLogueado']);                               }
+      public function storeCookie(Usuario $usuario) { setcookie('usuarioLogeado', $usuario->getEmail(), time() + 3600 * 24);    }
+      public function unsetCookie($cookieName)      { setcookie($cookieName, '', -1);                                           }
 
       public static function getInstance(RepositorioUsuarios $repositorio)
       {
@@ -50,5 +50,6 @@
           $usuario = $repositorio->fetchUserByEmail($_COOKIE['usuarioLogueado']);
           $this->login($usuario);
         endif;
-    }
+
   }
+}

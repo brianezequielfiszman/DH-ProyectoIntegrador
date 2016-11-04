@@ -42,9 +42,7 @@
       return [
           'id'              => $this->getId(),
           'name'            => $this->getNombre(),
-          'fechaNacimiento' => $this->getFechaNacimiento(),
           'email'           => $this->getEmail(),
-          'edad'            => $this->getEdad(),
           'password'        => $this->getPassword(),
       ];
     }

@@ -87,11 +87,14 @@ return array(
             'isEmailAlreadyRegistered' => function (RepositorioUsuarios $repo, $email) {
                 $validationConfig = include 'validation_config.php';
 
-                return ($repo->fetchUserByEmail($email)) ? $validationConfig['users']['errors']['emailExists'] : NO_ERROR;
+                return ($repo->fetchUserByEmail($email)) ?  $validationConfig['users']['errors']['emailExists'] : NO_ERROR;
             },
             'wrongPassword' => function (RepositorioUsuarios $repo, Usuario $usuario, $password) {
                 $validationConfig = include 'validation_config.php';
+
                 if ($user = $repo->fetchUserByName($usuario->getNombre())) {
+                    echo (!password_verify($password, $user['password']));
+
                     return (!password_verify($password, $user['password'])) ? $validationConfig['users']['errors']['wrongPassword'] : NO_ERROR;
                 }
             },

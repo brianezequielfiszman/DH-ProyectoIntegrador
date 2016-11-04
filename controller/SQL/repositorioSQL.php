@@ -1,17 +1,26 @@
 <?php
+namespace SQL;
+use Configuration\Config;
+use SQL\SQLServer;
+use SQL\RepositorioUsuariosSQL;
+use Repositorio;
 
-$config = include $_SERVER['DOCUMENT_ROOT'].'/config/config.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Config.php';
 
-include $config['controller']['URL']['repositorio'];
-include $config['controller']['URL']['repositorioUsuariosSQL'];
+require_once Config::getRepositorio();
+require_once Config::getRepositorioUsuariosSQL();
+require_once Config::getSQLServer();
 
 class RepositorioSQL extends Repositorio
 {
-    public function __construct($config)
-    {
-      $this->setRepositorioUsuarios(new RepositorioUsuariosSQL(new PDO($config['db']['sql']['driver'].':host='.$config['db']['sql']['host'].';dbname='.$config['db']['sql']['dbname'].';charset=utf8mb4;port:3306', $config['db']['sql']['username'], $config['db']['sql']['password']), $table));
+    private $server;
+    public function __construct() {
+      $this->setServer(new SQLServer());
+      $this->setRepositorioUsuarios(new RepositorioUsuariosSQL($this->getServer(), Config::getSQLUsersTableName(), Config::getSQLUsersTableProperties()));
     }
 
-    public function getRepositorioUsuarios(){ return $this->repositorioUsuarios; }
+    public  function getRepositorioUsuarios(){ return $this->repositorioUsuarios; }
     private function setRepositorioUsuarios($repositorioUsuarios){ $this->repositorioUsuarios = $repositorioUsuarios; }
+    private function getServer(){ return $this->server; }
+    private function setServer($server){ $this->server = $server; }
 }

@@ -1,8 +1,9 @@
 <?php
 use Configuration\Config;
-
+use SQL\RepositorioSQL;
 require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Config.php';
 require_once Config::getRepositorioJSON();
+require_once Config::getRepositorioSQL();
 require_once Config::getLoginValidator();
 require_once Config::getAuth();
 
@@ -44,7 +45,7 @@ class Login
     }
 }
 
-$login = new Login($_POST['nombre'], $_POST['password'], (new RepositorioJSON())->getRepositorioUsuarios(), new LoginValidator());
+$login = new Login($_POST['nombre'], $_POST['password'], (new RepositorioSQL())->getRepositorioUsuarios(), new LoginValidator());
 if (isset($_POST['recordame'])) {
     $login->loginUser($_POST['recordame']);
 } else {

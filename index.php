@@ -1,6 +1,10 @@
 <?php
   use Configuration\Config;
   require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Config.php';
+  require_once Config::getSupport();
+  $repoUsuarios    = $repositorio->getRepositorioUsuarios();
+  $usuarioLogueado = $auth->getLoggedUser($repoUsuarios);
+
   const HOME   = 'home';
   const FAQS   = 'faqs';
   const LOGIN  = 'login';
@@ -16,10 +20,6 @@
     <?php require_once Config::getViewHead(); ?>
   <body>
     <?php
-    require_once Config::getSupport();
-
-    $repoUsuarios    = $repositorio->getRepositorioUsuarios();
-    $usuarioLogueado = $auth->getLoggedUser($repoUsuarios);
 
 if (!$auth->isLogged()):
     switch ($_GET['id']):
@@ -39,6 +39,7 @@ if (!$auth->isLogged()):
         include Config::getViewHome();
         break;
     endswitch;
+
   else:
     switch ($_GET['id']):
       case HOME:
