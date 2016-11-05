@@ -1,8 +1,8 @@
 window.onload = function() {
-  <?php use Configuration\Config;           ?>
+  <?php use Configuration\View;           ?>
   <?php use Configuration\ValidationConfig; ?>
 
-  <?php require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Config.php';           ?>
+  <?php require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/View.php';           ?>
   <?php require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/ValidationConfig.php'; ?>
 
     const MAIL_REGEXP      = new RegExp(<?=ValidationConfig::getMailRegExp()?>);
@@ -29,7 +29,7 @@ window.onload = function() {
     const SUBMIT           = '<?=ValidationConfig::getSubmitInput()         ?>';
     'use strict';
 
-    <?php include Config::getViewAJAX(); ?>
+    <?php include View::getAJAX(); ?>
 
     /**
      * [validate: validacion de formulario]

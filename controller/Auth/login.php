@@ -8,6 +8,7 @@ require_once Config::getRepositorioJSON();
 require_once Config::getRepositorioSQL();
 require_once Config::getLoginValidator();
 require_once Config::getAuth();
+
 class Login
 {
     private $usuario;

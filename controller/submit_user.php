@@ -1,32 +1,60 @@
 <?php
+use Configuration\Config;
+use Configuration\Route;
 use SQL\RepositorioSQL;
 
-$config = include $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
 
-include $config['model']['URL']['usuario'];
-include $config['controller']['URL']['repositorioJSON'];
-include $config['controller']['URL']['repositorioSQL'];
-include $config['controller']['URL']['signUpValidator'];
+$config = include $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Route.php';
 
-const NO_ERROR = '';
+include Config::getModelUsuario();
+include Config::getRepositorioJSON();
+include Config::getRepositorioSQL();
+include Config::getSignUpValidator();
 
-$jsonDB = new RepositorioSQL();
+class Registro
+{
+    private $validator;
+    private $dataBase;
+    private $usuario;
 
-$id = $jsonDB->getRepositorioUsuarios()->getUsersCount() + 1;
-$nombre          = $_POST['nombre'];
-$email           = $_POST['email'];
-$password        = $_POST['password'];
+    const NO_ERROR = '';
+
+    public function __construct(RepositorioUsuarios $dataBase, Usuario $usuario)
+    {
+        $this->validator = new SignUpValidator();
+        $this->dataBase = $dataBase;
+        $this->usuario = $usuario;
+    }
+
+    public function submitInput()    {
+      $this->validator->validate($this->usuario, $this->dataBase);
+      if ($this->validator->isUserValid() === NO_ERROR)
+          if ($this->validator->isEmailValid() === NO_ERROR)
+              if ($this->validator->isPasswordValid() === NO_ERROR)
+                  if ($this->validator->isPasswordConfirmValid() === NO_ERROR){
+                      $this->usuario->setPassword(password_hash($this->usuario->getPassword(), PASSWORD_DEFAULT));
+                      $this->registerUser();
+                  }
+    }
+
+    private function registerUser(){
+      $this->dataBase->submitUser($this->usuario);
+    }
+
+    public function getValidator(){
+      return $this->validator;
+    }
+}
+
+$DB = new RepositorioSQL();
+$id = $DB->getRepositorioUsuarios()->getUsersCount() + 1;
+$nombre = $_POST['nombre'];
+$email = $_POST['email'];
+$password = $_POST['password'];
 $passwordConfirm = $_POST['passwordConfirm'];
 
 $usuario = new Usuario($id, $nombre, null, $email, null, $password, $passwordConfirm);
-$validator = new SignUpValidator();
-$validator->validate($usuario, $jsonDB->getRepositorioUsuarios());
-    if($validator->isUserValid() === NO_ERROR)
-      if($validator->isEmailValid() === NO_ERROR)
-        if($validator->isPasswordValid() === NO_ERROR)
-          if($validator->isPasswordConfirmValid() === NO_ERROR){
-              $usuario->setPassword(password_hash($password, PASSWORD_DEFAULT));
-
-              $jsonDB->getRepositorioUsuarios()->submitUser($usuario);
-          }
-header('location: ' . $config['view']['URI']['index'] . "?id=signup&nameError=" . $validator->isUserValid() . "&emailError=".$validator->isEmailValid() . "&passError=".$validator->isPasswordValid() ."&passConfirmError=".$validator->isPasswordConfirmValid());
+$registro = new Registro($DB->getRepositorioUsuarios(), $usuario);
+$registro->submitInput();
+$validator = $registro->getValidator();
+header('location: '.Route::getIndex().'?id=signup&nameError='.$validator->isUserValid().'&emailError='.$validator->isEmailValid().'&passError='.$validator->isPasswordValid().'&passConfirmError='.$validator->isPasswordConfirmValid());

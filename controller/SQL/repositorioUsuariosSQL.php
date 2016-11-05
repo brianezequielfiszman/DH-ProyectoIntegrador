@@ -22,7 +22,7 @@ class RepositorioUsuariosSQL extends RepositorioGenericoSQL implements Repositor
     }
 
     public function fetchUsers(){
-        // return $this->database->selectAssoc("SELECT * FROM usuarios");
+        return $this->database->select("SELECT * FROM usuarios", []);
     }
 
     public function getUsersCount(){

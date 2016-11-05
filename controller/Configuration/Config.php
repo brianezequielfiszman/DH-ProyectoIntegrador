@@ -107,6 +107,7 @@ namespace Configuration;
       public static function getRepositorioUsuariosJSON($ENV = self::URL) { return self::getPath($ENV, self::$controller)['repositorioUsuariosJSON']; }
       public static function getValidator($ENV = self::URL)               { return self::getPath($ENV, self::$controller)['validator'];               }
       public static function getLoginValidator($ENV = self::URL)          { return self::getPath($ENV, self::$controller)['loginValidator'];          }
+      public static function getSignUpValidator($ENV = self::URL)         { return self::getPath($ENV, self::$controller)['signUpValidator'];          }
       public static function getUserValidator($ENV = self::URL)           { return self::getPath($ENV, self::$controller)['userValidator'];           }
   }
 Config::getInstance();
