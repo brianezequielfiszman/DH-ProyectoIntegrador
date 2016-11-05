@@ -1,12 +1,13 @@
 <?php
 use Configuration\Config;
+use Configuration\Route;
 use SQL\RepositorioSQL;
 require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Config.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Route.php';
 require_once Config::getRepositorioJSON();
 require_once Config::getRepositorioSQL();
 require_once Config::getLoginValidator();
 require_once Config::getAuth();
-
 class Login
 {
     private $usuario;
@@ -38,10 +39,10 @@ class Login
             $auth = Auth::getInstance($this->repositorio);
             $auth->login($this->usuario);
             if (isset($recordame)) $auth->storeCookie($this->usuario);
-            header('location: '.Config::getViewIndex(URI).'?id=home');
+            header('location: '.Route::getIndex().'?id=home');
         }
          else
-            header('location: '.Config::getViewIndex(URI).'?id=login&nameError='.$this->validator->isUserValid().'&passError='.$this->validator->isPasswordValid());
+            header('location: '.Route::getIndex().'?id=login&nameError='.$this->validator->isUserValid().'&passError='.$this->validator->isPasswordValid());
     }
 }
 

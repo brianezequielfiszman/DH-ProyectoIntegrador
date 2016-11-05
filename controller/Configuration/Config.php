@@ -21,12 +21,12 @@ namespace Configuration;
       private function __construct()
       {
           self::$file       = include $_SERVER['DOCUMENT_ROOT'].'/config/config.php';
-          self::$db         = self::$file['db'];
-          self::$tables     = self::$db[self::SQL]['tables'];
-          self::$usuarios   = self::$tables['usuarios'];
-          self::$model      = self::$file['model'];
-          self::$view       = self::$file['view'];
-          self::$controller = self::$file['controller'];
+          self::$db         = &self::$file['db'];
+          self::$tables     = &self::$db[self::SQL]['tables'];
+          self::$usuarios   = &self::$tables['usuarios'];
+          self::$model      = &self::$file['model'];
+          self::$view       = &self::$file['view'];
+          self::$controller = &self::$file['controller'];
           self::destruct();
       }
 
@@ -82,22 +82,15 @@ namespace Configuration;
       public static function getSQLUsersTableName()      { return self::$usuarios['nombre'];     }
       public static function getSQLUsersTableProperties(){ return self::$usuarios['properties']; }
 
-
       //PATH
-      public static function getModelUsuario($ENV = self::URL)            { return self::getPath($ENV, self::$model)['usuario'];                      }
-      public static function getViewIndex($ENV = self::URL)               { return self::getPath($ENV, self::$view)['index'];                         }
-      public static function getViewHome($ENV = self::URL)                { return self::getPath($ENV, self::$view)['home'];                          }
-      public static function getViewHead($ENV = self::URL)                { return self::getPath($ENV, self::$view)['head'];                          }
-      public static function getViewFaqs($ENV = self::URL)                { return self::getPath($ENV, self::$view)['faqs'];                          }
-      public static function getViewLogin($ENV = self::URL)               { return self::getPath($ENV, self::$view)['login'];                         }
-      public static function getViewRegistrar($ENV = self::URL)           { return self::getPath($ENV, self::$view)['registrar'];                     }
-      public static function getViewMenu($ENV = self::URL)                { return self::getPath($ENV, self::$view)['menu'];                          }
-      public static function getViewLogout($ENV = self::URL)              { return self::getPath($ENV, self::$view)['logout'];                        }
-      public static function getViewAJAX($ENV = self::URL)                { return self::getPath($ENV, self::$view)['ajax'];                          }
-      public static function getViewFooter($ENV = self::URL)              { return self::getPath($ENV, self::$view)['footer'];                        }
-      public static function getViewStyle($ENV = self::URL)               { return self::getPath($ENV, self::$view)['style'];                         }
-      public static function getViewValidation($ENV = self::URL)          { return self::getPath($ENV, self::$view)['validacion'];                    }
-      public static function getViewFaqsScript($ENV = self::URL)          { return self::getPath($ENV, self::$view)['faqs_script'];                   }
+      public static function getRoutes($ENV = self::URI) { return self::getPath($ENV, self::$view); }
+      public static function getViews($ENV = self::URL)  { return self::getPath($ENV, self::$view); }
+
+      // Model
+      public static function getModelUsuario($ENV = self::URL)            { return self::getPath($ENV, self::$model)['usuario']; }
+
+
+      // Controllers
       public static function getAuth($ENV = self::URL)                    { return self::getPath($ENV, self::$controller)['auth'];                    }
       public static function getLogin($ENV = self::URL)                   { return self::getPath($ENV, self::$controller)['login'];                   }
       public static function getRegistrar($ENV = self::URL)               { return self::getPath($ENV, self::$controller)['submit_user'];             }

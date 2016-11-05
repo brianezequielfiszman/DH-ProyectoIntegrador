@@ -41,7 +41,7 @@
     public function JsonSerialize(){
       return [
           'id'              => $this->getId(),
-          'name'            => $this->getNombre(),
+          'nombre'            => $this->getNombre(),
           'email'           => $this->getEmail(),
           'password'        => $this->getPassword(),
       ];

@@ -77,4 +77,14 @@ class SQLServer extends PDO
 
       $sql->execute();
     }
+
+    public function select($query, ...$params){
+      $statement = $this->database->prepare($query);
+
+      foreach ($params as $key => $param)
+        $statement->bindValue($key + 1, $param);
+
+      $statement->execute();
+      return $statement;
+    }
 }
