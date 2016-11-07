@@ -1,5 +1,6 @@
 <?php
 namespace SQL;
+
 use PDO;
 use Configuration\Config;
 

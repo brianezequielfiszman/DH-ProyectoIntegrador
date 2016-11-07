@@ -1,15 +1,16 @@
 <?php
 use Configuration\Config;
 use Configuration\Route;
+use Validation\SignUpValidator;
 use SQL\RepositorioSQL;
 
 
-$config = include $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Route.php';
+$config = require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Route.php';
 
-include Config::getModelUsuario();
-include Config::getRepositorioJSON();
-include Config::getRepositorioSQL();
-include Config::getSignUpValidator();
+require_once Config::getModelUsuario();
+require_once Config::getRepositorioJSON();
+require_once Config::getRepositorioSQL();
+require_once Config::getSignUpValidator();
 
 class Registro
 {
@@ -28,10 +29,10 @@ class Registro
 
     public function submitInput()    {
       $this->validator->validate($this->usuario, $this->dataBase);
-      if ($this->validator->isUserValid() === NO_ERROR)
-          if ($this->validator->isEmailValid() === NO_ERROR)
-              if ($this->validator->isPasswordValid() === NO_ERROR)
-                  if ($this->validator->isPasswordConfirmValid() === NO_ERROR){
+      if ($this->validator->isUserValid() === self::NO_ERROR)
+          if ($this->validator->isEmailValid() === self::NO_ERROR)
+              if ($this->validator->isPasswordValid() === self::NO_ERROR)
+                  if ($this->validator->isPasswordConfirmValid() === self::NO_ERROR){
                       $this->usuario->setPassword(password_hash($this->usuario->getPassword(), PASSWORD_DEFAULT));
                       $this->registerUser();
                   }

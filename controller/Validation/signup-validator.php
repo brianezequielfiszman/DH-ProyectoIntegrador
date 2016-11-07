@@ -1,7 +1,8 @@
 <?php
+namespace Validation;
 use Configuration\Config;
 use Configuration\ValidationConfig;
-
+use Validation\UserValidator;
 require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Config.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/ValidationConfig.php';
 require_once Config::getUserValidator();
@@ -10,13 +11,13 @@ class SignUpValidator extends UserValidator
 {
   private $isEmailValid;
   private $isPasswordConfirmValid;
-
+  const NO_ERROR = '';
   public function validate($usuario, $userDatabase){
     parent::validate($usuario, $userDatabase);
-    if(parent::isUserValid() === ValidationConfig::NO_ERROR)
+    if(parent::isUserValid() === self::NO_ERROR)
     $this->setUserValid(ValidationConfig::IsUserAlreadyRegisteredRule($userDatabase, $usuario->getNombre()));
     $this->setEmailValid(ValidationConfig::IsEmailValidRule($usuario->getEmail()));
-    if($this->isEmailValid() === ValidationConfig::NO_ERROR)
+    if($this->isEmailValid() === self::NO_ERROR)
     $this->setEmailValid(ValidationConfig::IsEmailAlreadyRegisteredRule($userDatabase, $usuario->getEmail()));
     $this->setPasswordConfirmValid(ValidationConfig::IsPasswordConfirmValidRule($usuario->getPassword(), $usuario->getPasswordConfirm()));
   }

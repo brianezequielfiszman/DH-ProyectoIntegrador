@@ -29,6 +29,6 @@ class RepositorioGenericoSQL extends RepositorioGenerico
     }
 
     protected function fetchObject(){
-      
+
     }
 }

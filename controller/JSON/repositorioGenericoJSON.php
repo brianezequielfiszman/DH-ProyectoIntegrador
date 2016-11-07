@@ -1,4 +1,8 @@
 <?php
+use Configuration\Config;
+
+require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Config.php';
+require_once Config::getRepositorioGenerico();
 
 class RepositorioGenericoJSON extends RepositorioGenerico implements JsonSerializable
 {

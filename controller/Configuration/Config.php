@@ -92,6 +92,7 @@ namespace Configuration;
 
       // Controllers
       public static function getAuth($ENV = self::URL)                    { return self::getPath($ENV, self::$controller)['auth'];                    }
+      public static function getMigration($ENV = self::URL)                    { return self::getPath($ENV, self::$controller)['migration'];          }
       public static function getLogin($ENV = self::URL)                   { return self::getPath($ENV, self::$controller)['login'];                   }
       public static function getRegistrar($ENV = self::URL)               { return self::getPath($ENV, self::$controller)['submit_user'];             }
       public static function getSupport($ENV = self::URL)                 { return self::getPath($ENV, self::$controller)['support'];                 }

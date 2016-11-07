@@ -1,6 +1,8 @@
 <?php
+namespace Validation;
 use Configuration\Config;
 use Configuration\ValidationConfig;
+use Validation\Validator;
 
 require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Config.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/ValidationConfig.php';

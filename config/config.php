@@ -83,6 +83,7 @@ return array(
             'signUpValidator' => $_SERVER['DOCUMENT_ROOT'].'/controller/Validation/signup-validator.php',
             'loginValidator' => $_SERVER['DOCUMENT_ROOT'].'/controller/Validation/loginValidator.php',
             'support' => $_SERVER['DOCUMENT_ROOT'].'/controller/Auth/support.php',
+            'migration' => $_SERVER['DOCUMENT_ROOT'].'/App/Database/migration.php',
             'Config' => $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Config.php',
         ),
         'URI' => array(
@@ -105,6 +106,7 @@ return array(
             'signUpValidator' => '/controller/Validation/signup-validator.php',
             'loginValidator' => '/controller/Validation/loginValidator.php',
             'support' => '/controller/Auth/support.php',
+            'migration' => '/App/Database/migration.php',
             'Config' => '/controller/Configuration/Config.php',
         ),
     ),

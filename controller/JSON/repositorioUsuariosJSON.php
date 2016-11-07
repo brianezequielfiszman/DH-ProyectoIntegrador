@@ -23,7 +23,7 @@ class RepositorioUsuariosJSON extends RepositorioGenericoJSON implements Reposit
 
     public function fetchUserByName($name){
       foreach ($this->fetchUsers() as $user)
-          if($user['nombre'] === $name)
+          if($user['name'] === $name)
             return $user;
       return false;
     }

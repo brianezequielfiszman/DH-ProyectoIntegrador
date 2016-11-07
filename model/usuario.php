@@ -21,6 +21,7 @@
     }
 
     public static function loginConstruct($nombre, $password){ return new self(null, $nombre, null, null, null, $password, null); }
+    public static function signUpConstruct($nombre, $email, $password, $passwordConfirm){ return new self(null, $nombre, null, $email, null, $password, $passwordConfirm); }
 
     public function getId()              { return $this->id;              }
     public function getNombre()          { return $this->nombre;          }

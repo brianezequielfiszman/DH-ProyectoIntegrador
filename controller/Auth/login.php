@@ -1,6 +1,7 @@
 <?php
 use Configuration\Config;
 use Configuration\Route;
+use Validation\LoginValidator;
 use SQL\RepositorioSQL;
 require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Config.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/controller/Configuration/Route.php';
@@ -14,7 +15,7 @@ class Login
     private $usuario;
     private $repositorio;
     private $validator;
-
+    const NO_ERROR = '';
     public function __construct($nombre, $password, RepositorioUsuarios $repositorio, LoginValidator $validator)
     {
         $this->usuario     = Usuario::loginConstruct($nombre, $password);
@@ -29,7 +30,7 @@ class Login
     {
         $this->validator->validate($this->usuario, $this->repositorio);
 
-        return ($this->validator->isUserValid() === NO_ERROR) && ($this->validator->isPasswordValid() === NO_ERROR);
+        return ($this->validator->isUserValid() === self::NO_ERROR) && ($this->validator->isPasswordValid() === self::NO_ERROR);
     }
 
     public function loginUser($recordame = '')
