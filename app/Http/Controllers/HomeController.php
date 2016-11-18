@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
+use App\Message;
 
 class HomeController extends Controller
 {
@@ -26,11 +27,11 @@ class HomeController extends Controller
     public function index()
     {
         $user = User::find(Auth::user()->id);
-        return view('home')->withMessages($user->messages);
+        return view('home')->withMessages($user->receivedMessages);
     }
 
     public function showUserPage($id){
         $user = User::find($id);
-        return view('home')->withMessages($user->messages)->withUser($user);
+        return view('home')->withMessages($user->receivedMessages)->withUser($user);
     }
 }

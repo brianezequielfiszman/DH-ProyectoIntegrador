@@ -21,6 +21,9 @@
                        {{ method_field('PUT') }}
                        <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                        <div class="form-group">
+                          <input type="text" name="user_recipient" class="form-control" placeholder="Destinatario">
+                       </div>
+                       <div class="form-group">
                           <textarea name="message" class="form-control" rows="5" placeholder="Dime! ¿Qué mensaje quieres enviar?" style="resize: none;"></textarea>
                        </div>
                        <div class="form-group">
@@ -31,7 +34,7 @@
             </div>
             @foreach ($messages as $key => $value)
               <div class="panel panel-default">
-                  <div class="panel-heading">Titulo</div>
+                  <div class="panel-heading">Mensaje de {{App\User::find($value->user_id)->name}}</div>
 
                   <div class="panel-body">
                       <span>{{$value->text}}</span>
