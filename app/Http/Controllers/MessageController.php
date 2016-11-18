@@ -10,7 +10,11 @@ use App\Redirect;
 class MessageController extends Controller
 {
     public function sendMessage(Request $request){
-        Message::create( [ 'user_id' => $request->user_id, 'text' => $request->message ]);
+        Message::create([
+          'user_id' => $request->user_id,
+          'user_recipient_id' => 1,
+          'text' => $request->message
+        ]);
         return redirect()->route('userMainPage');
     }
 }

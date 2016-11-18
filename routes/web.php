@@ -18,4 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('userMainPage');
+Route::get('/user', 'UserController@findUser')->name('findUser');
+Route::get('/user/{id}', 'HomeController@showUserPage')->name('userWall');
+
 Route::put('/home', 'MessageController@sendMessage');

@@ -20,10 +20,12 @@
                        {{ csrf_field() }}
                        {{ method_field('PUT') }}
                        <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-                       <textarea name="message" class="form-control" rows="5" placeholder="Dime! ¿Qué mensaje quieres enviar?"></textarea>
-
-                       <input type="submit" class="btn btn-primary" value="Enviar">
-
+                       <div class="form-group">
+                          <textarea name="message" class="form-control" rows="5" placeholder="Dime! ¿Qué mensaje quieres enviar?" style="resize: none;"></textarea>
+                       </div>
+                       <div class="form-group">
+                          <input type="submit" class="btn btn-primary" value="Enviar">
+                       </div>
                     </form>
                 </div>
             </div>
@@ -36,7 +38,22 @@
                   </div>
               </div>
             @endforeach
+              <div class="panel panel-default">
+                <div class="panel-heading">Buscar usuario</div>
+                <div class="panel-body">
+                  <form class="form-group" action="/user" method="get">
+                      <div class="input-group">
+                          <input type="text" class="form-control" name="user" placeholder="Ingresar nombre">
+                          <span class="input-group-btn">
+                                <button type="submit"  class="btn btn-default">
+                                <span class="glyphicon glyphicon-search"></span>
+                              </button>
+                          </span>
+                      </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
-</div>
 @endsection

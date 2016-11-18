@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Message;
+use App\User;
 use Auth;
 
 class HomeController extends Controller
@@ -25,7 +25,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $messages = Message::where('user_id', Auth::user()->id)->get();
-        return view('home')->withMessages($messages);
+        $user = User::find(Auth::user()->id);
+        return view('home')->withMessages($user->messages);
+    }
+
+    public function showUserPage($id){
+        $user = User::find($id);
+        return view('home')->withMessages($user->messages)->withUser($user);
     }
 }
