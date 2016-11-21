@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'category'
     ];
 
     /**
@@ -27,11 +27,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function messages(){
-        return $this->hasMany('App\Message', 'user_id');
-    }
-
-    public function receivedMessages(){
-        return $this->hasMany('App\Message', 'user_recipient_id', 'id');      
-    }
+    // public function messages(){
+    //     return $this->hasMany('App\Message', 'user_id');
+    // }
+    //
+    // public function receivedMessages(){
+    //     return $this->hasMany('App\Message', 'user_recipient_id', 'id');
+    // }
 }

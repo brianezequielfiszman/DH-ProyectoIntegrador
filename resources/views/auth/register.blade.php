@@ -61,6 +61,17 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="category" class="col-md-4 control-label">Category</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" name="category">
+                                  <option value="docente">Docente</option>
+                                  <option value="padre">Padre</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     Register

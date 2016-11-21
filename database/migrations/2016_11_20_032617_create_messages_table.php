@@ -8,23 +8,26 @@ class CreateMessagesTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->text('text');
+            $table->integer('book_recipient_id')->unsigned();
+            $table->integer('user_origin_id')->unsigned();
+            $table->foreign('book_recipient_id')->references('id')->on('books');
+            $table->foreign('user_origin_id')->references('id')->on('users');
             $table->timestamps();
+            /*
+            * $table->integer('reply_id')->unsigned();
+            * $table->foreign('reply_id')->references('id')->on('reply');
+            */
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {
