@@ -17,11 +17,21 @@
                 <div class="panel-body">
                     <form class="form-group" action="/home" method="post">
                         {{ csrf_field() }} {{ method_field('PUT') }}
-                        <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-                        <div class="form-group">
+                        <input type="hidden" name="user_origin" value="{{Auth::user()->id}}">
+                        @if ($errors->has('user_recipient'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('user_recipient') }}</strong>
+                            </span>
+                        @endif
+                        <div class="form-group{{ $errors->has('user_recipient') ? ' has-error' : '' }}">
                             <input type="text" name="user_recipient" class="form-control" placeholder="Destinatario">
                         </div>
-                        <div class="form-group">
+                        @if ($errors->has('message'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('message') }}</strong>
+                            </span>
+                        @endif
+                        <div class="form-group{{ $errors->has('message') ? ' has-error' : '' }}">
                             <textarea name="message" class="form-control" rows="5" placeholder="Dime! ¿Qué mensaje quieres enviar?" style="resize: none;"></textarea>
                         </div>
                         <div class="form-group">
@@ -30,15 +40,7 @@
                     </form>
                 </div>
             </div>
-            {{-- @foreach ($messages as $key => $value)
-            <div class="panel panel-default">
-                <div class="panel-heading">Mensaje de {{App\User::find($value->user_id)->name}}</div>
 
-                <div class="panel-body">
-                    <span>{{$value->text}}</span>
-                </div>
-            </div>
-            @endforeach --}}
             <div class="panel panel-default">
                 <div class="panel-heading">Buscar usuario</div>
                 <div class="panel-body">

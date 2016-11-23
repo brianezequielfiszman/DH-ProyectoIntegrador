@@ -1,11 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Manija\Http\Controllers\Auth;
 
-use App\User;
-use App\Http\Controllers\Controller;
+
+use Manija\User;
+use Manija\Categories;
+use Manija\Http\Controllers\Controller;
+use Manija\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -27,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/admin/register';
 
     /**
      * Create a new controller instance.
@@ -36,9 +40,29 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('Manija\Http\Middleware\AdminMiddleware');
     }
 
+    /**
+ * Handle a registration request for the application.
+ *
+ * @param  \Illuminate\Http\Request  $request
+ * @return \Illuminate\Http\Response
+ */
+public function register(Request $request)
+{
+    $validator = $this->validator($request->all());
+    if ($validator->fails()) {
+        $this->throwValidationException(
+            $request, $validator
+        );
+    }
+
+    $user = $this->create($request->all());
+    $categories = $user->categories();
+    dd($user);
+    return redirect($this->redirectPath())->with('userCreated', true);
+}
     /**
      * Get a validator for an incoming registration request.
      *
@@ -48,10 +72,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name'     => 'required|max:255',
-            'category' => 'required|in:Padre,Docente',
-            'email'    => 'required|email|max:255|unique:users',
+            'name' => 'required|max:20',
+            'category' => 'required|in:1,2,3',
             'password' => 'required|min:6|confirmed',
+            'email' => 'required|email|max:255|unique:users',
         ]);
     }
 
@@ -64,9 +88,9 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name'     => $data['name'],
-            'category' => $data['category'],
-            'email'    => $data['email'],
+            'name' => $data['name'],
+            'category_id' => $data['category'],
+            'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
     }

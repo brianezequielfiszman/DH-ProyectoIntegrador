@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/register') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -65,8 +65,9 @@
 
                             <div class="col-md-6">
                                 <select class="form-control" name="category">
-                                  <option value="docente">Docente</option>
-                                  <option value="padre">Padre</option>
+                                  <option value="1">Admin</option>
+                                  <option value="2">Docente</option>
+                                  <option value="3">Padre</option>
                                 </select>
                             </div>
                         </div>

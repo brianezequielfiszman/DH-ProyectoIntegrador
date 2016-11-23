@@ -13,10 +13,10 @@ class CreateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('text');
-            $table->integer('book_recipient_id')->unsigned();
+            $table->text('message');
+            $table->integer('user_recipient_id')->unsigned();
             $table->integer('user_origin_id')->unsigned();
-            $table->foreign('book_recipient_id')->references('id')->on('books');
+            $table->foreign('user_recipient_id')->references('id')->on('users');
             $table->foreign('user_origin_id')->references('id')->on('users');
             $table->timestamps();
             /*

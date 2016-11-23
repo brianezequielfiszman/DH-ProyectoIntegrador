@@ -20,6 +20,23 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Admin Default Data
+    |--------------------------------------------------------------------------
+    |
+    | This option controls the default authentication data for an Authenticable
+    | admin account for your application. You may change these defaults
+    | as required, but they're a perfect start for most applications.
+    |
+    */
+    'admin' => [
+        'name'      => 'admin',
+        'password'  => '123456',
+        'email'     => 'brianezequielfiszman@gmail.com',
+        'category'  => 1
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Authentication Guards
     |--------------------------------------------------------------------------
     |
@@ -67,7 +84,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => Manija\User::class,
         ],
 
         // 'users' => [

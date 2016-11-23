@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Manija\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
-use App\Message;
+use Manija\User;
+use Manija\Message;
 use Auth;
 
 class HomeController extends Controller

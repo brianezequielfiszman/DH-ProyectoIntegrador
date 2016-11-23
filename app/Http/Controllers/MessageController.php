@@ -1,25 +1,35 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Manija\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Message;
-use App\User;
-use App\Redirect;
+use Manija\Message;
+use Manija\User;
+use Manija\Redirect;
 
 class MessageController extends Controller
 {
+
     public function sendMessage(Request $request){
         $user_recipient = ($request->has('user_recipient')) ? User::where('name', $request->user_recipient)->first() : null;
 
-        $user_recipient_id = $user_recipient->id ?? null;
+        $user_origin    = ($request->has('user_origin')) ? User::find($request->user_origin) : null;
 
-        if(isset($user_recipient_id))
-        Message::create([
-          'user_id' => $request->user_id,
-          'user_recipient_id' => $user_recipient_id,
-          'text' => $request->message
+        $user_recipient_id = $user_recipient->id ?? null;
+        $user_origin_id    = $user_origin->id    ?? null;
+
+        $this->validate($request, [
+          'user_origin'       => 'required|exists:users,id',
+          'user_recipient'    => 'required|exists:users,name',
+          'message'           => 'required'
         ]);
+
+        Message::create([
+          'user_origin_id'    => $user_origin_id,
+          'user_recipient_id' => $user_recipient_id,
+          'message'           => $request->message
+        ]);
+
         return redirect()->route('userMainPage');
     }
 }

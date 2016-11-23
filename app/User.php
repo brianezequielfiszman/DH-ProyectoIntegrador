@@ -1,7 +1,8 @@
 <?php
 
-namespace App;
+namespace Manija;
 
+use Manija\Category;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -15,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'category'
+        'name', 'email', 'password', 'category_id'
     ];
 
     /**
@@ -27,11 +28,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    // public function messages(){
-    //     return $this->hasMany('App\Message', 'user_id');
-    // }
-    //
-    // public function receivedMessages(){
-    //     return $this->hasMany('App\Message', 'user_recipient_id', 'id');
-    // }
+    public function category(){
+        return $this->belongsTo('\Manija\Category', 'category_id');
+    }
 }

@@ -1,16 +1,16 @@
 <?php
 
-namespace App;
+namespace Manija;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
   protected $fillable = [
-      'text', 'user_origin_id', 'book_recipient_id'
+      'message', 'user_origin_id', 'user_recipient_id'
   ];
 
   public function user(){
-      return $this->belongsTo('App\User', 'user_origin_id');
+      return $this->belongsTo('Manija\User', 'user_origin_id');
   }
 }
