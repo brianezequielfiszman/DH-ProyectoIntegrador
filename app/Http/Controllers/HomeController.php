@@ -27,12 +27,13 @@ class HomeController extends Controller
     public function index()
     {
         $user = User::find(Auth::user()->id);
-        return view('home')->withMessages($user->receivedMessages);
+        $messages = Message::all();
+        return view('home')->withMessages($user->messages);
     }
 
     public function showUserPage($id)
     {
         $user = User::find($id);
-        return view('home')->withMessages($user->receivedMessages)->withUser($user);
+        return view('home')->withMessages($user->messages)->withUser($user);
     }
 }

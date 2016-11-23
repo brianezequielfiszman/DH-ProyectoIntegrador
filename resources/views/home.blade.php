@@ -57,7 +57,19 @@
                   </div>
               </div>
             @endif
+
+            @foreach ($messages as $value)
+              <div class="panel panel-default">
+                  <div class="panel-heading">Mensaje de {{$value->origin->name}}</div>
+
+                  <div class="panel-body">
+                      <span>{{$value->message}}</span>
+                  </div>
+              </div>
+            @endforeach
+
         </div>
     </div>
 </div>
+
 @endsection

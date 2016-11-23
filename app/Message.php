@@ -11,6 +11,10 @@ class Message extends Model
   ];
 
   public function user(){
+      return $this->belongsTo('Manija\User', 'user_origin_id')->orWhere('Manija\User', 'user_recipient_id');
+  }
+
+  public function origin(){
       return $this->belongsTo('Manija\User', 'user_origin_id');
   }
 }

@@ -31,4 +31,8 @@ class User extends Authenticatable
     public function category(){
         return $this->belongsTo('\Manija\Category', 'category_id');
     }
+
+    public function messages(){
+        return $this->hasMany('Manija\Message', 'user_origin_id')->orWhere('user_recipient_id', $this->id);
+    }
 }
