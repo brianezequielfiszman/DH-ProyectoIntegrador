@@ -18,14 +18,16 @@ Route::get('/', function () {
 Route::group(['middleware' => ['web']], function () {
     Route::group(['middleware' => 'Manija\Http\Middleware\AdminMiddleware'], function () {
         Route::get('/admin', function () {return dd(Auth());});
-        Route::get('/user', 'UserController@index')->name('listUsers');
-        Route::get('/user/{id}', 'UserController@show')->name('showUser');
 
       // Registration Routes...
       Route::get('/admin/register', 'UserController@create');
       Route::post('/admin/register', 'UserController@store');
     });
-
+    
+Route::group(['middleware' => 'Manija\Http\Middleware\TeacherAndAdminMiddleware'], function () {
+    Route::get('/user', 'UserController@index')->name('listUsers');
+    Route::get('/user/{id}', 'UserController@show')->name('showUser');
+});
 // Login Routes...
     Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
     Route::post('login', ['as' => 'login.post', 'uses' => 'Auth\LoginController@login']);

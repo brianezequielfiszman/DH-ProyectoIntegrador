@@ -40,22 +40,23 @@
                     </form>
                 </div>
             </div>
-
-            <div class="panel panel-default">
-                <div class="panel-heading">Buscar usuario</div>
-                <div class="panel-body">
-                    <form class="form-group" action="/user" method="get">
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="user" placeholder="Ingresar nombre">
-                            <span class="input-group-btn">
-                              <button type="submit"  class="btn btn-default">
-                                <span class="glyphicon glyphicon-search"></span>
-                              </button>
-                            </span>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            @if (Auth::user()->category->id != 3)
+              <div class="panel panel-default">
+                  <div class="panel-heading">Buscar usuario</div>
+                  <div class="panel-body">
+                      <form class="form-group" action="/user" method="get">
+                          <div class="input-group">
+                              <input type="text" class="form-control" name="user" placeholder="Ingresar nombre">
+                              <span class="input-group-btn">
+                                <button type="submit"  class="btn btn-default">
+                                  <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                              </span>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+            @endif
         </div>
     </div>
 </div>
