@@ -24,7 +24,7 @@ class UserController extends Controller
      */
     public function create()
     {
-
+        return (new Auth\RegisterController)->showRegistrationForm();
     }
 
     /**
@@ -35,7 +35,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
+        return (new Auth\RegisterController)->register($request);
     }
 
     /**

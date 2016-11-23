@@ -59,8 +59,8 @@ public function register(Request $request)
     }
 
     $user = $this->create($request->all());
-    $categories = $user->categories();
-    dd($user);
+    $categories = $user->category;
+    
     return redirect($this->redirectPath())->with('userCreated', true);
 }
     /**

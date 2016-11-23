@@ -22,8 +22,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/user/{id}', 'UserController@show')->name('showUser');
 
       // Registration Routes...
-      Route::get('/admin/register', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
-      Route::post('/admin/register', ['as' => 'register.post', 'uses' => 'Auth\RegisterController@register']);
+      Route::get('/admin/register', 'UserController@create');
+      Route::post('/admin/register', 'UserController@store');
     });
 
 // Login Routes...
