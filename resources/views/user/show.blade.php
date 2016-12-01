@@ -7,9 +7,15 @@
         <div class="panel-heading">Usuario</div>
           <ul class="list-group">
             @foreach ($user->getAttributes() as $key => $value)
-              @if ($key == 'name' || $key == 'email' || $key == 'category_id')
+              @if ($key == 'name' || $key == 'email' || $key == 'category_id' || $key == 'lastName')
                 <li class="list-group-item">
-                  {{($key == 'category_id') ? 'CATEGORY: '.$user->category->description : strtoupper($key).': '.$value}}
+                  @if ($key == 'category_id')
+                    {{"Categoria: ".$user->category->description}}
+                  @elseif ($key == 'lastName')
+                    {{"Apellido: ".$user->lastName}}
+                  @else
+                    {{ucfirst($key).': '.$value}}
+                  @endif
                 </li>
               @endif
             @endforeach

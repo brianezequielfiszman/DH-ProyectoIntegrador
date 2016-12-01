@@ -22,7 +22,7 @@
                         <div class="input-group">
                             <span class="input-group-btn">
                               <button type="submit"  class="btn btn-default btn-lg admin-btn-lg" data-toggle="modal" data-target="#myModalNorm" id='edit'>
-                              <span class="glyphicon glyphicon-pencil admin-glyph"></span>
+                              <span class="glyphicon glyphicon-edit admin-glyph"></span>
                               </button>
                             </span>
                         </div>

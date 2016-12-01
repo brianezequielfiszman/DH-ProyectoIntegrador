@@ -72,10 +72,11 @@ public function register(Request $request)
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:20',
+            'name'     => 'required|alpha|max:20',
+            'lastName' => 'required|alpha|max:20',
             'category' => 'required|in:1,2,3',
             'password' => 'required|min:6|confirmed',
-            'email' => 'required|email|max:255|unique:users',
+            'email'    => 'required|email|max:255|unique:users',
         ]);
     }
 
@@ -88,7 +89,8 @@ public function register(Request $request)
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'name' => ucfirst($data['name']),
+            'lastName' => ucfirst($data['lastName']),
             'category_id' => $data['category'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),

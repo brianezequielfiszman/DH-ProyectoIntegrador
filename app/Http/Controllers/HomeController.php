@@ -29,10 +29,10 @@ class HomeController extends Controller
         switch (Auth::user()->category->description) {
           case 'parent':
             $user = User::find(Auth::user()->id);
-            $messages = Message::all();
             return view('home')->withMessages($user->messages);
             break;
           case 'teacher':
+            $user = User::find(Auth::user()->id);
             return view('home')->withMessages($user->messages);
             break;
           case 'admin':

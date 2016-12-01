@@ -30,6 +30,7 @@ return [
     */
     'admin' => [
         'name'      => env('ADMIN_USERNAME','admin'),
+        'lastName'  => env('ADMIN_LASTNAME','admin'),
         'password'  => env('ADMIN_PASSWORD','123456'),
         'email'     => env('ADMIN_EMAIL','admin@manija.com')
     ],

@@ -7,16 +7,14 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-  /**
+    /**
    * Create a new controller instance.
-   *
-   * @return void
    */
   public function __construct()
   {
       $this->middleware('auth');
-      $this->middleware('admin', ['only'=>['create','store']]);
-      $this->middleware('adminAndTeacher', ['only'=>['index','show']]);
+      $this->middleware('admin', ['only' => ['create', 'store', 'destroy']]);
+      $this->middleware('adminAndTeacher', ['only' => ['index', 'show']]);
   }
     /**
      * Display a listing of the resource.
@@ -25,7 +23,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user.list')->with('users', User::all());
+        return view('user.list')->with('users', User::all())->with('action', '');
     }
 
     /**
@@ -35,24 +33,26 @@ class UserController extends Controller
      */
     public function create()
     {
-        return (new Auth\RegisterController)->showRegistrationForm();
+        return (new Auth\RegisterController())->showRegistrationForm();
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        return (new Auth\RegisterController)->register($request);
+        return (new Auth\RegisterController())->register($request);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -63,35 +63,52 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-
+      $user = User::find($id);
+      return ($user) ? view('user.edit')->withUser($user) : view('user.error-not-exists');
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+      $user = User::find($id);
+      $this->validate($request, [
+        'name'     => 'required|alpha|max:20',
+        'lastName' => 'required|alpha|max:20',
+        'category' => 'required|in:1,2,3',
+      ]);
+
+      $user->name        = ucfirst($request['name']);
+      $user->lastName    = ucfirst($request['lastName']);
+      $user->category_id = $request['category'];
+
+      $user->save();
+      return redirect(route('user.edit', $user->id));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+      User::find($id)->delete();
+      return view('user.deleted');
     }
 
     /**
@@ -99,9 +116,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function search(Request $request){
-      $users = ($request->has('user')) ? User::where('name', "LIKE", $request->user.'%')->get() : null;
-      dd($request->action);
-      return ($users) ? view('user.list')->withUsers($users) : view('user.error-not-exists');
+    public function search(Request $request)
+    {
+        $users = ($request->has('user')) ? User::where('name', 'LIKE', $request->user.'%')->get() : null;
+        if ($request->action == 'edit' || $request->action == 'delete')
+          return ($users) ? view('user.list')->withUsers($users)->withAction($request->action) : view('user.error-not-exists');
+        else
+          return ($users) ? view('user.list')->withUsers($users)->withAction('') : view('user.error-not-exists');
     }
 }

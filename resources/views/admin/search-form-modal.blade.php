@@ -20,10 +20,16 @@
 
                 <form role="form" action="{{route('user.search')}}" method="get">
                   <div class="form-group">
-                      <input type="text" class="form-control" name='user' placeholder="Ingrese usuario"/>
+                      <div class="input-group">
+                          <input type="text" class="form-control" name='user' placeholder="Ingrese usuario"/>
+                          <span class="input-group-btn">
+                            <button type="submit"  class="btn btn-default">
+                              <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                          </span>
+                      </div>
                       <input type="hidden" name="action" id='action'>
                   </div>
-                  <button type="submit" class="btn btn-default">Buscar</button>
                   <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 </form>
             </div>

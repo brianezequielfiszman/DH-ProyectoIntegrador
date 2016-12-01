@@ -40,11 +40,11 @@
                     </form>
                 </div>
             </div>
-            @if (Auth::user()->category->id != 3)
+            @if (Auth::user()->category->description != 'parent')
               <div class="panel panel-default">
                   <div class="panel-heading">Buscar usuario</div>
                   <div class="panel-body">
-                      <form class="form-group" action="/user" method="get">
+                      <form class="form-group" action="{{route('user.search')}}" method="get">
                           <div class="input-group">
                               <input type="text" class="form-control" name="user" placeholder="Ingresar nombre">
                               <span class="input-group-btn">
