@@ -31,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin/register';
+    protected $redirectTo = '/user/create';
 
     /**
      * Create a new controller instance.
@@ -40,7 +40,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('Manija\Http\Middleware\AdminMiddleware');
+        $this->middleware('Middleware\AdminMiddleware');
     }
 
     /**
@@ -60,7 +60,7 @@ public function register(Request $request)
 
     $user = $this->create($request->all());
     $categories = $user->category;
-    
+
     return redirect($this->redirectPath())->with('userCreated', true);
 }
     /**

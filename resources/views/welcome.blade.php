@@ -8,9 +8,9 @@
 
           <div class="links">
               @if (Auth::check())
-                  @if (Auth::user()->category_id == 1)
-                      <a href="{{ url('/admin/register') }}">Register an user</a>
-                      <a href="{{ route('listUsers') }}">List users</a>
+                  @if (Auth::user()->category->description == 'admin')
+                      <a href="{{ route('users.create') }}">Register an user</a>
+                      <a href="{{ route('users.index') }}">List users</a>
                   @endif
               @endif
           </div>

@@ -16,7 +16,7 @@
 
                 <div class="panel-body">
                     <form class="form-group" action="/home" method="post">
-                        {{ csrf_field() }} {{ method_field('PUT') }}
+                        {{ csrf_field() }}
                         <input type="hidden" name="user_origin" value="{{Auth::user()->id}}">
                         @if ($errors->has('user_recipient'))
                             <span class="help-block">

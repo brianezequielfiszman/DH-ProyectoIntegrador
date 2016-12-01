@@ -39,3 +39,12 @@
 .m-b-md {
     margin-bottom: 30px;
 }
+
+.admin-container {
+  text-align: center;
+}
+
+.admin-btn-lg {
+  height: 5em;
+  width: 5em;
+}

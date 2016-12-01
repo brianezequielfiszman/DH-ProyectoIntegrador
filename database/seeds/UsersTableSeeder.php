@@ -1,5 +1,6 @@
 <?php
 
+use Manija\Category;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
@@ -15,7 +16,7 @@ class UsersTableSeeder extends Seeder
             'name'        => Config::get('auth.admin.name'),
             'email'       => Config::get('auth.admin.email'),
             'password'    => bcrypt(Config::get('auth.admin.password')),
-            'category_id' => Config::get('auth.admin.category'),
+            'category_id' => Category::where('description', 'admin')->first()->id,
           ]);
     }
 }

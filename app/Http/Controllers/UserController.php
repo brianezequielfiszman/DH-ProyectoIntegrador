@@ -15,6 +15,8 @@ class UserController extends Controller
   public function __construct()
   {
       $this->middleware('auth');
+      $this->middleware('admin', ['only'=>['create','store']]);
+      $this->middleware('adminAndTeacher', ['only'=>['index','show']]);
   }
     /**
      * Display a listing of the resource.
@@ -23,7 +25,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('users.list')->with('users', User::all());
+        return view('user.list')->with('users', User::all());
     }
 
     /**
@@ -55,7 +57,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return (User::find($id)) ? view('users.show')->with('user', User::find($id)) : view('users.error-not-exists');
+        return (User::find($id)) ? view('user.show')->with('user', User::find($id)) : view('user.error-not-exists');
     }
 
     /**
@@ -66,7 +68,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -90,5 +92,16 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request){
+      $users = ($request->has('user')) ? User::where('name', "LIKE", $request->user.'%')->get() : null;
+      dd($request->action);
+      return ($users) ? view('user.list')->withUsers($users) : view('user.error-not-exists');
     }
 }

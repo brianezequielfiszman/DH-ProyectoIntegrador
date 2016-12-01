@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('welcome');
     }
 
     /**
@@ -26,9 +26,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = User::find(Auth::user()->id);
-        $messages = Message::all();
-        return view('home')->withMessages($user->messages);
+        switch (Auth::user()->category->description) {
+          case 'parent':
+            $user = User::find(Auth::user()->id);
+            $messages = Message::all();
+            return view('home')->withMessages($user->messages);
+            break;
+          case 'teacher':
+            return view('home')->withMessages($user->messages);
+            break;
+          case 'admin':
+            return redirect(route('admin.index'));
+            break;
+        }
+    }
+
+    public function welcome(){
+        return (Auth::check()) ? redirect(route('home')) : view('welcome');
     }
 
     public function showUserPage($id)

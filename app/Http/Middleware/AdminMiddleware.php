@@ -16,7 +16,7 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user()->category_id != 1)
+        if ($request->user()->category->description != 'admin')
             return redirect('home');
 
         return $next($request);

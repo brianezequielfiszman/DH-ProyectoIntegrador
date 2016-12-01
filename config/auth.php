@@ -29,10 +29,9 @@ return [
     |
     */
     'admin' => [
-        'name'      => 'admin',
-        'password'  => '123456',
-        'email'     => 'brianezequielfiszman@gmail.com',
-        'category'  => 1
+        'name'      => env('ADMIN_USERNAME','admin'),
+        'password'  => env('ADMIN_PASSWORD','123456'),
+        'email'     => env('ADMIN_EMAIL','admin@manija.com')
     ],
 
     /*

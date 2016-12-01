@@ -3,6 +3,7 @@
 namespace Manija\Http\Middleware;
 
 use Closure;
+use User;
 
 class TeacherAndAdminMiddleware
 {
@@ -15,7 +16,7 @@ class TeacherAndAdminMiddleware
      */
      public function handle($request, Closure $next)
      {
-         if ($request->user()->category->id == 3)
+         if ($request->user()->category->description == 'parent')
              return redirect('home');
 
          return $next($request);

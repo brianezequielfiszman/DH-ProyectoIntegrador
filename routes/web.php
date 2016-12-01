@@ -11,23 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::group(['middleware' => ['web']], function () {
-    Route::group(['middleware' => 'Manija\Http\Middleware\AdminMiddleware'], function () {
-        Route::get('/admin', function () {return dd(Auth());})->middleware('auth');
+    Route::resource('user', 'UserController');
 
-      // Registration Routes...
-      Route::get('/admin/register', 'UserController@create');
-      Route::post('/admin/register', 'UserController@store');
-    });
-
-Route::group(['middleware' => 'Manija\Http\Middleware\TeacherAndAdminMiddleware'], function () {
-    Route::get('/user', 'UserController@index')->name('listUsers');
-    Route::get('/user/{id}', 'UserController@show')->name('showUser');
-});
 // Login Routes...
     Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
     Route::post('login', ['as' => 'login.post', 'uses' => 'Auth\LoginController@login']);
@@ -40,7 +26,9 @@ Route::group(['middleware' => 'Manija\Http\Middleware\TeacherAndAdminMiddleware'
     Route::post('password/reset', ['as' => 'password.reset.post', 'uses' => 'Auth\ResetPasswordController@reset']);
 });
 
-Route::get('/home', 'HomeController@index')->name('userMainPage');
+Route::get('/', 'HomeController@welcome');
+Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/{id}', 'HomeController@showUserPage')->name('userWall');
-
-Route::put('/home', 'MessageController@create');
+Route::post('/home', 'MessageController@create');
+Route::get('/admin', 'AdminController@index')->name('admin.index');
+Route::get('/users/search', 'UserController@search')->name('user.search');
