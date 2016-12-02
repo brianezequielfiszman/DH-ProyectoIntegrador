@@ -28,7 +28,10 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::get('/', 'HomeController@welcome');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/home/{id}', 'HomeController@showUserPage')->name('userWall');
+Route::get('/home/{id}', 'HomeController@parentHome')->name('home.user');
 Route::post('/home', 'MessageController@create');
 Route::get('/admin', 'AdminController@index')->name('admin.index');
 Route::get('/users/search', 'UserController@search')->name('user.search');
+Route::delete('/message/{id}', 'MessageController@destroy')->name('message.destroy');
+Route::get('/message/{id}/edit' , 'MessageController@edit')->name('message.edit');
+Route::patch('/message/{id}' , 'MessageController@update')->name('message.update');

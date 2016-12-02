@@ -3,6 +3,7 @@
 namespace Manija\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 use Manija\Message;
 use Manija\User;
 use Manija\Redirect;
@@ -45,6 +46,52 @@ class MessageController extends Controller
         'message'           => $request->message
       ]);
 
-      return redirect()->route('userMainPage');
+      return redirect()->back();
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+      Message::find($id)->delete();
+      return redirect()->back();
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+      $message = Message::find($id);
+      $this->validate($request, [
+        'message'           => 'required'
+      ]);
+      $message->message = $request['message'];
+      $message->save();
+      return redirect(route('home'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+      $message = Message::find($id);
+      return ($message) ? view('message.edit')->withMessage($message) : view('user.error-not-exists');
+    }
+
 }

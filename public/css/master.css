@@ -48,3 +48,7 @@
   height: 5em;
   width: 5em;
 }
+.row-sm-flex-center {
+  display:table-cell;
+  vertical-align:middle;
+}
