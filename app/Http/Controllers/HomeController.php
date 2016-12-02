@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Manija\User;
 use Manija\Message;
 use Auth;
+use Response;
 
 class HomeController extends Controller
 {
@@ -29,7 +30,7 @@ class HomeController extends Controller
         switch (Auth::user()->category->description) {
           case 'parent':
             $user = User::find(Auth::user()->id);
-            return view('home.user')->withMessages($user->messages);
+            return view('home.user')->withMessages($user->messages)->withResponse(Response::json(User::all()));
             break;
           case 'teacher':
             $user = User::find(Auth::user()->id);

@@ -94,4 +94,10 @@ class MessageController extends Controller
       return ($message) ? view('message.edit')->withMessage($message) : view('user.error-not-exists');
     }
 
+    public function autocomplete(Request $request)
+    {
+      $query = $request->get('term', '');
+      $data  = User::where("name","LIKE",'%'.$query.'%')->get();
+      return response()->json($data);
+    }
 }
