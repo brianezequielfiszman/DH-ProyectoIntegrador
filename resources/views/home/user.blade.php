@@ -5,7 +5,6 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>
-
                 <div class="panel-body">
                     <span>Bienvenido! ¿Qué tal si envias un mensaje?</span>
                 </div>
@@ -24,7 +23,7 @@
                             </span>
                         @endif
                         <div class="form-group{{ $errors->has('user_recipient') ? ' has-error' : '' }}">
-                            <input type="text" name="user_recipient" class="form-control" placeholder="Destinatario">
+                            <input type="text" name="user_recipient" class="typeahead form-control" placeholder="Destinatario" autocomplete="off">
                         </div>
                         @if ($errors->has('message'))
                             <span class="help-block">
@@ -92,4 +91,15 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+  var path = "{{ route('autocomplete') }}";
+  $('input.typeahead').typeahead({
+      minLength: 0,
+      source:  function (query, process) {
+      return $.get(path, { query: query }, function (data) {
+              return process(data);
+          });
+      }
+  });
+</script>
 @endsection

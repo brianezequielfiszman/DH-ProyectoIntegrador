@@ -35,3 +35,4 @@ Route::get('/users/search', 'UserController@search')->name('user.search');
 Route::delete('/message/{id}', 'MessageController@destroy')->name('message.destroy');
 Route::get('/message/{id}/edit' , 'MessageController@edit')->name('message.edit');
 Route::patch('/message/{id}' , 'MessageController@update')->name('message.update');
+Route::get('/autocomplete', 'MessageController@autocomplete')->name('autocomplete');
