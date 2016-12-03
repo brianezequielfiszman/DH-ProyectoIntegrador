@@ -4,7 +4,7 @@ namespace Manija\Http\Middleware;
 
 use Closure;
 
-class TeacherMiddleware
+class UserNotExistsMiddleware
 {
     /**
      * Handle an incoming request.

@@ -92,7 +92,7 @@
     </div>
 </div>
 <script type="text/javascript">
-  var path = "{{ route('autocomplete') }}";
+  var path = "{{  route('autocomplete') }}";
   $('input.typeahead').typeahead({
       minLength: 0,
       source:  function (query, process) {

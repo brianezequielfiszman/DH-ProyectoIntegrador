@@ -18,6 +18,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except('welcome');
+        $this->middleware('teacher', ['only' => ['userHome']]);
     }
 
     /**
@@ -30,11 +31,11 @@ class HomeController extends Controller
         switch (Auth::user()->category->description) {
           case 'parent':
             $user = User::find(Auth::user()->id);
-            return view('home.user')->withMessages($user->messages)->withResponse(Response::json(User::all()));
+            return view('home.parent')->withMessages($user->messages)->withResponse(Response::json(User::all()));
             break;
           case 'teacher':
             $user = User::find(Auth::user()->id);
-            return view('home')->withMessages($user->messages);
+            return view('home.teacher')->withMessages($user->messages);
             break;
           case 'admin':
             return redirect(route('admin.index'));
@@ -46,9 +47,8 @@ class HomeController extends Controller
         return (Auth::check()) ? redirect(route('home')) : view('welcome');
     }
 
-    public function showUserPage($id)
-    {
+    public function userHome($id){
         $user = User::find($id);
-        return view('home')->withMessages($user->messages)->withUser($user);
+        return ($user) ? view('home.parent')->withMessages($user->messages) : view('errors.user-not-exists');
     }
 }

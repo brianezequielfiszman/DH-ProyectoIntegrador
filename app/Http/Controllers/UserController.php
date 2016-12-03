@@ -57,7 +57,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return (User::find($id)) ? view('user.show')->with('user', User::find($id)) : view('user.error-not-exists');
+        return (User::find($id)) ? view('user.show')->with('user', User::find($id)) : view('errors.user-not-exists');
     }
 
     /**
@@ -70,7 +70,7 @@ class UserController extends Controller
     public function edit($id)
     {
       $user = User::find($id);
-      return ($user) ? view('user.edit')->withUser($user) : view('user.error-not-exists');
+      return ($user) ? view('user.edit')->withUser($user) : view('errors.user-not-exists');
     }
 
     /**
@@ -122,6 +122,6 @@ class UserController extends Controller
         if ($request->action == 'edit' || $request->action == 'delete')
           return ($users) ? view('user.list')->withUsers($users)->withAction($request->action) : view('user.error-not-exists');
         else
-          return ($users) ? view('user.list')->withUsers($users)->withAction('') : view('user.error-not-exists');
+          return ($users) ? view('user.list')->withUsers($users)->withAction('') : view('errors.user-not-exists');
     }
 }

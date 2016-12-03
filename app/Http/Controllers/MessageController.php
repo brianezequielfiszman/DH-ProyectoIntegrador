@@ -4,6 +4,7 @@ namespace Manija\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Validator;
 use Manija\Message;
 use Manija\User;
 use Manija\Redirect;
@@ -39,6 +40,20 @@ class MessageController extends Controller
         'user_recipient'    => 'required|exists:users,name',
         'message'           => 'required'
       ]);
+
+      $validation = Validator::make(
+        array(
+          'user_recipient'  => User::find($user_recipient_id)->category->description,
+        ),
+        array(
+          'user_recipient' => array( 'required', 'not_in:'.Auth::user()->category->description.',admin' ),
+        )
+      );
+
+      if ( $validation->fails() ) {
+        $errors = $validation->messages();
+        return redirect()->back()->with('errors', $errors);
+      }
 
       Message::create([
         'user_origin_id'    => $user_origin_id,
@@ -97,7 +112,10 @@ class MessageController extends Controller
     public function autocomplete(Request $request)
     {
       $query = $request->get('term', '');
-      $data  = User::where("name","LIKE",'%'.$query.'%')->get();
+      if(Auth::user()->category->description != 'admin')
+        $data  = User::where("name","LIKE",'%'.$query.'%')->where('category_id', '!=', Auth::user()->category_id)->where('category_id', '!=', '1')->get();
+      else
+        $data  = User::where("name","LIKE",'%'.$query.'%')->get();
       return response()->json($data);
     }
 }

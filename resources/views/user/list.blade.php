@@ -9,7 +9,7 @@
                     @foreach ($users as $key => $value)
                         <li class="list-group-item clearfix">
                           <div class="col-xs-10 col-sm-11">
-                              <a href="{{route('user.show', $value->id)}}">{{$value->name}} {{$value->lastName}}</a>
+                              <a href="{{route('home').'/'. $value->id}}">{{$value->name}} {{$value->lastName}}</a>
                           </div>
                           @if (Auth::user()->category->description === 'admin' and ($action === 'delete' or $action === 'edit'))
                             @if ($action === 'delete')
