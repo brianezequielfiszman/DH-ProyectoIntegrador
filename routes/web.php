@@ -13,7 +13,6 @@
 
 Route::group(['middleware' => ['web']], function () {
     Route::resource('user', 'UserController');
-
 // Login Routes...
     Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
     Route::post('login', ['as' => 'login.post', 'uses' => 'Auth\LoginController@login']);
@@ -25,14 +24,11 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('password/reset/{token}', ['as' => 'password.reset.token', 'uses' => 'Auth\ResetPasswordController@showResetForm']);
     Route::post('password/reset', ['as' => 'password.reset.post', 'uses' => 'Auth\ResetPasswordController@reset']);
 });
-
+Route::resource('messages', 'MessageController', ['only' => [ 'store', 'destroy', 'edit', 'update' ]]);
+Route::resource('reply', 'ReplyController', ['only' => [ 'store', 'destroy', 'edit', 'update' ]]);
 Route::get('/', 'HomeController@welcome');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/{id}', 'HomeController@userHome')->name('home.user');
-Route::post('/home', 'MessageController@create');
 Route::get('/admin', 'AdminController@index')->name('admin.index');
 Route::get('/users/search', 'UserController@search')->name('user.search');
-Route::delete('/message/{id}', 'MessageController@destroy')->name('message.destroy');
-Route::get('/message/{id}/edit' , 'MessageController@edit')->name('message.edit');
-Route::patch('/message/{id}' , 'MessageController@update')->name('message.update');
 Route::get('/autocomplete', 'MessageController@autocomplete')->name('autocomplete');

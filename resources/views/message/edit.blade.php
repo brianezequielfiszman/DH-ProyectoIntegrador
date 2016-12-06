@@ -6,7 +6,7 @@
             <div class="panel-heading">Envía un mensaje</div>
 
             <div class="panel-body">
-                <form class="form-group" action="{{route('message.update', $message->id)}}" method="post">
+                <form class="form-group" action="{{route('messages.update', $message->id)}}" method="post">
                     {{ csrf_field() }}
                     {{method_field('PATCH')}}
                     <input type="hidden" name="user_origin" value="{{Auth::user()->id}}">

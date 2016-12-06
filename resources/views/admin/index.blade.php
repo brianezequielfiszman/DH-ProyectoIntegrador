@@ -57,4 +57,5 @@
     </div>
 </div>
 @include('admin.search-form-modal')
+@include('misc.autocomplete')
 @endsection

@@ -1,5 +1,5 @@
-@extends('layouts.app')
-@section('content')
+@extends('home.index')
+@section('home')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -29,15 +29,4 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-  var path = "{{  route('autocomplete') }}";
-  $('input.typeahead').typeahead({
-      minLength: 0,
-      source:  function (query, process) {
-      return $.get(path, { query: query }, function (data) {
-              return process(data);
-          });
-      }
-  });
-</script>
 @endsection

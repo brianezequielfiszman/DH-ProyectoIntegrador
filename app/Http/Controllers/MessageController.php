@@ -26,7 +26,7 @@ class MessageController extends Controller
     *
     * @return \Illuminate\Http\Response
     */
-    public function create(Request $request)
+    public function store(Request $request)
     {
       $user_recipient = ($request->has('user_recipient')) ? User::where('name', $request->user_recipient)->first() : null;
 
@@ -37,7 +37,7 @@ class MessageController extends Controller
 
       $this->validate($request, [
         'user_origin'       => 'required|exists:users,id',
-        'user_recipient'    => 'required|exists:users,name',
+        'user_recipient'    => 'required|exists:users,name|not in: '.Auth::user()->id,
         'message'           => 'required'
       ]);
 
@@ -88,9 +88,7 @@ class MessageController extends Controller
     public function update(Request $request, $id)
     {
       $message = Message::find($id);
-      $this->validate($request, [
-        'message'           => 'required'
-      ]);
+      $this->validate($request, [ 'message' => 'required' ]);
       $message->message = $request['message'];
       $message->save();
       return redirect(route('home'));

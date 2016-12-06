@@ -1,5 +1,5 @@
-@extends('layouts.app')
-@section('content')
+@extends('home.index')
+@section('home')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -11,95 +11,46 @@
             </div>
 
             <div class="panel panel-primary">
-                <div class="panel-heading">Envía un mensaje</div>
-
-                <div class="panel-body">
-                    <form class="form-group" action="/home" method="post">
-                        {{ csrf_field() }}
-                        <input type="hidden" name="user_origin" value="{{Auth::user()->id}}">
-                        @if ($errors->has('user_recipient'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('user_recipient') }}</strong>
-                            </span>
-                        @endif
-                        <div class="form-group{{ $errors->has('user_recipient') ? ' has-error' : '' }}">
-                            <input type="text" name="user_recipient" class="typeahead form-control" placeholder="Destinatario" autocomplete="off">
-                        </div>
-                        @if ($errors->has('message'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('message') }}</strong>
-                            </span>
-                        @endif
-                        <div class="form-group{{ $errors->has('message') ? ' has-error' : '' }}">
-                            <textarea name="message" class="form-control" rows="5" placeholder="Dime! ¿Qué mensaje quieres enviar?" style="resize: none;"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-primary" value="Enviar">
-                        </div>
-                    </form>
-                </div>
+                <div class="panel-heading">Envía un mensaje{{(isset($user) ? ' a '.$user->name : '')}}</div>
+                @include('home.layouts.message-box')
             </div>
             @if (Auth::user()->category->description == 'teacher')
-              <div class="panel panel-default">
-                  <div class="panel-heading">Buscar usuario</div>
-                  <div class="panel-body">
-                      <form class="form-group" action="{{route('user.search')}}" method="get">
-                          <div class="input-group">
-                              <input type="text" class="form-control" name="user" placeholder="Ingresar nombre">
-                              <span class="input-group-btn">
-                                <button type="submit"  class="btn btn-default">
-                                  <span class="glyphicon glyphicon-search"></span>
-                                </button>
-                              </span>
-                          </div>
-                      </form>
-                  </div>
-              </div>
+              @include('layouts.user-search-form')
             @endif
 
-            @foreach ($messages as $value)
+            @foreach ($messages as $message)
               <div class="panel panel-default">
                   <div class="panel-heading">
                     <div class="container-fluid">
-                      <div class="row">
-                        <div class="col-md-11 col-sm-11 col-xs-10 col-offset-1" >Mensaje de {{$value->origin->name}}</div>
-                        <div class="col-md-1 col-sm-1 col-xs-1 col-offset-12">
-                          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-menu-down">
-                            </span>
-                          </button>
-                          <div class="dropdown-menu">
-                            <form action={{route('message.destroy', $value->id)}} method="post">
-                              {{method_field('DELETE')}}
-                              {{csrf_field()}}
-                              <button class="btn btn-block" type="submit">Borrar</button>
-                            </form>
-                            <form action={{route('message.edit', $value->id)}} method="get">
-                              <button class="btn btn-block" type="submit">Editar</button>
-                            </form>
-                          </div>
+                      <div class="row centered-row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          Mensaje de {{$message->origin->name}}
                         </div>
+                        @if ($message->origin->id === Auth::user()->id and !isset($message->reply_id))
+                          @include('home.layouts.dropdown-menu')
+                        @endif
                       </div>
                     </div>
                   </div>
                   <div class="panel-body">
-                      <span>{{$value->message}}</span>
+                      <span>{{$message->message}}</span>
                   </div>
+                  <footer class="panel-footer">
+                    @if (isset($message->reply_id))
+                      <p>{{$message->reply->content}}</p>
+                    @else
+                      <form class="form-horizontal" action="{{route('reply.store')}}" method="post">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="message_id" value="{{$message->id}}">
+                        <input type="hidden" name="origin_id" value="{{Auth::user()->id}}">
+                        <input type="text" class="form-control" name="content" placeholder="Escriba una respuesta">
+                      </form>
+                    @endif
+                  </footer>
               </div>
             @endforeach
 
         </div>
     </div>
 </div>
-<script type="text/javascript">
-  var path = "{{  route('autocomplete') }}";
-  $('input.typeahead').typeahead({
-      minLength: 0,
-      source:  function (query, process) {
-      return $.get(path, { query: query }, function (data) {
-              return process(data);
-          });
-      }
-  });
-</script>
 @endsection

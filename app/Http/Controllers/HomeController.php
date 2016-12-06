@@ -49,6 +49,6 @@ class HomeController extends Controller
 
     public function userHome($id){
         $user = User::find($id);
-        return ($user) ? view('home.parent')->withMessages($user->messages) : view('errors.user-not-exists');
+        return ($user and $user->category->description != 'parent') ? view('home.parent')->withMessages($user->messages)->withUser($user) : view('errors.user-not-exists');
     }
 }

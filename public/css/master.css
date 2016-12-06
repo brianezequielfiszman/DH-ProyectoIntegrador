@@ -48,7 +48,7 @@
   height: 5em;
   width: 5em;
 }
-.row-sm-flex-center {
-  display:table-cell;
-  vertical-align:middle;
+.centered-row {
+  display:flex;
+  align-items: center;
 }
