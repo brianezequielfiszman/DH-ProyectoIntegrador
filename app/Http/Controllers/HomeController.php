@@ -31,11 +31,11 @@ class HomeController extends Controller
         switch (Auth::user()->category->description):
           case 'parent':
             $user = User::find(Auth::user()->id);
-            return view('home.parent')->withMessages($user->messages)->withResponse(Response::json(User::all()));
+            return view('home.parent')->withMessages($user->recentMessages())->withResponse(Response::json(User::all()));
             break;
           case 'teacher':
             $user = User::find(Auth::user()->id);
-            return view('home.teacher')->withMessages($user->messages);
+            return view('home.teacher')->withMessages($user->recentMessages());
             break;
           case 'admin':
             return redirect(route('admin.index'));
@@ -49,6 +49,6 @@ class HomeController extends Controller
 
     public function userHome($id){
         $user = User::find($id);
-        return ($user and $user->category->description === 'parent') ? view('home.parent')->withMessages($user->messages)->withUser($user) : view('errors.user-not-exists');
+        return ($user and $user->category->description === 'parent') ? view('home.parent')->withMessages($user->recentMessages())->withUser($user) : view('errors.user-not-exists');
     }
 }

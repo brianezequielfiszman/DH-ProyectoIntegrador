@@ -12,9 +12,7 @@
     </span>
 @endif
 <div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}">
-    <textarea name="content" class="form-control" rows="5" placeholder="Dime! Que quieres poner en tu FAQ?" style="resize: none;">
-      {{ (isset($faq)) ? $faq->content : '' }}
-    </textarea>
+    <textarea name="content" class="form-control" rows="5" placeholder="Dime! Que quieres poner en tu FAQ?" style="resize: none;">{{(isset($faq)) ? $faq->content : ''}}</textarea>
 </div>
 <div class="form-group">
     <input type="submit" class="btn btn-primary" value="Enviar">

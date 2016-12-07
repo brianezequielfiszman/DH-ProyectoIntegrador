@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddReplyToMessagesTable extends Migration
+class AddAvatarToUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class AddReplyToMessagesTable extends Migration
      */
     public function up()
     {
-        Schema::table('messages', function (Blueprint $table) {
-          $table->integer('reply_id')->unsigned()->nullable();
-          $table->foreign('reply_id')->references('id')->on('replies');
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('avatar')->nullable()->default(storage_path() . '/' . 'default.png');
         });
     }
 
@@ -26,8 +25,8 @@ class AddReplyToMessagesTable extends Migration
      */
     public function down()
     {
-        Schema::table('messages', function (Blueprint $table) {
-            $table->dropForeign('messages_reply_id_foreign');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('avatar');
         });
     }
 }

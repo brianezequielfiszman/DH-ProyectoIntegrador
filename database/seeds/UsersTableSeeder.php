@@ -19,5 +19,19 @@ class UsersTableSeeder extends Seeder
             'password'    => bcrypt(Config::get('auth.admin.password')),
             'category_id' => Category::where('description', 'admin')->first()->id,
           ]);
+          DB::table('users')->insert([
+            'name'        => 'First',
+            'lastName'    => 'User',
+            'email'       => 'testone@manija.com',
+            'password'    => bcrypt('123456'),
+            'category_id' => Category::where('description', 'teacher')->first()->id,
+          ]);
+          DB::table('users')->insert([
+            'name'        => 'Second',
+            'lastName'    => 'User',
+            'email'       => 'testtwo@manija.com',
+            'password'    => bcrypt('123456'),
+            'category_id' => Category::where('description', 'parent')->first()->id,
+          ]);
     }
 }

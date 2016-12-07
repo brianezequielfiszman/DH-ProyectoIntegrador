@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'lastName', 'email', 'password', 'category_id'
+        'name', 'lastName', 'email', 'password', 'category_id', 'avatar'
     ];
 
     public function fullName(){
@@ -38,5 +38,9 @@ class User extends Authenticatable
 
     public function messages(){
         return $this->hasMany('Manija\Message', 'user_origin_id')->orWhere('user_recipient_id', $this->id);
+    }
+
+    public function recentMessages(){
+        return $this->messages()->paginate(20);
     }
 }

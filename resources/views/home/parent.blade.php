@@ -23,8 +23,11 @@
                   <div class="panel-heading">
                     <div class="container-fluid">
                       <div class="row centered-row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-11 col-sm-11 col-xs-11">
                           Mensaje de {{$message->origin->name}}
+                        </div>
+                        <div class="pull-right">
+                            {{($message->created_at)}}
                         </div>
                         @if ($message->origin->id === Auth::user()->id and !isset($message->reply_id))
                           @include('home.layouts.dropdown-menu')
@@ -44,7 +47,9 @@
                   </footer>
               </div>
             @endforeach
-
+            <div class="text-center">
+                {{ $messages }}
+            </div>
         </div>
     </div>
 </div>

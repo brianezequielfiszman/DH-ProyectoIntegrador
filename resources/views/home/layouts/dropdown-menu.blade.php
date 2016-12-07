@@ -1,4 +1,4 @@
-<div class="col-md-1 col-sm-1 col-xs-1 col-md-offset-2">
+<div class="col-md-1 col-sm-1 col-xs-1 pull-right">
   <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
     <span class="glyphicon glyphicon-menu-down"></span>
   </button>
