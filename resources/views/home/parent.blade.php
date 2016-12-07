@@ -27,7 +27,9 @@
                           Mensaje de {{$message->origin->name}}
                         </div>
                         <div class="pull-right">
-                            {{($message->created_at)}}
+                           <span class="text-info text-right">
+                              {{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $message->created_at)->format('Y-m-d')}}
+                           </span>
                         </div>
                         @if ($message->origin->id === Auth::user()->id and !isset($message->reply_id))
                           @include('home.layouts.dropdown-menu')
