@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-        <div class="col-md-8">
+        <div class="col-sm-8">
             <div class="panel panel-info">
                 <div class="panel-heading">Resultados</div>
                   <ul class="list-group">

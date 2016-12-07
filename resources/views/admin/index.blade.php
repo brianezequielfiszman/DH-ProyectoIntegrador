@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-        <div class="col-md-8">
+        <div class="col-sm-8">
             <div class="panel panel-info">
                 <div class="panel-heading">Panel de administrador</div>
                 <div class="panel-body">

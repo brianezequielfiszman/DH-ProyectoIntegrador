@@ -2,7 +2,7 @@
 @section('home')
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-sm-8">
             <div class="panel panel-default">
                 <div class="panel-heading">Hola {{Auth::user()->fullName()}}</div>
                 <div class="panel-body">

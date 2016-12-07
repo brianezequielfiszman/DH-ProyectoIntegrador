@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container-fluid col-xs-12 col-md-8">
+    <div class="container-fluid col-xs-12 col-sm-8">
       <section class="panel panel-info">
         <article class="panel-heading">
           <h3 class="panel-title">Listado de FAQS</h3>

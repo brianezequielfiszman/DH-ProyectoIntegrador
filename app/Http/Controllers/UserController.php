@@ -3,6 +3,7 @@
 namespace Manija\Http\Controllers;
 
 use Manija\User;
+use Auth;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -14,7 +15,7 @@ class UserController extends Controller
   {
       $this->middleware('auth');
       $this->middleware('admin', ['only' => ['create', 'store', 'destroy']]);
-      $this->middleware('adminAndTeacher', ['only' => ['index', 'show']]);
+      $this->middleware('adminAndTeacher', ['only' => ['index']]);
   }
     /**
      * Display a listing of the resource.
@@ -57,7 +58,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return (User::find($id)) ? view('user.show')->with('user', User::find($id)) : view('errors.user-not-exists');
+        return (User::find($id) and Auth::user()->id == $id) ? view('user.show')->with('user', User::find($id)) : view('errors.user-not-exists');
     }
 
     /**
