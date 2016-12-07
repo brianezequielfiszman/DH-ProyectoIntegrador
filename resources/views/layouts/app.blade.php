@@ -80,7 +80,16 @@
                 </div>
             </div>
         </nav>
-        @yield('content')
+        <div class="container">
+          <div class="row">
+            @if (Auth::check())
+              <nav class="visible-lg visible-md col-lg-2 col-md-2 col-md-offset-0 col-lg-offset-0">
+                  @include('layouts.horizontal-navbar')
+              </nav>
+            @endif
+            @yield('content')
+          </div>
+        </div>
     </div>
 </body>
 </html>

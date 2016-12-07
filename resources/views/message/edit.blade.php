@@ -12,7 +12,7 @@
                     <input type="hidden" name="user_origin" value="{{Auth::user()->id}}">
                     @if ($errors->has('user_recipient'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('user_recipient') }}</strong>
+                        <strong style="text-danger">{{ $errors->first('user_recipient') }}</strong>
                     </span>
                     @endif
                     <div class="form-group{{ $errors->has('user_recipient') ? ' has-error' : '' }}">
@@ -20,7 +20,7 @@
                     </div>
                     @if ($errors->has('message'))
                     <span class="help-block">
-                                <strong>{{ $errors->first('message') }}</strong>
+                                <strong style="text-danger">{{ $errors->first('message') }}</strong>
                             </span> @endif
                     <div class="form-group{{ $errors->has('message') ? ' has-error' : '' }}">
                         <textarea name="message" class="form-control" rows="5" placeholder="Dime! ¿Qué mensaje quieres enviar?" style="resize: none;">{{$message->message}}</textarea>

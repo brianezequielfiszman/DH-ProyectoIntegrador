@@ -5,6 +5,7 @@ namespace Manija\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Validator;
+use DB;
 use Manija\Message;
 use Manija\User;
 use Manija\Redirect;
@@ -28,7 +29,7 @@ class MessageController extends Controller
     */
     public function store(Request $request)
     {
-      $user_recipient = ($request->has('user_recipient')) ? User::where('name', $request->user_recipient)->first() : null;
+      $user_recipient = ($request->has('user_recipient')) ? User::where('name','LIKE', $request->user_recipient."%")->first() : null;
 
       $user_origin    = ($request->has('user_origin')) ? User::find($request->user_origin) : null;
 
@@ -42,12 +43,8 @@ class MessageController extends Controller
       ]);
 
       $validation = Validator::make(
-        array(
-          'user_recipient'  => User::find($user_recipient_id)->category->description,
-        ),
-        array(
-          'user_recipient' => array( 'required', 'not_in:'.Auth::user()->category->description.',admin' ),
-        )
+        array('user_recipient' => User::find($user_recipient_id)->category->description),
+        array('user_recipient' => array('required', 'not_in:'.Auth::user()->category->description.',admin'))
       );
 
       if ( $validation->fails() ) {

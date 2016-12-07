@@ -2,7 +2,7 @@
 @section('content')
   <div class="container">
       <div class="row">
-          <div class="col-md-8 col-md-offset-2">
+          <div class="col-md-8">
               <div class="panel panel-default">
                   <div class="panel-heading">Editar Usuario</div>
                   <div class="panel-body">
@@ -17,7 +17,7 @@
 
                                   @if ($errors->has('name'))
                                       <span class="help-block">
-                                          <strong>{{ $errors->first('name') }}</strong>
+                                          <strong style="text-danger">{{ $errors->first('name') }}</strong>
                                       </span>
                                   @endif
                               </div>
@@ -30,7 +30,7 @@
 
                                 @if ($errors->has('lastName'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('lastName') }}</strong>
+                                        <strong style="text-danger">{{ $errors->first('lastName') }}</strong>
                                     </span>
                                 @endif
                             </div>

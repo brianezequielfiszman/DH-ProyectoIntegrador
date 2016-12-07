@@ -14,12 +14,15 @@ class Message extends Model
       return $this->belongsTo('Manija\User', 'user_origin_id')->orWhere('Manija\User', 'user_recipient_id');
   }
 
-  public function reply()
-  {
+  public function reply() {
     return $this->belongsTo('Manija\Reply', 'reply_id');
   }
 
   public function origin(){
       return $this->belongsTo('Manija\User', 'user_origin_id');
+  }
+
+  public function recipient(){
+      return $this->belongsTo('Manija\User', 'user_recipient_id');
   }
 }

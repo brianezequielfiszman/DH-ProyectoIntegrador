@@ -26,6 +26,10 @@ Route::group(['middleware' => ['web']], function () {
 });
 Route::resource('messages', 'MessageController', ['only' => [ 'store', 'destroy', 'edit', 'update' ]]);
 Route::resource('reply', 'ReplyController', ['only' => [ 'store', 'destroy', 'edit', 'update' ]]);
+Route::resource('faqs', 'FaqsController');
+Route::get('/admin/faqs/edit', 'FaqsController@editList')->name('faqs.list.edit');
+Route::get('/admin/faqs/delete', 'FaqsController@deleteList')->name('faqs.list.delete');
+Route::get('/admin/faqs/list', 'FaqsController@list')->name('admin.faqs.list');
 Route::get('/', 'HomeController@welcome');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/{id}', 'HomeController@userHome')->name('home.user');

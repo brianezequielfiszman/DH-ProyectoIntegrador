@@ -1,60 +1,39 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-8">
             <div class="panel panel-info">
                 <div class="panel-heading">Panel de administrador</div>
                 <div class="panel-body">
-                    <div class="col-xs-6 col-sm-3 admin-container">
-                        <form class="form-group" action="{{route('user.create')}}" method="get">
-                            <div class="input-group">
-                                <span class="input-group-btn">
-                          <button type="submit" class="btn btn-default btn-lg admin-btn-lg">
-                            <span class="glyphicon glyphicon-plus"></span>
-                                </button>
-                                </span>
-                            </div>
-                            <label for="create-user" class="control-label">Crear Usuario</label>
-                        </form>
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="panel-heading">
+                        <button class="btn btn-block btn-lg btn-default" data-toggle="collapse" data-target="#users">
+                          Administracion de usuarios
+                        </button>
+                      </div>
+                      <div id="users" class="panel-collapse collapse">
+                        <li class="list-group-item container-fluid">
+                          @include('admin.layouts.users')
+                        </li>
+                      </div>
                     </div>
-                    <div class="col-xs-6 col-sm-3 admin-container">
-                        <div class="input-group">
-                            <span class="input-group-btn">
-                              <button type="submit"  class="btn btn-default btn-lg admin-btn-lg" data-toggle="modal" data-target="#myModalNorm" id='edit'>
-                              <span class="glyphicon glyphicon-edit admin-glyph"></span>
-                              </button>
-                            </span>
-                        </div>
-                        <label for="list-users" class="control-label">Editar Usuario</label>
+                    <div class="row">
+                      <div class="panel-heading">
+                        <button class="btn btn-block btn-lg btn-default" data-toggle="collapse" data-target="#faqs">
+                          Administracion de FAQS
+                        </button>
+                      </div>
+                      <div id="faqs" class="panel-collapse collapse">
+                        <li class="list-group-item container-fluid">
+                          @include('admin.layouts.faqs')
+                        </li>
+                      </div>
                     </div>
-                    <div class="clearfix visible-xs-block"></div>
-                    <div class="col-xs-6 col-sm-3 admin-container">
-                        <div class="input-group">
-                            <span class="input-group-btn">
-                              <button type="submit"  class="btn btn-default btn-lg admin-btn-lg" data-toggle="modal" data-target="#myModalNorm" id='delete'>
-                              <span class="glyphicon glyphicon-remove admin-glyph"></span>
-                              </button>
-                            </span>
-                        </div>
-                        <label for="list-users" class="control-label">Borrar Usuario</label>
-                    </div>
-                    <div class="col-xs-6 col-sm-3 admin-container">
-                        <form class="form-group" action="{{route('user.index')}}" method="get">
-                            <div class="input-group">
-                                <span class="input-group-btn">
-                          <button type="submit"  class="btn btn-default btn-lg admin-btn-lg">
-                            <span class="glyphicon glyphicon-user admin-glyph"></span>
-                                </button>
-                                </span>
-                            </div>
-                            <label for="list-users" class="control-label">Listar Usuarios</label>
-                        </form>
-                    </div>
+                  </div>
                 </div>
             </div>
-        </div>
-    </div>
+      </div>
 </div>
 @include('admin.search-form-modal')
 @include('misc.autocomplete')

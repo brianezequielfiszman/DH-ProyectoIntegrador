@@ -28,7 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        switch (Auth::user()->category->description) {
+        switch (Auth::user()->category->description):
           case 'parent':
             $user = User::find(Auth::user()->id);
             return view('home.parent')->withMessages($user->messages)->withResponse(Response::json(User::all()));
@@ -40,7 +40,7 @@ class HomeController extends Controller
           case 'admin':
             return redirect(route('admin.index'));
             break;
-        }
+        endswitch;
     }
 
     public function welcome(){
@@ -49,6 +49,6 @@ class HomeController extends Controller
 
     public function userHome($id){
         $user = User::find($id);
-        return ($user and $user->category->description != 'parent') ? view('home.parent')->withMessages($user->messages)->withUser($user) : view('errors.user-not-exists');
+        return ($user and $user->category->description === 'parent') ? view('home.parent')->withMessages($user->messages)->withUser($user) : view('errors.user-not-exists');
     }
 }
