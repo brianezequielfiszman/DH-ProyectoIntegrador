@@ -41,6 +41,6 @@ class User extends Authenticatable
     }
 
     public function recentMessages(){
-        return $this->messages()->paginate(20);
+        return $this->messages()->orderBy('created_at', 'desc')->paginate(20);
     }
 }
