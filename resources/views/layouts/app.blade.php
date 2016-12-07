@@ -14,7 +14,6 @@
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/master.css" rel="stylesheet">
 
-
     <!-- Scripts -->
     <script src="/js/app.js"></script>
     <script src="/js/typeahead.min.js"></script>

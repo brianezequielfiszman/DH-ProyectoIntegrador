@@ -57,7 +57,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return (User::find($id) and \Auth::user()->id == $id) ? view('user.show')->with('user', User::find($id)) : view('errors.user-not-exists');
+        return (User::find($id)) ? view('user.show')->with('user', User::find($id)) : view('errors.user-not-exists');
     }
 
     /**

@@ -1,16 +1,17 @@
 @if (Auth::check())
   <ul class="nav nav-pills nav-stacked">
-      <li role="presentation" class="active">
+      <li role="presentation" >
+        <li class="{{(\Request::url() == route('home') or \Request::url() == route('admin.index')) ? 'active' : ''}}">
         <a href="{{route('home')}}">
           {{(Auth::user()->category->description === 'admin') ? 'Admin Panel' : 'Home' }}
         </a>
       </li>
-      <li role="presentation">
+      <li class="{{\Request::url() == route('user.show', Auth::user()->id) ? 'active' : ''}}">
         <a href="{{ route('user.show', Auth::user()->id) }}">
           Profile
         </a>
       </li>
-      <li role="presentation">
+      <li class="{{\Request::url() == route('faqs.index') ? 'active' : ''}}">
         <a href="{{ route('faqs.index') }}">
           FAQS
         </a>
