@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
-  <div class="flex-center position-ref full-height">
+  <div class="container-fluid col-xs-12 col-sm-8 center-block flex-center position-ref full-height">
+
       <div class="content">
           <div class="title m-b-md">
               PORTAL
@@ -15,5 +16,6 @@
               @endif
           </div>
       </div>
-  </div>
+
+</div>
 @endsection

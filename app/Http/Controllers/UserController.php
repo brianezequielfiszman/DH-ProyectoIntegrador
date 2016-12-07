@@ -3,7 +3,6 @@
 namespace Manija\Http\Controllers;
 
 use Manija\User;
-use Auth;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -58,7 +57,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return (User::find($id) and Auth::user()->id == $id) ? view('user.show')->with('user', User::find($id)) : view('errors.user-not-exists');
+        return (User::find($id) and \Auth::user()->id == $id) ? view('user.show')->with('user', User::find($id)) : view('errors.user-not-exists');
     }
 
     /**

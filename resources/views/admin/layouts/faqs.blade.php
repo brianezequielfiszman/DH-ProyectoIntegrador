@@ -32,7 +32,7 @@
             </button>
           </span>
       </div>
-      <label for="list-users" class="control-label">Editar FAQ</label>
+      <label for="list-users" class="control-label">Borrar FAQ</label>
   </form>
 </div>
 <div class="col-xs-6 col-sm-3 admin-container">

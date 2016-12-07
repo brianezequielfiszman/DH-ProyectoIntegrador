@@ -56,8 +56,8 @@ class FaqsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-          'title'     => 'required|min:10|max:225',
-          'content'   => 'required|min:10|max:225'
+          'title'     => 'required|min:10|max:255',
+          'content'   => 'required|min:10|max:255'
         ]);
 
         Faqs::create([
@@ -87,7 +87,8 @@ class FaqsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $faq = Faqs::find($id);
+        return ($faq) ? view('faqs.edit')->withFaq($faq) : view('errors.404');
     }
 
     /**
@@ -99,7 +100,15 @@ class FaqsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $faq = Faqs::find($id);
+      $this->validate($request, [
+        'title'     => 'required|min:10|max:255',
+        'content'   => 'required|min:10|max:255'
+       ]);
+      $faq->content = $request->content;
+      $faq->title   = $request->title;
+      $faq->save();
+      return redirect(route('home'));
     }
 
     /**
@@ -110,6 +119,7 @@ class FaqsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Faqs::find($id)->delete();
+        return redirect()->back();
     }
 }
